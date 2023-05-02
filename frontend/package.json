@@ -1,0 +1,33 @@
+{
+  "name": "animal-cloud-adoption",
+  "version": "0.1.0",
+  "description": "111-2 NTU Web Application Programming Final Project",
+  "main": "index.js",
+  "repository": "https://github.com/angel870326/animal-cloud-adoption.git",
+  "author": "Angel Wang (@angel870326), @yinhuang119, @Shannon1923, mya (@myaqq), @kkkuo",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.2",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.4",
+    "next": "13.3.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "2.8.8"
+  }
+}
