@@ -24,26 +24,26 @@ frontend
 │   ├── index.jsx
 │   ├── animals.jsx
 │   ├── animals
-│   │   └── animalsInfo.js
+│   │   └── animalsInfo.jsx
 │   ├── adopters.jsx
 │   ├── adopters
-│   │   └── adoptersInfo.js
+│   │   └── adoptersInfo.jsx
 │   ├── shelters.jsx
 │   ├── shelters
-│   │   └── sheltersInfo.js
+│   │   └── sheltersInfo.jsx
 │   ├── account.jsx
 │   ├── _app.jsx
 │   ├── _document.jsx
 │   └── api
 │       └── hello.jsx
 ├── components
-│   ├── Layout.js
+│   ├── Layout.jsx
 │   ├── Header
-│   │   ├── Header.js
-│   │   ├── HeaderLinks.js
-│   │   └── DrawerLinks.js
-│   ├── Footer.js
-│   └── Button.js
+│   │   ├── Header.jsx
+│   │   ├── HeaderLinks.jsx
+│   │   └── DrawerLinks.jsx
+│   ├── Footer.jsx
+│   └── Button.jsx
 └── styles
     └── jss
        ├── components
