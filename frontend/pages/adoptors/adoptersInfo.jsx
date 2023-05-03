@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout'
 
 
-export default function Home() {
+export default function AdoptersInfoPage() {
 
   return (
     <Layout>
-      add main page here.
+      add adopters info page here.
     </Layout>
 
 

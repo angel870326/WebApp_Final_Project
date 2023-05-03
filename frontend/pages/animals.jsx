@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout'
 
 
-export default function Home() {
+export default function AnimalsListPage() {
 
   return (
     <Layout>
-      add main page here.
+      add animals page here.
     </Layout>
 
 

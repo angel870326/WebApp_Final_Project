@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout'
 
 
-export default function Home() {
+export default function SheltersInfoPage() {
 
   return (
     <Layout>
-      add main page here.
+      add shelters info page here.
     </Layout>
 
 

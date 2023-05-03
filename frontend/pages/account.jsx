@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 
 
-export default function Home() {
+export default function AccountPage() {
 
   return (
     <Layout>
