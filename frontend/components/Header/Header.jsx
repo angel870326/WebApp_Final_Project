@@ -1,7 +1,5 @@
 import React from "react";
 import Link from "next/link";
-// nodejs library that concatenates classes
-import clsx from "clsx";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @mui components
@@ -16,62 +14,69 @@ import { Menu } from "@mui/icons-material";
 // components
 import DrawerLinks from "./DrawerLinks";
 // style
-import headerStyle from "/styles/jss/components/Header/headerStyle.js";
 import { brownColor } from "@/styles/jss/animal-cloud-adoption.js";
+import {
+  appBar,
+  absolute,
+  fixed,
+  headerContainer,
+  flex,
+  title,
+  appResponsive,
+  // primary,
+  // info,
+  // transparent,
+  // dark,
+  // white,
+  drawerPaper
+} from "/styles/jss/components/Header/headerStyle.js";;
 
 
 export default function Header(props) {
-  const classes = headerStyle();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  React.useEffect(() => {
-    if (props.changeColorOnScroll) {
-      window.addEventListener("scroll", headerColorChange);
-    }
-    return function cleanup() {
-      if (props.changeColorOnScroll) {
-        window.removeEventListener("scroll", headerColorChange);
-      }
-    };
-  });
+  // React.useEffect(() => {
+  //   if (props.changeColorOnScroll) {
+  //     window.addEventListener("scroll", headerColorChange);
+  //   }
+  //   return function cleanup() {
+  //     if (props.changeColorOnScroll) {
+  //       window.removeEventListener("scroll", headerColorChange);
+  //     }
+  //   };
+  // });
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const headerColorChange = () => {
-    const { color, changeColorOnScroll } = props;
-    const windowsScrollTop = window.pageYOffset;
-    if (windowsScrollTop > changeColorOnScroll.height) {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[changeColorOnScroll.color]);
-    } else {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[changeColorOnScroll.color]);
-    }
-  };
+  // const headerColorChange = () => {
+  //   const { color, changeColorOnScroll } = props;
+  //   const windowsScrollTop = window.pageYOffset;
+  //   if (windowsScrollTop > changeColorOnScroll.height) {
+  //     document.body
+  //       .getElementsByTagName("header")[0]
+  //       .classList.remove(classes[color]);
+  //     document.body
+  //       .getElementsByTagName("header")[0]
+  //       .classList.add(classes[changeColorOnScroll.color]);
+  //   } else {
+  //     document.body
+  //       .getElementsByTagName("header")[0]
+  //       .classList.add(classes[color]);
+  //     document.body
+  //       .getElementsByTagName("header")[0]
+  //       .classList.remove(classes[changeColorOnScroll.color]);
+  //   }
+  // // };
   const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
-  const appBarClasses = clsx({
-    [classes.appBar]: true,
-    [classes[color]]: color,
-    [classes.absolute]: absolute,
-    [classes.fixed]: fixed
-  });
   const brandComponent = (
     <Link href="/" as="/">
-      <Button className={classes.title}>{brand}</Button>
+      <Button sx={title}>{brand}</Button>
     </Link>
   );
   return (
-    <AppBar className={appBarClasses}>
-      <Toolbar className={classes.container}>
+    <AppBar sx={{...appBar, absolute, fixed, color}}>
+      <Toolbar sx={headerContainer}>
         {leftLinks !== undefined ? brandComponent : null}
-        <div className={classes.flex}>
+        <div style={flex}>
           {leftLinks !== undefined ? (
             <Hidden smDown implementation="css">
               {leftLinks}
@@ -104,12 +109,10 @@ export default function Header(props) {
           variant="temporary"
           anchor={"right"}
           open={mobileOpen}
-          classes={{
-            paper: classes.drawerPaper
-          }}
+          sx={drawerPaper}
           onClose={handleDrawerToggle}
         >
-          <div className={classes.appResponsive}>
+          <div style={appResponsive}>
             {leftLinks}
             <DrawerLinks />
           </div>
