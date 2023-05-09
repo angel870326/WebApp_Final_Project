@@ -5,21 +5,15 @@ import { Grid,
   ThemeProvider,
   CssBaseline,
 } from "@mui/material"
-import { makeStyles } from "@mui/styles"
+
+// components
+import Head from "next/head";
 import Header from "./Header/Header"
 import HeaderLinks from "./Header/HeaderLinks"
 import Footer from "./Footer"
 
+// style
 import { bgColor, brownColor, primaryColor } from "@/styles/jss/animal-cloud-adoption"
-
-import Head from "next/head";
-
-const useStyles = makeStyles(() => ({
-    main: {
-        paddingTop: "150px",
-        backgroundColor: bgColor,
-    },
-}));
 
 const theme = createTheme({
   palette: {
@@ -58,8 +52,6 @@ const theme = createTheme({
 const dashboardRoutes = [];
 
 export default function Layout({ children }) {
-  const classes = useStyles();
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -78,7 +70,7 @@ export default function Layout({ children }) {
               color: "white"
             }}
           />
-          <Container className={classes.main} maxWidth="lg">
+          <Container maxWidth="lg">
             {children}
           </Container>
           <Footer/>
