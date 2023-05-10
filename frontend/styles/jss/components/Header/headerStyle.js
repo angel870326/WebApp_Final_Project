@@ -64,7 +64,7 @@ const title = {
   color: "white",
   padding: "8px 16px",
   letterSpacing: "unset",
-  "&:hover,&:focus": {
+  "&:hover": {
     color: brownColor,
     background: "transparent"
   }

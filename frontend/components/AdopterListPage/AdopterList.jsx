@@ -25,42 +25,43 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const rowImgData1 = [
   {
     img: 'animal-1',
-    title: 'animal1',
+    title: 'name1',
   },
   {
     img: 'animal-1',
-    title: 'animal2',
+    title: 'name2',
   },
   {
     img: 'animal-1',
-    title: 'animal3',
+    title: 'name3',
   },
 ];
 
 const rowImgData2 = [
   {
     img: 'animal-2',
-    title: 'animal4',
+    title: 'name4',
   },
   {
     img: 'animal-2',
-    title: 'animal5',
+    title: 'name5',
   },
   {
     img: 'animal-2',
-    title: 'animal6',
+    title: 'name6',
   },
 ];
 
+// rows 全部都要連資料庫
 const rows = [
-  { id: 1, adopter: 'A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData1 },
-  { id: 2, adopter: 'B', currNum: 2, accumNum: 12, amount: 2000, animal: rowImgData2 },
-  { id: 3, adopter: 'C', currNum: 3, accumNum: 13, amount: 3000, animal: rowImgData1 },
-  { id: 4, adopter: 'D', currNum: 4, accumNum: 14, amount: 4000, animal: rowImgData2 },
-  { id: 5, adopter: 'E', currNum: 5, accumNum: 15, amount: 5000, animal: rowImgData1 },
-  { id: 6, adopter: 'F', currNum: 6, accumNum: 16, amount: 6000, animal: rowImgData2 },
-  { id: 7, adopter: 'G', currNum: 7, accumNum: 17, amount: 7000, animal: rowImgData1 },
-  { id: 8, adopter: 'H', currNum: 8, accumNum: 18, amount: 8000, animal: rowImgData2 },
+  { id: 1, adopter: 'name A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData1 },
+  { id: 2, adopter: 'name B', currNum: 2, accumNum: 12, amount: 2000, animal: rowImgData2 },
+  { id: 3, adopter: 'name C', currNum: 3, accumNum: 13, amount: 3000, animal: rowImgData1 },
+  { id: 4, adopter: 'name D', currNum: 4, accumNum: 14, amount: 4000, animal: rowImgData2 },
+  { id: 5, adopter: 'name E', currNum: 5, accumNum: 15, amount: 5000, animal: rowImgData1 },
+  { id: 6, adopter: 'name F', currNum: 6, accumNum: 16, amount: 6000, animal: rowImgData2 },
+  { id: 7, adopter: 'name G', currNum: 7, accumNum: 17, amount: 7000, animal: rowImgData1 },
+  { id: 8, adopter: 'name H', currNum: 8, accumNum: 18, amount: 8000, animal: rowImgData2 },
 ];
 
 const columns = [

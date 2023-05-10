@@ -62,7 +62,6 @@ frontend
 │   └── AdopterListpage
 │       ├── AdopterList.jsx
 │       └── AdopterAnimalList.jsx
-
 ├── styles
 │   └── jss
 │       ├── components

@@ -38,8 +38,9 @@ const gridStyle = {
         fontSize: 16,
         fontWeight: '10px',
         "&:hover,&:focus,&:active": {
-            color: brownColor,
+            borderColor: "white",
             background: "transparent",
+            border: 'none !important',
             outline: "none !important",
         },
     }
