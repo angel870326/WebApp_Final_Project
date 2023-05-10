@@ -50,23 +50,30 @@ frontend
 │   │   ├── SearchCond.js
 │   │   ├── SearchRes.js
 │   │   └── AniCard.js
-│   └── ShelterListpage
-│       ├── ShelterListpage
-│       ├── SearchCond.js
-│       ├── SearchRes.js
-│       └── SheCard.js
-└── styles
-    └── jss
-       ├── components
-       │   ├── buttonStyle.js
-       │   ├── footerStyle.js
-       │   ├── Header
-       │   │   ├── drawerLinksStyle.js
-       │   │   ├── headerLinksStyle.js
-       │   │   └── headerStyle.js
-       │   └── AnimalListpage
-       │       └── generalStyle.js
-       └── animal-cloud-adoption.js
+│   ├── ShelterListpage
+│   │   ├── ShelterListpage
+│   │   ├── SearchCond.js
+│   │   ├── SearchRes.js
+│   │   └── SheCard.js
+│   └── AdopterListpage
+│       └── AdopterList.jsx
+├── styles
+│   └── jss
+│     ├── components
+│       │   ├── buttonStyle.js
+│      │   ├── footerStyle.js
+│     │   ├── Header
+│       │   │   ├── drawerLinksStyle.js
+│      │   │   ├── headerLinksStyle.js
+│      │   │   └── headerStyle.js
+│      │   ├── AnimalListpage
+│      │   │   └── generalStyle.js
+│      │   └── AdopterListpage
+│      │       └── adopterListStyle.js
+│      └── animal-cloud-adoption.js
+└── public
+    └── animals
+       └── ....jpg
 
 
 backend
