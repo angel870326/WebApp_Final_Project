@@ -1,6 +1,5 @@
 # WebApp Final Project - 動物雲
 
-
 ## File Structure
 
 Within the download you'll find the following directories and files:
@@ -55,9 +54,15 @@ frontend
 │   │   ├── SearchCond.js
 │   │   ├── SearchRes.js
 │   │   └── SheCard.js
+│   ├── AnimalInfoPage
+│   │   ├── AniInfo.js
+│   │   ├── AdoptRecord.js
+│   │   ├── OtherAdopters.js
+│   │   └── JoinBtns.js
 │   └── AdopterListpage
 │       ├── AdopterList.jsx
 │       └── AdopterAnimalList.jsx
+
 ├── styles
 │   └── jss
 │       ├── components
@@ -69,6 +74,8 @@ frontend
 │       │   │   └── headerStyle.js
 │       │   ├── AnimalListpage
 │       │   │   └── generalStyle.js
+│       │   ├── AnimalInfoPage
+│       │   │   └── infoPageStyle.js
 │       │   └── AdopterListpage
 │       │       └── adopterListStyle.js
 │       └── animal-cloud-adoption.js
