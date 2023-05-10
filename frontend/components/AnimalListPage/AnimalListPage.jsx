@@ -3,8 +3,8 @@ import React from 'react'
 import { title, brownTheme, content } from "@/styles/jss/components/AnimalListpage/generalStyle";
 import { ThemeProvider } from '@mui/material/styles';
 //my components
-import SearchCond from '../AnimalListpage/SearchCond'
-import SearchRes from '../AnimalListpage/SearchRes'
+import SearchCond from './SearchCond'
+import SearchRes from './SearchRes'
 //mui components
 import { Button } from '@mui/material';
 

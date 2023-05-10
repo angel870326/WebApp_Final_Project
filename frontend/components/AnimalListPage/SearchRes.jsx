@@ -2,7 +2,7 @@ import React from 'react';
 // style
 import { title, divLine } from "@/styles/jss/components/AnimalListpage/generalStyle";
 // my components
-import AniCard from '../AnimalListpage/AniCard';
+import AniCard from './AniCard';
 
 function SearchRes() {
 

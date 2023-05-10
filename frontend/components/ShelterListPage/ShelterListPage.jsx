@@ -2,8 +2,8 @@ import React from 'react'
 // style
 import { title, content } from "@/styles/jss/components/AnimalListpage/generalStyle";
 // my components
-import SearchCond from '../ShelterListpage/SearchCond'
-import SearchRes from '../ShelterListpage/SearchRes'
+import SearchCond from './SearchCond'
+import SearchRes from './SearchRes'
 
 function Home() {
 

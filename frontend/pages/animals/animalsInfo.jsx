@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { brownTheme } from "@/styles/jss/components/AnimalInfoPage/InfoPageStyle";
+import { brownTheme } from "@/styles/jss/components/AnimalInfoPage/infoPageStyle";
 import { ThemeProvider } from '@mui/material/styles';
 import AniInfo from '@/components/AnimalInfoPage/AniInfo';
 import AdoptRecord from '@/components/AnimalInfoPage/AdoptRecord';

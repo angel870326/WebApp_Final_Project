@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout'
-import ShelterListpage from '@/components/ShelterListpage/ShelterListpage'
+import ShelterListpage from '@/components/ShelterListPage/ShelterListPage'
 
 export default function SheltersPage() {
 

@@ -44,24 +44,27 @@ frontend
 │   │   └── DrawerLinks.jsx
 │   ├── Footer.jsx
 │   ├── Button.jsx
-│   ├── AnimalListpage
-│   │   ├── AnimalListpage.js
-│   │   ├── SearchCond.js
-│   │   ├── SearchRes.js
-│   │   └── AniCard.js
-│   ├── ShelterListpage
-│   │   ├── ShelterListpage
-│   │   ├── SearchCond.js
-│   │   ├── SearchRes.js
-│   │   └── SheCard.js
+│   ├── AnimalListPage
+│   │   ├── AnimalListPage.jsx
+│   │   ├── SearchCond.jsx
+│   │   ├── SearchRes.jsx
+│   │   └── AniCard.jsx
+│   ├── ShelterListPage
+│   │   ├── ShelterListPage.jsx
+│   │   ├── SearchCond.jsx
+│   │   ├── SearchRes.jsx
+│   │   └── SheCard.jsx
 │   ├── AnimalInfoPage
-│   │   ├── AniInfo.js
-│   │   ├── AdoptRecord.js
-│   │   ├── OtherAdopters.js
-│   │   └── JoinBtns.js
-│   └── AdopterListpage
-│       ├── AdopterList.jsx
-│       └── AdopterAnimalList.jsx
+│   │   ├── AniInfo.jsx
+│   │   ├── AdoptRecord.jsx
+│   │   ├── OtherAdopters.jsx
+│   │   └── JoinBtns.jsx
+│   ├── AdopterListPage
+│   │   ├── AdopterList.jsx
+│   │   └── AdopterAnimalList.jsx
+│   └── AdopterInfoPage
+│       ├── AdopterInfo.jsx
+│       └── AdopterAnimalInfo.jsx
 ├── styles
 │   └── jss
 │       ├── components
