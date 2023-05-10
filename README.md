@@ -60,18 +60,18 @@ frontend
 │       └── AdopterAnimalList.jsx
 ├── styles
 │   └── jss
-│     ├── components
-│       │   ├── buttonStyle.js
-│      │   ├── footerStyle.js
-│     │   ├── Header
-│       │   │   ├── drawerLinksStyle.js
-│      │   │   ├── headerLinksStyle.js
-│      │   │   └── headerStyle.js
-│      │   ├── AnimalListpage
-│      │   │   └── generalStyle.js
-│      │   └── AdopterListpage
-│      │       └── adopterListStyle.js
-│      └── animal-cloud-adoption.js
+│       ├── components
+│       │   ├── buttonStyle.js
+│       │   ├── footerStyle.js
+│       │   ├── Header
+│       │   │   ├── drawerLinksStyle.js
+│       │   │   ├── headerLinksStyle.js
+│       │   │   └── headerStyle.js
+│       │   ├── AnimalListpage
+│       │   │   └── generalStyle.js
+│       │   └── AdopterListpage
+│       │       └── adopterListStyle.js
+│       └── animal-cloud-adoption.js
 └── public
     └── animals
        └── ....jpg
