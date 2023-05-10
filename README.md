@@ -56,7 +56,8 @@ frontend
 │   │   ├── SearchRes.js
 │   │   └── SheCard.js
 │   └── AdopterListpage
-│       └── AdopterList.jsx
+│       ├── AdopterList.jsx
+│       └── AdopterAnimalList.jsx
 ├── styles
 │   └── jss
 │     ├── components

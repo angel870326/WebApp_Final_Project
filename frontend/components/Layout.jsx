@@ -65,10 +65,10 @@ export default function Layout({ children }) {
             brand="Animal Cloud Adoption"
             rightLinks={<HeaderLinks />}
             fixed
-            changeColorOnScroll={{
-              height: 400,
-              color: "white"
-            }}
+            // changeColorOnScroll={{
+            //   height: 400,
+            //   color: "white"
+            // }}
           />
           <Container maxWidth="lg">
             {children}

@@ -14,7 +14,7 @@ import {
 import MuiPagination from '@mui/material/Pagination';
 import { Button } from '@mui/material';
 
-import Image from 'next/image';
+import AnimalImageList from './AdopterAnimalList';
 
 // style
 import { gridStyle, moreBtn } from '@/styles/jss/components/AdopterListPage/adopterListStyle';
@@ -22,29 +22,62 @@ import { primaryColor, brownColor } from "@/styles/jss/animal-cloud-adoption.js"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Data
+const rowImgData1 = [
+  {
+    img: 'animal-1',
+    title: 'animal1',
+  },
+  {
+    img: 'animal-1',
+    title: 'animal2',
+  },
+  {
+    img: 'animal-1',
+    title: 'animal3',
+  },
+];
+
+const rowImgData2 = [
+  {
+    img: 'animal-2',
+    title: 'animal4',
+  },
+  {
+    img: 'animal-2',
+    title: 'animal5',
+  },
+  {
+    img: 'animal-2',
+    title: 'animal6',
+  },
+];
+
 const rows = [
-  { id: 1, adopter: 'A', currNum: 1, accumNum: 11, amount: 1000, animal: 'animal-1.jpg' },
-  { id: 2, adopter: 'B', currNum: 2, accumNum: 12, amount: 2000, animal: 'animal-1.jpg' },
-  { id: 3, adopter: 'C', currNum: 3, accumNum: 13, amount: 3000, animal: 'animal-1.png' },
-  { id: 4, adopter: 'D', currNum: 4, accumNum: 14, amount: 4000, animal: '1.jpg' },
-  { id: 5, adopter: 'E', currNum: 5, accumNum: 15, amount: 5000, animal: '1.jpg' },
-  { id: 6, adopter: 'F', currNum: 6, accumNum: 16, amount: 6000, animal: '1.jpg' },
-  { id: 7, adopter: 'G', currNum: 7, accumNum: 17, amount: 7000, animal: '1.jpg' },
-  { id: 8, adopter: 'H', currNum: 8, accumNum: 18, amount: 8000, animal: '1.jpg' },
+  { id: 1, adopter: 'A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData1 },
+  { id: 2, adopter: 'B', currNum: 2, accumNum: 12, amount: 2000, animal: rowImgData2 },
+  { id: 3, adopter: 'C', currNum: 3, accumNum: 13, amount: 3000, animal: rowImgData1 },
+  { id: 4, adopter: 'D', currNum: 4, accumNum: 14, amount: 4000, animal: rowImgData2 },
+  { id: 5, adopter: 'E', currNum: 5, accumNum: 15, amount: 5000, animal: rowImgData1 },
+  { id: 6, adopter: 'F', currNum: 6, accumNum: 16, amount: 6000, animal: rowImgData2 },
+  { id: 7, adopter: 'G', currNum: 7, accumNum: 17, amount: 7000, animal: rowImgData1 },
+  { id: 8, adopter: 'H', currNum: 8, accumNum: 18, amount: 8000, animal: rowImgData2 },
 ];
 
 const columns = [
-  { field: 'adopter', headerName: '認養人', width: 150, sortable: false },
+  { field: 'adopter', headerName: '認養人', width: 120, sortable: false },
   { field: 'currNum', headerName: <>當前認養<br />動物數量</>, width: 120 },
   { field: 'accumNum', headerName: <>累積認養<br />動物數量</>, width: 120 },
-  { field: 'amount', headerName: '累積認養金額', width: 150 },
-  { field: 'animal', headerName: '當前認養動物', width: 300, sortable: false,
+  { field: 'amount', headerName: <>累積認養<br />金額</>, width: 120 },
+  { field: 'animal', headerName: '當前認養動物', width: 390, sortable: false,
     renderCell: (params) => (
-      <Image
-        src={`/animals/${params.value}`}
-        alt={`Animal adopted by ${params.row.adopter}`}
-        width={100}
-        height={100}
+      // <Image
+      //   src={`/animals/${params.value}.jpg`}
+      //   alt={`Animal adopted by ${params.row.adopter}`}
+      //   width={100}
+      //   height={100}
+      // />
+      <AnimalImageList
+        imgData={params.value}
       />
     ),
   },
@@ -59,6 +92,7 @@ const columns = [
     ),
   },
 ];
+
 
 // Footer
 function Pagination({ page, onPageChange, className }) {
@@ -123,11 +157,12 @@ const theme = createTheme({
 export default function AdopterList() {
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 633, width: '100%' }}>
       <ThemeProvider theme={theme}>
         <DataGrid 
           rows={rows} 
           columns={columns} 
+          rowHeight={100}
           disableColumnMenu
           disableRowSelectionOnClick
           initialState={{
@@ -137,13 +172,13 @@ export default function AdopterList() {
           components={{
               pagination: CustomPagination,
               Toolbar: GridToolbar,
-
           }}
           pagination
           slots={{
             pagination: CustomPagination,
           }}
           sx={gridStyle}
+          // getRowHeight={() => 'auto'}
           />
       </ThemeProvider>
     </div>

@@ -6,6 +6,7 @@ import {
 
 const gridStyle = {
     border: 'none',
+    padding: '10px 10px 0px 10px',
     "&:hover,&:focus,&:focus-within,&:active,&:active-within": {
         outline: "none !important",
         border: 'none !important',
@@ -14,62 +15,24 @@ const gridStyle = {
     '& .MuiDataGrid-columnSeparator': {
         display: 'none',
     },
-    // '& .MuiDataGrid-columnSeparator--sideLeft': {
-    //     display: 'none',
-    // },
     "& .MuiDataGrid-columnHeaders": {
         ...defaultFont,
         backgroundColor: brownColor,
         color: "white",
         fontSize: 16,
         border: 'none !important',
-        // outline: "none !important",
-        // "&:hover,&:focus,&:focus-within,&:active,&:active-within": {
-        //     outline: "none !important",
-        //     border: 'none !important',
+        outline: 'none !important',
+        padding: '35px 0px',
 
-        // },
     },
     "& .MuiDataGrid-columnHeaderTitleContainer": {
         ...defaultFont,
         backgroundColor: brownColor,
         color: "white",
         fontSize: 16,
-        // border: 'none !important',
-        outline: "none !important",
-
-        // "&:hover,&:focus,&:focus-within,&:active,&:active-within": {
-        //     outline: "none !important",
-        //     border: 'none !important',
-
-        // },
+        border: 'none !important',
+        outline: 'none !important',
     },
-    // "& .MuiDataGrid-columnHeadersInner": {
-    //     ...defaultFont,
-    //     backgroundColor: brownColor,
-    //     color: "white",
-    //     fontSize: 16,
-    //     border: 'none !important',
-    //     outline: "none !important",
-
-    //     "&:hover,&:focus,&:focus-within,&:active,&:active-within": {
-    //         outline: "none !important",
-    //         border: 'none !important',
-
-    //     },
-    // },
-    // ".MuiDataGrid-columnHeader--showColumnBorder": {
-    //     outline: "red",
-    //     border: 'red',
-    //     color: 'red',
-    //     // outline: "none !important",
-    //     // border: 'none !important',
-    //     "&:hover,&:focus,&:focus-within,&:active,&:active-within": {
-    //         outline: "none !important",
-    //         border: 'none !important',
-    //         color: 'red',
-    //     },
-    //  },
     "& .MuiDataGrid-cell": {
         ...defaultFont,
         fontSize: 16,
