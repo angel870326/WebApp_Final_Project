@@ -1,9 +1,12 @@
-import React, { useState } from 'react';// style
+import React, { useState } from 'react';
+// style
 import { brownTheme } from "@/styles/jss/components/AnimalListpage/generalStyle";
 import { ThemeProvider } from '@mui/material/styles';
 import { primaryColor } from '@/styles/jss/animal-cloud-adoption';
-//mui components
+// mui components
 import { Card, CardMedia, CardContent, Typography, Button, CardActions } from '@mui/material';
+// next.js compononts
+import Link from 'next/link';
 
 //每 5 個換一頁
 const ShelterList = ({ shelters }) => {
@@ -27,36 +30,29 @@ const ShelterList = ({ shelters }) => {
     <div>
       <ThemeProvider theme={brownTheme}>
       {visibleShelters.map((shelter) => (
-        <Card key={shelters.id} sx={{ maxWidth: "100%", marginBottom: 2 }}>
-{/* 
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div" color={primaryColor}>
+        <Card key={shelters.id}
+          sx={{ maxWidth: "100%", my: 2, borderRadius: '8px',
+          ':hover': {
+            boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.3)",
+            transition: "transform 0.15s ease-in-out",
+            transform: "scale3d(1.05, 1.05, 1)",
+          }
+        }}>
+          <CardContent style={{ display: 'flex', alignItems: 'center', }}>
+
+            <Typography variant="h5" component="div" color={primaryColor} style={{ marginRight: 'auto' }}>
               {shelter.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" style={{ marginRight: 'auto' }}>
               {shelter.address}<br />{shelter.numAnimal}
             </Typography>
+            <CardActions style={{ marginLeft: 'auto' }}>
+            <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} as={`/shelters/sheltersInfo/${shelter.id}`} style={{ textDecoration: 'none' }}>
+              <Button size="small" variant="contained">查看更多</Button>
+            </Link>
+            </CardActions>
+
           </CardContent>
-          
-                               
-          <CardActions style={{justifyContent: 'right'}}>
-            <Button size="small" variant="contained">查看更多</Button>
-          </CardActions>
-
-*/}
-<CardContent style={{ display: 'flex', alignItems: 'center', }}>
-
-    <Typography variant="h5" component="div" color={primaryColor} style={{ marginRight: 'auto' }}>
-      {shelter.name}
-    </Typography>
-    <Typography variant="body2" color="text.secondary" style={{ marginRight: 'auto' }}>
-      {shelter.address}<br />{shelter.numAnimal}
-    </Typography>
-  <CardActions style={{ marginLeft: 'auto' }}>
-    <Button size="small" variant="contained">查看更多</Button>
-  </CardActions>
-</CardContent>
-
         </Card>
       ))}
 
