@@ -24,6 +24,8 @@ frontend
 │   ├── animals.jsx
 │   ├── animals
 │   │   └── animalsInfo.jsx
+│   │   └── extendAdopt.jsx
+│   │   └── joinAdopt.jsx
 │   ├── adopters.jsx
 │   ├── adopters
 │   │   └── adoptersInfo.jsx
