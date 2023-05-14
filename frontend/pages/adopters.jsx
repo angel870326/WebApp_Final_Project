@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from '@/components/Layout'
-import { title, content } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 import AdopterList from "@/components/AdopterListPage/AdopterList";
 
 

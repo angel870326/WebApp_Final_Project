@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // style
-import { title, brownTheme, divLine } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, divLine, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 // select bar
 import Select, { SelectChangeEvent } from '@mui/material/Select';

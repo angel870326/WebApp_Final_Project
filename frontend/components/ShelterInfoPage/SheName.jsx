@@ -1,6 +1,6 @@
 import React from 'react';
 // style
-import { title, brownTheme, divLine } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, divLine } from "@/styles/jss/animal-cloud-adoption.js";
 // next components
 import { useRouter } from 'next/router';
 //router method (no use now)

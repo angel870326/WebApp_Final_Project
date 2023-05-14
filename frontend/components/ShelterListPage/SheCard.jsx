@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // style
-import { brownTheme } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 import { primaryColor } from '@/styles/jss/animal-cloud-adoption';
 // mui components

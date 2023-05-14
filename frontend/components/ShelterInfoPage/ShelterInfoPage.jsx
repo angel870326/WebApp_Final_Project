@@ -1,6 +1,6 @@
 import React from 'react'
 //style
-import { title, brownTheme, content } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 //my components
 import SheName from './SheName'
 import SheAniList from './SheAniList'
