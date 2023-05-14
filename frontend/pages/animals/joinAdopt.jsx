@@ -2,7 +2,7 @@ import Layout from '@/components/Layout'
 import React, { useState } from 'react';
 import { Box, Button, Link, Grid, Typography, Container, List, ListItem, ListItemText, ListItemSecondaryAction, FormControl, InputLabel, MenuItem, Select, Collapse} from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { title, content, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
+import { title, plan, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import EditIcon from '@mui/icons-material/Edit';
 
 // GET 所有方案所有資訊 
@@ -67,7 +67,7 @@ export default function joinAdopt() {
   return (
     <Layout>
         <ThemeProvider theme={brownTheme}>
-          <div style={content}>
+          <div style={plan}>
               <Container component="main" maxWidth="xs">
                   <Box
                   sx={{
@@ -98,9 +98,9 @@ export default function joinAdopt() {
                                 <ListItemSecondaryAction>
                                     <div>
                                       {user.anonymous ? (
-                                        <>匿名捐款 <Link href="/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
+                                        <>匿名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
                                       ) : (
-                                        <>具名捐款 <Link href="/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
+                                        <>具名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
                                       )}
                                     </div>
                                 </ListItemSecondaryAction>
