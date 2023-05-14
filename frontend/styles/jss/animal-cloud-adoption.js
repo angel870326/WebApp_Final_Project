@@ -99,6 +99,17 @@ const content = {
   borderRadius: '16px',
 };
 
+// 認養方案白色大框框
+const plan = {
+  marginLeft: '200px',
+  marginRight: '200px',
+  marginTop: '50px',
+  marginBottom: '50px',
+  padding: '2%',
+  backgroundColor: 'white',
+  borderRadius: '16px',
+};
+
 // 定義主題
 const brownTheme = createTheme({
   palette: {
@@ -136,7 +147,8 @@ export {
   // 自定義
   title, 
   brownTheme, 
-  content, 
+  content,
+  plan, 
   divLine, 
 };
   
