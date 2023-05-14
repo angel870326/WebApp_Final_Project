@@ -1,6 +1,6 @@
 import React from 'react';
 // style
-import { title, divLine } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, divLine } from "@/styles/jss/animal-cloud-adoption.js";
 // my components
 import SheCard from './SheCard';
 

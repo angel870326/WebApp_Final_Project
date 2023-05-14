@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { title, content, divLine } from "@/styles/jss/components/AnimalInfoPage/InfoPageStyle";
+import { title, content, divLine } from "@/styles/jss/animal-cloud-adoption.js";
 import { Typography, Grid, Switch, List, ListItem } from '@mui/material';
 
 export default function AniInfo({animal, firstAdoptionStatus}) {

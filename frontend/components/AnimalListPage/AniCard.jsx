@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 // style
-import { brownTheme } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 import { primaryColor } from '@/styles/jss/animal-cloud-adoption';
 //mui components
 import { Card, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
+// next.js compononts
+import Link from 'next/link';
 
 // 每頁有 6 個，每 3 個排一列
 const AnimalList = ({ animals }) => {
@@ -38,14 +40,21 @@ const AnimalList = ({ animals }) => {
       <ThemeProvider theme={brownTheme}>
 
         {groups.map((group, i) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'left' }}>
+          <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
             {group.map((animal) => (
-              <Card key={animal.id} sx={{ width: "30.6%", marginBottom: 2, marginLeft: '2%' }}>
-                                     
+              <Card key={animal.id}
+                sx={{ width: "32%", mx: '1%', my: '1%', borderRadius: '8px',
+                ':hover': {
+                  boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.3)",
+                  transition: "transform 0.15s ease-in-out",
+                  transform: "scale3d(1.05, 1.05, 1)",
+                }
+              }}>
+             
                 <CardMedia
                   component="img"
                   height="200"
-                  image={animal.image}
+                  image={"/animals/animal-" + animal.id + ".jpg"}
                   alt={animal.name}
                 />
                                       
@@ -59,7 +68,9 @@ const AnimalList = ({ animals }) => {
                 </CardContent>
                                       
                 <CardActions style={{justifyContent: 'center', marginBottom: 10}}>
+                <Link href={`/animals/animalsInfo?a_id=${animals.id}`} as={`/animals/animalsInfo/${animals.id}`} style={{ textDecoration: 'none' }}>
                   <Button size="small" variant="contained">查看更多</Button>
+                </Link>
                 </CardActions>
 
               </Card>

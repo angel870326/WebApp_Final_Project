@@ -1,10 +1,8 @@
 import {container,
-    hexToRGBAlpha,
     defaultFont,
     primaryColor,
     brownColor,
     greyColor,
-    infoColor,
     transition,
     boxShadow,
     drawerWidth

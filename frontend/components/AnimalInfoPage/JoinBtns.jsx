@@ -1,5 +1,5 @@
 import React from 'react';
-import { brownTheme } from "@/styles/jss/components/AnimalInfoPage/InfoPageStyle";
+import { brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 import { Typography, Link, Button } from '@mui/material';
 

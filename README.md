@@ -24,6 +24,8 @@ frontend
 │   ├── animals.jsx
 │   ├── animals
 │   │   └── animalsInfo.jsx
+│   │   └── extendAdopt.jsx
+│   │   └── joinAdopt.jsx
 │   ├── adopters.jsx
 │   ├── adopters
 │   │   └── adoptersInfo.jsx
@@ -31,6 +33,8 @@ frontend
 │   ├── shelters
 │   │   └── sheltersInfo.jsx
 │   ├── account.jsx
+│   ├── account
+│   │   └── edit.jsx
 │   ├── faq.jsx
 │   ├── _app.jsx
 │   ├── _document.jsx
@@ -54,6 +58,10 @@ frontend
 │   │   ├── SearchCond.jsx
 │   │   ├── SearchRes.jsx
 │   │   └── SheCard.jsx
+│   ├── ShelterInfoPage
+│   │   ├── ShelterInfoPage.jsx
+│   │   ├── SheName.jsx
+│   │   └── SheAniList.jsx
 │   ├── AnimalInfoPage
 │   │   ├── AniInfo.jsx
 │   │   ├── AdoptRecord.jsx
@@ -62,9 +70,12 @@ frontend
 │   ├── AdopterListPage
 │   │   ├── AdopterList.jsx
 │   │   └── AdopterAnimalList.jsx
-│   └── AdopterInfoPage
-│       ├── AdopterInfo.jsx
-│       └── AdopterAnimalInfo.jsx
+│   ├── AdopterInfoPage
+│   │   ├── AdopterInfo.jsx
+│   │   └── AdopterAnimalInfo.jsx
+│   └── AccountPage
+│       ├── AccountInfo.jsx
+│       └── AccountAnimalInfo.jsx
 ├── styles
 │   └── jss
 │       ├── components
@@ -74,12 +85,10 @@ frontend
 │       │   │   ├── drawerLinksStyle.js
 │       │   │   ├── headerLinksStyle.js
 │       │   │   └── headerStyle.js
-│       │   ├── AnimalListpage
-│       │   │   └── generalStyle.js
-│       │   ├── AnimalInfoPage
-│       │   │   └── infoPageStyle.js
-│       │   └── AdopterListpage
-│       │       └── adopterListStyle.js
+│       │   ├── AdopterListPage
+│       │   │   └── adopterListStyle.js
+│       │   └── AccountPpage
+│       │       └── accountInfoStyle.js
 │       └── animal-cloud-adoption.js
 └── public
     └── animals

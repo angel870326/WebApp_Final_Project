@@ -1,6 +1,6 @@
 import React from 'react'
 //style
-import { title, brownTheme, content } from "@/styles/jss/components/AnimalListpage/generalStyle";
+import { title, content, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 //my components
 import SearchCond from './SearchCond'
