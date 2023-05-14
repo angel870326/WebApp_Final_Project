@@ -78,10 +78,6 @@ frontend
 │       │   │   ├── drawerLinksStyle.js
 │       │   │   ├── headerLinksStyle.js
 │       │   │   └── headerStyle.js
-│       │   ├── AnimalListpage
-│       │   │   └── generalStyle.js
-│       │   ├── AnimalInfoPage
-│       │   │   └── infoPageStyle.js
 │       │   └── AdopterListpage
 │       │       └── adopterListStyle.js
 │       └── animal-cloud-adoption.js
