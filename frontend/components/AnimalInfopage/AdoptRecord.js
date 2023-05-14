@@ -1,5 +1,5 @@
 import React from 'react';
-import { title, divLine } from "@/styles/jss/components/AnimalInfoPage/InfoPageStyle";
+import { title, divLine } from "@/styles/jss/components/AnimalInfoPage/infoPageStyle";
 import { Typography, Box, Card, CardContent} from '@mui/material';
 
 
