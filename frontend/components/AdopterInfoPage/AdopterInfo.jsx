@@ -40,8 +40,5 @@ export default function AdopterInfo(props) {
         </Grid>
       </Grid>
     </div>
-
-
     )
-
 }

@@ -2,7 +2,7 @@
 import React from "react"
 import Layout from '@/components/Layout'
 import { Grid } from "@mui/material";
-import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
+import { title } from "@/styles/jss/animal-cloud-adoption.js";
 import AdopterInfo from '@/components/AdopterInfoPage/AdopterInfo'
 import AdopterAnimalInfo from '@/components/AdopterInfoPage/AdopterAnimalInfo'
 
@@ -21,7 +21,5 @@ export default function AdoptersInfoPage() {
           </Grid>
         </Grid>
     </Layout>
-
-
   )
 }
