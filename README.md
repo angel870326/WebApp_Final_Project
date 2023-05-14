@@ -54,6 +54,10 @@ frontend
 │   │   ├── SearchCond.jsx
 │   │   ├── SearchRes.jsx
 │   │   └── SheCard.jsx
+│   ├── ShelterInfoPage
+│   │   ├── ShelterInfoPage.jsx
+│   │   ├── SheName.jsx
+│   │   └── SheAniList.jsx
 │   ├── AnimalInfoPage
 │   │   ├── AniInfo.jsx
 │   │   ├── AdoptRecord.jsx

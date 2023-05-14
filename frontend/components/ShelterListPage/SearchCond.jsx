@@ -31,11 +31,10 @@ function SelectBar() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={"台北市"}>台北市</MenuItem>
-          <MenuItem value={"新北市"}>新北市</MenuItem>
-          <MenuItem value={"桃園市"}>桃園市</MenuItem>
-          <MenuItem value={"台中市"}>台中市</MenuItem>
-          <MenuItem value={"高雄市"}>高雄市</MenuItem>
+          <MenuItem value={"北部"}>北部</MenuItem>
+          <MenuItem value={"中部"}>中部</MenuItem>
+          <MenuItem value={"南部"}>南部</MenuItem>
+          <MenuItem value={"東部"}>東部</MenuItem>
         </Select>
         <FormHelperText>helper text</FormHelperText>
       </FormControl>
