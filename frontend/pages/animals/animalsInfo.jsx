@@ -1,12 +1,12 @@
 import Layout from '@/components/Layout'
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { brownTheme } from "@/styles/jss/components/AnimalInfoPage/infoPageStyle";
+import { brownTheme } from "@/styles/jss/components/AnimalInfoPage/InfoPageStyle";
 import { ThemeProvider } from '@mui/material/styles';
-import AniInfo from '@/components/AnimalInfopage/AniInfo';
-import AdoptRecord from '@/components/AnimalInfopage/AdoptRecord';
-import OtherAdopters from '@/components/AnimalInfopage/OtherAdopters';
-import JoinBtns from '@/components/AnimalInfopage/JoinBtns';
+import AniInfo from '@/components/AnimalInfoPage/AniInfo';
+import AdoptRecord from '@/components/AnimalInfoPage/AdoptRecord';
+import OtherAdopters from '@/components/AnimalInfoPage/OtherAdopters';
+import JoinBtns from '@/components/AnimalInfoPage/JoinBtns';
 
 // GET 單一 Animal (所有)資訊
 const animal = { id: 22, name: '小黑', sex: "母", type: "巴哥犬", brithYear: 2020, personality: "活潑", appearance: "黑色、垂耳", shelter_id: 1};
