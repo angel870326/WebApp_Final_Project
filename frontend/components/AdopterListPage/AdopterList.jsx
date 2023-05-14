@@ -24,30 +24,30 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // Data
 const rowImgData1 = [
   {
-    img: 'animal-1',
+    img: 'animals/animal-1.jpg',
     title: 'name1',
   },
   {
-    img: 'animal-1',
+    img: 'animals/animal-1.jpg',
     title: 'name2',
   },
   {
-    img: 'animal-1',
+    img: 'animals/animal-1.jpg',
     title: 'name3',
   },
 ];
 
 const rowImgData2 = [
   {
-    img: 'animal-2',
+    img: 'animals/animal-2.jpg',
     title: 'name4',
   },
   {
-    img: 'animal-2',
+    img: 'animals/animal-2.jpg',
     title: 'name5',
   },
   {
-    img: 'animal-2',
+    img: 'animals/animal-2.jpg',
     title: 'name6',
   },
 ];
