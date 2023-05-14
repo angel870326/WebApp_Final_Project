@@ -27,7 +27,7 @@ export default function OtherAdopters({adopters, adoptionRecords}) {
                 }}}>
                   <CardContent>
                     {/* 顯示認養人的基本資訊 */}
-                    <Link href={`/adoptersInfo/${adopter.id}`} color="inherit" underline="none">
+                    <Link href={`/adopters/adoptersInfo/${adopter.id}`} color="inherit" underline="none">
                       <Typography variant="body1" component="p">
                         {adopter.name}
                       </Typography>
