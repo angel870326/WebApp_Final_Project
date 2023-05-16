@@ -23,37 +23,37 @@ export default function AdopterInfo(props) {
           <Typography>帳號</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>{user_name}</Typography>
+          <Typography>{user_name}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>暱稱</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>{name}</Typography>
+          <Typography>{name}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>E-mail</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>{email}</Typography>
+          <Typography>{email}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>手機</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>{phone}</Typography>
+          <Typography>{phone}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>密碼</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>***</Typography>
+          <Typography>***</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>捐款時是否匿名</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>{anonymous}</Typography>
+          <Typography>{anonymous}</Typography>
         </Grid>
         <a href="/account/edit">
           <Button variant="outlined" sx={{...editBtn, marginTop: '40px'}}>編輯</Button>
