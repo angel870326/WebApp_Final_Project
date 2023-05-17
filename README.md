@@ -75,7 +75,8 @@ frontend
 │   │   └── AdopterAnimalInfo.jsx
 │   └── AccountPage
 │       ├── AccountInfo.jsx
-│       └── AccountAnimalInfo.jsx
+│       ├── AccountAnimalInfo.jsx
+│       └── AccountInfoEdit.jsx
 ├── styles
 │   └── jss
 │       ├── components
