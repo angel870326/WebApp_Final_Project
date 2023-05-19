@@ -16,52 +16,72 @@ const content = {
 
 export default function AdopterAnimalInfo(props) {
 
-  // const [animalData, setAnimalData] = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       // use memberId = 1 just for testing
-  //       const response = await fetch('/api/getAccountAnimal/1');
-  //       const jsonData = await response.json();
-  //       setAnimalData(jsonData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-  const number = 1;
-  const amount = 1000;
-  const date = 'donation_end_date'
-  const state_date = `認養期間至 ${date}`
-  const state_pending = '認養申請審核中'
-  const state_end = '認養期間已過'
-  const animalData = [
-    {
-      img: '/animals/1.jpg',
-      title: 'name1',
-      state: state_date,
-      link: '/animals/animalsInfo',
-    },
-    {
-      img: '/animals/2.jpg',
-      title: 'name2',
-      state: state_pending,
-      link: '/animals/animalsInfo',
-    },
-    {
-      img: '/animals/2.jpg',
-      title: 'name3',
-      state: state_end,
-      link: '/animals/animalsInfo',
-    },
-    {
-      img: '/animals/1.jpg',
-      title: 'name4',
-      state: state_end,
-      link: '/animals/animalsInfo',
-    },
-  ];
+  // const date = 'donation_end_date'
+  // const state_date = `認養期間至 ${date}`
+  // const state_date = '認養中'
+  const state_pending = '審核中'
+  const state_end = '認養結束'
+
+  const [number, setNumber] = useState([]);
+  const [amount, setAmount] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // use memberId = 1 just for testing
+        const response = await fetch('/api/getAccountAdoptInfo/1');
+        const jsonData = await response.json();
+        setNumber(jsonData.number);
+        setAmount(jsonData.amount);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  // const number = 1;
+  // const amount = 1000;
+
+  const [animalData, setAnimalData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // use memberId = 1 just for testing
+        const response = await fetch('/api/getAccountAnimal/1');
+        const jsonData = await response.json();
+        setAnimalData(jsonData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // const animalData = [
+  //   {
+  //     img: '/animals/1.jpg',
+  //     title: 'name1',
+  //     state: state_date,
+  //     link: '/animals/animalsInfo',
+  //   },
+  //   {
+  //     img: '/animals/2.jpg',
+  //     title: 'name2',
+  //     state: state_pending,
+  //     link: '/animals/animalsInfo',
+  //   },
+  //   {
+  //     img: '/animals/2.jpg',
+  //     title: 'name3',
+  //     state: state_end,
+  //     link: '/animals/animalsInfo',
+  //   },
+  //   {
+  //     img: '/animals/1.jpg',
+  //     title: 'name4',
+  //     state: state_end,
+  //     link: '/animals/animalsInfo',
+  //   },
+  // ];
 
   return (
     <div style={content}>
@@ -113,7 +133,8 @@ export default function AdopterAnimalInfo(props) {
                   color: item.state === state_end ? 'grey' : 'inherit'
                 },
                 '& .MuiImageListItemBar-subtitle': {
-                  color: item.state === state_pending ? 'red' : item.state === state_date ? 'black' : item.state === state_end ? 'grey' : 'inherit'
+                  color: item.state === state_pending ? 'red' : item.state === state_end ? 'grey' : 'inherit'
+                  // color: item.state === state_pending ? 'red' : item.state === state_date ? 'black' : item.state === state_end ? 'grey' : 'inherit'
                 }
               }}
             />

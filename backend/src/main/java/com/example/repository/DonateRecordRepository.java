@@ -15,11 +15,9 @@ public interface DonateRecordRepository extends JpaRepository<DonateRecord, Long
 
         Optional<DonateRecord> findById(Long id);
 
-        // // 認養紀錄list byMemberId
-        // @Query(nativeQuery = true, value = "SELECT * FROM donate_record WHERE
-        // member_id = ?")
-        // List<DonateRecord> findDonateRecordsByMemberId(@Param("memberId") Long
-        // memberId);
+        // 認養紀錄list without審核失敗 byMemberId
+        @Query(nativeQuery = true, value = "SELECT * FROM donate_record WHERE member_id = ? and status != '審核失敗'")
+        List<DonateRecord> findDonateRecordsByMemberId(@Param("memberId") Long memberId);
 
         // 認養紀錄list without審核失敗 byMemberId&AnimalId
         @Query(nativeQuery = true, value = "SELECT * FROM donate_record WHERE animal_id = ?1 and member_id = ?2 and status != '審核失敗'")

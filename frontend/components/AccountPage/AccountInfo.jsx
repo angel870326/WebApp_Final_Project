@@ -7,29 +7,33 @@ import { content, editBtn } from '@/styles/jss/components/AccountPage/accountInf
 
 export default function AdopterInfo(props) {
 
-  // const [name, setName] = useState("");
-  // const [number, setNumber] = useState("");
-  // const [amount, setAmount] = useState("");
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       // use memberId = 1 just for testing
-  //       const response = await fetch('/api/getAccountInfo/1');
-  //       const jsonData = await response.json();
-  //       setName(jsonData.name);
-  //       setNumber(jsonData.number);
-  //       setAmount(jsonData.amount);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-  const user_name = 'user_name';
-  const name = 'nick_name';
-  const email = 'abc@gmail.com';
-  const phone = '09xxxxxxxx';
-  const anonymous = '是';
+  const [user_name, setUserName] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [anonymous, setAnonymous] = useState("");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // use memberId = 1 just for testing
+        const response = await fetch('/api/getAccountInfo/1');
+        const jsonData = await response.json();
+        setUserName(jsonData.user_name);
+        setName(jsonData.name);
+        setEmail(jsonData.email);
+        setPhone(jsonData.phone);
+        setAnonymous(jsonData.anonymous);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  // const user_name = 'user_name';
+  // const name = 'nick_name';
+  // const email = 'abc@gmail.com';
+  // const phone = '09xxxxxxxx';
+  // const anonymous = '是';
 
   return (
     <div style={content}>
