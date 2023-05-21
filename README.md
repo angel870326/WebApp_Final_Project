@@ -35,6 +35,9 @@ frontend
 │   ├── account.jsx
 │   ├── account
 │   │   └── edit.jsx
+│   ├── auth
+│   │   └── register.jsx
+│   │   └── login.jsx
 │   ├── faq.jsx
 │   ├── _app.jsx
 │   ├── _document.jsx
@@ -73,6 +76,9 @@ frontend
 │   ├── AdopterInfoPage
 │   │   ├── AdopterInfo.jsx
 │   │   └── AdopterAnimalInfo.jsx
+│   ├── AuthPage
+│   │   ├── RegisterForm.jsx
+│   │   └── LoginForm.jsx
 │   └── AccountPage
 │       ├── AccountInfo.jsx
 │       ├── AccountAnimalInfo.jsx
