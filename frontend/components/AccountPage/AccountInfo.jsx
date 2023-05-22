@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // component
 import { Grid, Typography, Button } from '@mui/material';
 // style
-import { title, divLine} from "@/styles/jss/animal-cloud-adoption.js";
+import { title, divLine } from "@/styles/jss/animal-cloud-adoption.js";
 import { content, editBtn } from '@/styles/jss/components/AccountPage/accountInfoStyle';
 
-
-// data
-const user_name = 'user_name';
-const name = 'nick_name';
-const email = 'abc@gmail.com';
-const phone = '09xxxxxxxx';
-const anonymous = '是';
-
 export default function AdopterInfo(props) {
+
+  const [user_name, setUserName] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [anonymous, setAnonymous] = useState("");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // use memberId = 1 just for testing
+        const response = await fetch('/api/getAccountInfo/1');
+        const jsonData = await response.json();
+        setUserName(jsonData.user_name);
+        setName(jsonData.name);
+        setEmail(jsonData.email);
+        setPhone(jsonData.phone);
+        setAnonymous(jsonData.anonymous);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  // const user_name = 'user_name';
+  // const name = 'nick_name';
+  // const email = 'abc@gmail.com';
+  // const phone = '09xxxxxxxx';
+  // const anonymous = '是';
+
   return (
     <div style={content}>
       <h2 style={title}>個人資料</h2>
-      <div style={divLine}/>
-      <Grid container spacing={2} sx={{padding: '10px 30px 30px 30px'}} justifyContent="center" alignItems="center">
+      <div style={divLine} />
+      <Grid container spacing={2} sx={{ padding: '10px 30px 30px 30px' }} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
           <Typography>帳號</Typography>
         </Grid>
@@ -56,9 +77,10 @@ export default function AdopterInfo(props) {
           <Typography>{anonymous}</Typography>
         </Grid>
         <a href="/account/edit">
-          <Button variant="outlined" sx={{...editBtn, marginTop: '40px'}}>編輯</Button>
+          <Button variant="outlined" sx={{ ...editBtn, marginTop: '40px' }}>編輯</Button>
         </a>
       </Grid>
     </div>
   )
+
 }

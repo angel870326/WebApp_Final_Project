@@ -1,75 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
 // components
 import {
-    DataGrid,
-    gridPageCountSelector,
-    GridPagination,
-    useGridApiContext,
-    useGridSelector,
-    GridToolbar
+  DataGrid,
+  gridPageCountSelector,
+  GridPagination,
+  useGridApiContext,
+  useGridSelector,
+  GridToolbar
 } from '@mui/x-data-grid';
-
 import MuiPagination from '@mui/material/Pagination';
 import { Button } from '@mui/material';
-
 import AnimalImageList from './AdopterAnimalList';
-
 // style
 import { gridStyle, moreBtn } from '@/styles/jss/components/AdopterListPage/adopterListStyle';
 import { primaryColor, brownColor } from "@/styles/jss/animal-cloud-adoption.js";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Data
-const rowImgData1 = [
-  {
-    img: 'animals/animal-1.jpg',
-    title: 'name1',
-  },
-  {
-    img: 'animals/animal-1.jpg',
-    title: 'name2',
-  },
-  {
-    img: 'animals/animal-1.jpg',
-    title: 'name3',
-  },
-];
-
-const rowImgData2 = [
-  {
-    img: 'animals/animal-2.jpg',
-    title: 'name4',
-  },
-  {
-    img: 'animals/animal-2.jpg',
-    title: 'name5',
-  },
-  {
-    img: 'animals/animal-2.jpg',
-    title: 'name6',
-  },
-];
-
-// rows 全部都要連資料庫
-const rows = [
-  { id: 1, adopter: 'name A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData1 },
-  { id: 2, adopter: 'name B', currNum: 2, accumNum: 12, amount: 2000, animal: rowImgData2 },
-  { id: 3, adopter: 'name C', currNum: 3, accumNum: 13, amount: 3000, animal: rowImgData1 },
-  { id: 4, adopter: 'name D', currNum: 4, accumNum: 14, amount: 4000, animal: rowImgData2 },
-  { id: 5, adopter: 'name E', currNum: 5, accumNum: 15, amount: 5000, animal: rowImgData1 },
-  { id: 6, adopter: 'name F', currNum: 6, accumNum: 16, amount: 6000, animal: rowImgData2 },
-  { id: 7, adopter: 'name G', currNum: 7, accumNum: 17, amount: 7000, animal: rowImgData1 },
-  { id: 8, adopter: 'name H', currNum: 8, accumNum: 18, amount: 8000, animal: rowImgData2 },
-];
 
 const columns = [
   { field: 'adopter', headerName: '認養人', width: 120, sortable: false },
   { field: 'currNum', headerName: <>當前認養<br />動物數量</>, width: 120 },
   { field: 'accumNum', headerName: <>累積認養<br />動物數量</>, width: 120 },
   { field: 'amount', headerName: <>累積認養<br />金額</>, width: 120 },
-  { field: 'animal', headerName: '當前認養動物', width: 390, sortable: false,
+  {
+    field: 'animal', headerName: '當前認養動物', width: 390, sortable: false,
     renderCell: (params) => (
       // <Image
       //   src={`/animals/${params.value}.jpg`}
@@ -82,7 +38,8 @@ const columns = [
       />
     ),
   },
-  { field: 'more', headerName: '', width: 100, sortable: false, 
+  {
+    field: 'more', headerName: '', width: 100, sortable: false,
     renderCell: (params) => (
       // link 必須和 id 相同
       // <a href={`pages/adopters.adopterInfo/${params.row.id}`}>
@@ -93,7 +50,6 @@ const columns = [
     ),
   },
 ];
-
 
 // Footer
 function Pagination({ page, onPageChange, className }) {
@@ -157,12 +113,37 @@ const theme = createTheme({
 
 export default function AdopterList() {
 
+  const [rows, setRows] = useState([]);
+  // rows = [{ "amount": 300, "id": 1, "animal": [{ "img": "animals/1.jpg", "title": "樂樂" }], "accumNum": 2, "currNum": 1, "adopter": "AAA" }, { "amount": 280, "id": 2, "animal": [{ "img": "animals/1.jpg", "title": "樂樂" }], "accumNum": 1, "currNum": 1, "adopter": "BBB" }, { "amount": 0, "id": 3, "animal": [], "accumNum": 0, "currNum": 0, "adopter": "CCC" },]
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/getAdopterList');
+        const jsonData = await response.json();
+        setRows(jsonData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  // const rows = [
+  //   { id: 1, adopter: 'name A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData1 },
+  //   { id: 2, adopter: 'name B', currNum: 2, accumNum: 12, amount: 2000, animal: rowImgData2 },
+  //   { id: 3, adopter: 'name C', currNum: 3, accumNum: 13, amount: 3000, animal: rowImgData1 },
+  //   { id: 4, adopter: 'name D', currNum: 4, accumNum: 14, amount: 4000, animal: rowImgData2 },
+  //   { id: 5, adopter: 'name E', currNum: 5, accumNum: 15, amount: 5000, animal: rowImgData1 },
+  //   { id: 6, adopter: 'name F', currNum: 6, accumNum: 16, amount: 6000, animal: rowImgData2 },
+  //   { id: 7, adopter: 'name G', currNum: 7, accumNum: 17, amount: 7000, animal: rowImgData1 },
+  //   { id: 8, adopter: 'name H', currNum: 8, accumNum: 18, amount: 8000, animal: rowImgData2 },
+  // ];
+
   return (
     <div style={{ height: 633, width: '100%' }}>
       <ThemeProvider theme={theme}>
-        <DataGrid 
-          rows={rows} 
-          columns={columns} 
+        <DataGrid
+          rows={rows}
+          columns={columns}
           rowHeight={100}
           disableColumnMenu
           disableRowSelectionOnClick
@@ -171,17 +152,18 @@ export default function AdopterList() {
           }}
           pageSizeOptions={[5]}
           components={{
-              pagination: CustomPagination,
-              Toolbar: GridToolbar,
+            pagination: CustomPagination,
+            Toolbar: GridToolbar,
           }}
           pagination
           slots={{
             pagination: CustomPagination,
           }}
           sx={gridStyle}
-          // getRowHeight={() => 'auto'}
-          />
+        // getRowHeight={() => 'auto'}
+        />
       </ThemeProvider>
     </div>
   );
+
 }

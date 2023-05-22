@@ -54,7 +54,7 @@ const AnimalList = ({ animals }) => {
                 <CardMedia
                   component="img"
                   height="200"
-                  image={"/animals/animal-" + animal.id + ".jpg"}
+                  image={"/animals/" + animal.id + ".jpg"}
                   alt={animal.name}
                 />
                                       
