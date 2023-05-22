@@ -4,7 +4,7 @@ import { title, divLine } from "@/styles/jss/animal-cloud-adoption.js";
 // my components
 import AniCard from './AniCard';
 
-// NEW animal array: { id, name, type, sex, birth_year, shelter, sheltered_date, numMember }
+// NEW animal array: { id, name, type, sex, birth_year, area, shelter, sheltered_date, numMember }
 const animals = [
     { id: 1, name: 'name1', type: '狗', sex: '公', birth_year: '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06 00:00:00.000000', numMember: '1' },
     { id: 2, name: 'name2', type: '貓', sex: '母', birth_year: '2021', area: '北部', shelter: '新北市新店區公立動物之家', sheltered_date: '2021-04-06 00:00:00.000000', numMember: '2' },
