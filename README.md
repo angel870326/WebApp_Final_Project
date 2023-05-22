@@ -76,13 +76,16 @@ frontend
 │   ├── AdopterInfoPage
 │   │   ├── AdopterInfo.jsx
 │   │   └── AdopterAnimalInfo.jsx
+│   ├── AccountPage
+│   │   ├── AccountInfo.jsx
+│   │   ├── AccountAnimalInfo.jsx
+│   │   └── AccountInfoEdit.jsx
 │   ├── AuthPage
 │   │   ├── RegisterForm.jsx
 │   │   └── LoginForm.jsx
-│   └── AccountPage
-│       ├── AccountInfo.jsx
-│       ├── AccountAnimalInfo.jsx
-│       └── AccountInfoEdit.jsx
+│   └── FaqPage
+│       ├── FaqPage.jsx
+│       └── Data.jsx
 ├── styles
 │   └── jss
 │       ├── components
@@ -94,8 +97,10 @@ frontend
 │       │   │   └── headerStyle.js
 │       │   ├── AdopterListPage
 │       │   │   └── adopterListStyle.js
-│       │   └── AccountPpage
-│       │       └── accountInfoStyle.js
+│       │   ├── AccountPage
+│       │   │   └── accountInfoStyle.js
+│       │   └── FaqPpage
+│       │       └── faqStyle.js
 │       └── animal-cloud-adoption.js
 └── public
     └── animals
