@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }  from 'react'
 // style
 import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 // my components
@@ -6,20 +6,25 @@ import SearchCond from './SearchCond'
 import SearchRes from './SearchRes'
 
 function Home() {
+  const [searchCriteria, setSearchCriteria] = useState({ area: '', sortBy: ''});
 
-      return (
-      <div>
-        <h1 style={title}> 收容所列表 </h1>
+  const handleSearch = (newSearchCriteria) => {
+    setSearchCriteria(newSearchCriteria);
+  };
+  
+  return (
+    <div>
+      <h1 style={title}> 收容所列表 </h1>
 
-        <div style={content}>
-          <SearchCond />
-        </div>
-        <div style={content}>
-          <SearchRes />
-        </div>
-        
+      <div style={content}>
+        <SearchCond onSearch={handleSearch} />
       </div>
-      );
+      <div style={content}>
+        <SearchRes searchCriteria={searchCriteria} />
+      </div>
+    
+    </div>
+  );
      
 }
 

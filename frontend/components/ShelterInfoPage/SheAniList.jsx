@@ -11,7 +11,23 @@ function SheAniList() {
     const router = useRouter();
     const { s_id } = router.query;
 
-    // 後端利用 s_id 得到相對應的 animals [{id, name, shelter, type, birth_year, numMember},]
+
+    // 後端利用 s_id 得到相對應的 animals [{id, name, type, sex, birth_year, area(可以不用), shelter, sheltered_date, numMember},]
+    // NEW animals array
+    const animals = [
+        { id: 1, name: 'name1', type: '狗', sex: '公', birth_year: '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06 00:00:00.000000', numMember: '1' },
+        { id: 2, name: 'name2', type: '貓', sex: '母', birth_year: '2021', area: '北部', shelter: '新北市新店區公立動物之家', sheltered_date: '2021-04-06 00:00:00.000000', numMember: '2' },
+        { id: 3, name: 'name3', type: '鸚鵡', sex: '公', birth_year: '2022', area: '東部', shelter: '臺東縣動物收容中心', sheltered_date: '2023-05-06 00:00:00.000000', numMember: '5' },
+        { id: 4, name: 'name4', type: '狗', sex: '公', birth_year: '2023', area: '南部', shelter: 'my shelter', sheltered_date: '2023-04-06 00:00:00.000000', numMember: '10' },
+        { id: 5, name: 'name5', type: '貓', sex: '公', birth_year: '2017', area: '中部', shelter: 'my shelter', sheltered_date: '2020-04-06 00:00:00.000000', numMember: '3' },
+        { id: 6, name: 'name6', type: '狗', sex: '母', birth_year: '2018', area: '中部', shelter: 'my shelter', sheltered_date: '2019-04-06 00:00:00.000000', numMember: '5' },
+        { id: 7, name: 'name7', type: '貓', sex: '公', birth_year: '2016', area: '南部', shelter: 'my shelter', sheltered_date: '2018-04-06 00:00:00.000000', numMember: '2' },
+        { id: 8, name: 'name8', type: '狗', sex: '母', birth_year: '2001', area: '東部', shelter: 'my shelter', sheltered_date: '2007-04-06 00:00:00.000000', numMember: '11' },
+    ];
+
+
+    // OLD animals array: {id, name, shelter, type, birth_year, numMember}
+    /*
     const [animals, setAnimals] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -26,16 +42,7 @@ function SheAniList() {
         }
         fetchData();
     }, []);
-    // const animals = [
-    //     { id: 1, name: 'name1', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 2, name: 'name2', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 3, name: 'name3', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 4, name: 'name4', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 5, name: 'name5', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 6, name: 'name6', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 7, name: 'name7', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    //     { id: 8, name: 'name8', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },
-    // ];
+    */
 
     return (
         <div>

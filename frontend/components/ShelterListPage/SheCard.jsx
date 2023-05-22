@@ -26,6 +26,19 @@ const ShelterList = ({ shelters }) => {
   const endIndex = startIndex + pageSize;
   const visibleShelters = shelters.slice(startIndex, endIndex);
 
+  // 狗腳印
+  const getDogPawPrints = (numAnimal) => {
+    if (numAnimal >= 11) {
+      return '🐾🐾🐾';
+    } else if (numAnimal >= 6) {
+      return '🐾🐾';
+    } else if (numAnimal >= 1) {
+      return '🐾';
+    } else {
+      return '';
+    }
+  };
+
   return (
     <div>
       <ThemeProvider theme={brownTheme}>
@@ -38,13 +51,13 @@ const ShelterList = ({ shelters }) => {
             transform: "scale3d(1.05, 1.05, 1)",
           }
         }}>
-          <CardContent style={{ display: 'flex', alignItems: 'center', }}>
+          <CardContent style={{ display: 'flex', alignItems: 'center', }} sx={{mx: '1%'}}>
 
-            <Typography variant="h5" component="div" color={primaryColor} style={{ marginRight: 'auto' }}>
+            <Typography variant="h5" component="div" color={primaryColor} style={{ width: '40%' }}>
               {shelter.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary" style={{ marginRight: 'auto' }}>
-              {shelter.address}<br />{shelter.numAnimal}
+            <Typography variant="body2" color="text.secondary" style={{ width: '30%' }}>
+              {shelter.address}<br />收容動物數量：{shelter.numAnimal} {getDogPawPrints(shelter.numAnimal)}
             </Typography>
             <CardActions style={{ marginLeft: 'auto' }}>
             <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} as={`/shelters/sheltersInfo/${shelter.id}`} style={{ textDecoration: 'none' }}>
