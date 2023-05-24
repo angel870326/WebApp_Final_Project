@@ -5,29 +5,24 @@ import { ThemeProvider } from '@mui/material/styles';
 // mui conponents
 import { Button } from '@mui/material';
 // select bar
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 
 // below function: {SelectBar, SortButton} --> SearchCond
 
 // 選單欄
-function SelectBar() {
-  const [types, setTypes] = useState('');
-  const [age, setAge] = useState('');
-  const [sex, setSex] = useState('');
-  const [area, setArea] = useState('');
+function SelectBar(props){
+  const { types, setTypes, age, setAge, sex, setSex, area, setArea } = props;
   
-  return(
+  return (
     <div>
-      
-      <FormControl sx={{ m: 1, minWidth: 120}}>
-        <InputLabel id="demo-simple-select-helper-label">動物品種</InputLabel>
+
+      {/* types */}
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel>動物品種</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
           value={types}
           label="動物品種"
           onChange={(e) => setTypes(e.target.value)}
@@ -39,9 +34,9 @@ function SelectBar() {
           <MenuItem value={"狗"}>狗</MenuItem>
           <MenuItem value={"其他"}>其他</MenuItem>
         </Select>
-        <FormHelperText>helper text</FormHelperText>
       </FormControl>
 
+      {/* age */}
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>年紀</InputLabel>
         <Select
@@ -59,6 +54,7 @@ function SelectBar() {
         </Select>
       </FormControl>
 
+      {/* sex */}
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>性別</InputLabel>
         <Select
@@ -74,6 +70,7 @@ function SelectBar() {
         </Select>
       </FormControl>
 
+      {/* area */}
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>收容地點</InputLabel>
         <Select
@@ -96,43 +93,81 @@ function SelectBar() {
 }
 
 // 排序按鈕
-function SortButton(){
-  const [color1, setColor1] = useState('primary');
-  const [color2, setColor2] = useState('primary');
-  const handleClick1 = () => {
-    setColor1(prevColor => prevColor === 'primary' ? 'secondary' : 'primary');
-  };
-  const handleClick2 = () => {
-    setColor2(prevColor => prevColor === 'primary' ? 'secondary' : 'primary');
+function SortButton(props){
+  const {sortBy, setSortBy } = props;
+
+  const handleSort = (option) => {
+    if(sortBy === option){
+      setSortBy('');
+    }else{
+      setSortBy(option);
+    }
   };
 
   return(
     <p>排序方式：
-      <Button variant="outlined" onClick={handleClick1} color={color1} sx={{m: 0.5}}>收容時間</Button>
-      <Button variant="outlined" onClick={handleClick2} color={color2} sx={{m: 0.5}}>認養人數</Button>
+      <Button
+        variant="outlined"
+        onClick={() => handleSort('sheltered_date')} 
+        color={sortBy === 'sheltered_date' ? 'secondary' : 'primary'}
+        sx={{ m: 0.5 }}
+      >收容時間</Button>
+
+      <Button
+        variant="outlined"
+        onClick={() => handleSort('numMember')}
+        color={sortBy === 'numMember' ? 'secondary' : 'primary'}
+        sx={{ m: 0.5 }}
+      >認養人數</Button>
+
     </p>
   );
 }
 
 // main
-function SearchCond() {
+function SearchCond({ onSearch }) {
+  const [types, setTypes] = useState('');
+  const [age, setAge] = useState('');
+  const [sex, setSex] = useState('');
+  const [area, setArea] = useState('');
+  const [sortBy, setSortBy] = useState('');
+
+  // 按下搜尋後，丟給爸爸 AnimalListPage 處理
+  const handleSearch = () => {
+    onSearch({ types, age, sex, area, sortBy });
+  };
+
   return (
     <ThemeProvider theme={brownTheme}>
-      
-        <h2 style={title}>搜尋條件</h2>
-        <div style={divLine}/>
-        
-        <div style={{textAlign: 'center'}}>
-          <SelectBar />
-        </div>
-          
-        <div style={{textAlign: "right", marginRight: '50px'}}>
-          <SortButton />
-        </div>
+      <h2 style={title}>搜尋條件</h2>
+      <div style={divLine}/>
 
-        <div style={{textAlign: "center"}}>
-          <Button variant="contained" size="large">搜尋</Button>
-        </div>
+      {/* select bar */}
+      <div style={{ textAlign: 'center' }}>
+        <SelectBar
+          types={types}
+          setTypes={setTypes}
+          age={age}
+          setAge={setAge}
+          sex={sex}
+          setSex={setSex}
+          area={area}
+          setArea={setArea}
+        />
+      </div>
+
+      {/* sort button */}
+      <div style={{ textAlign: "right", marginRight: '50px' }}>
+        <SortButton
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
+      </div>
+
+      {/* search button*/}
+      <div style={{ textAlign: "center" }}>
+        <Button variant="contained" size="large" onClick={handleSearch}>搜尋</Button>
+      </div>
 
     </ThemeProvider>
   );
