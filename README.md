@@ -51,6 +51,13 @@ frontend
 │   │   └── DrawerLinks.jsx
 │   ├── Footer.jsx
 │   ├── Button.jsx
+│   ├── HomePage
+│   │   ├── HomeSectionLayout.jsx
+│   │   ├── AboutUs.jsx
+│   │   ├── CustomCountUp.jsx
+│   │   ├── HomeAnimal.jsx
+│   │   ├── HomeAdopter.jsx
+│   │   └── HomeShelter.jsx
 │   ├── AnimalListPage
 │   │   ├── AnimalListPage.jsx
 │   │   ├── SearchCond.jsx
@@ -95,6 +102,9 @@ frontend
 │       │   │   ├── drawerLinksStyle.js
 │       │   │   ├── headerLinksStyle.js
 │       │   │   └── headerStyle.js
+│       │   ├── HomePage
+│       │   │   ├── homeStyle.js
+│       │   │   └── aboutUsStyle.js
 │       │   ├── AdopterListPage
 │       │   │   └── adopterListStyle.js
 │       │   ├── AccountPage
