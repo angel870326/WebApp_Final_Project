@@ -73,7 +73,7 @@ const AnimalList = ({ animals }) => {
                   </CardContent>
                                         
                   <CardActions style={{justifyContent: 'center', marginBottom: 10}}>
-                  <Link href={`/animals/animalsInfo?a_id=${animal.id}`} as={`/animals/animalsInfo/${animal.id}`} style={{ textDecoration: 'none' }}>
+                  <Link href={`/animals/animalsInfo?a_id=${animal.id}`} style={{ textDecoration: 'none' }}>
                     <Button size="small" variant="contained">查看更多</Button>
                   </Link>
                   </CardActions>
