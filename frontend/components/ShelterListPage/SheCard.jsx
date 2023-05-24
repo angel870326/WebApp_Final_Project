@@ -60,7 +60,7 @@ const ShelterList = ({ shelters }) => {
               {shelter.address}<br />收容動物數量：{shelter.numAnimal} {getDogPawPrints(shelter.numAnimal)}
             </Typography>
             <CardActions style={{ marginLeft: 'auto' }}>
-            <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} as={`/shelters/sheltersInfo/${shelter.id}`} style={{ textDecoration: 'none' }}>
+            <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} style={{ textDecoration: 'none' }}>
               <Button size="small" variant="contained">查看更多</Button>
             </Link>
             </CardActions>
