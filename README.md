@@ -53,6 +53,7 @@ frontend
 │   ├── Button.jsx
 │   ├── HomePage
 │   │   ├── HomeSectionLayout.jsx
+│   │   ├── ImageContent.jsx
 │   │   ├── AboutUs.jsx
 │   │   ├── CustomCountUp.jsx
 │   │   ├── HomeAnimal.jsx
@@ -104,7 +105,8 @@ frontend
 │       │   │   └── headerStyle.js
 │       │   ├── HomePage
 │       │   │   ├── homeStyle.js
-│       │   │   └── aboutUsStyle.js
+│       │   │   ├── aboutUsStyle.js
+│       │   │   └── imageContentStyle.js
 │       │   ├── AdopterListPage
 │       │   │   └── adopterListStyle.js
 │       │   ├── AccountPage
@@ -113,8 +115,9 @@ frontend
 │       │       └── faqStyle.js
 │       └── animal-cloud-adoption.js
 └── public
-    └── animals
-       └── ....jpg
+    ├── animals
+    │   └── ....jpg
+    └── bg.jpg
 
 
 backend
