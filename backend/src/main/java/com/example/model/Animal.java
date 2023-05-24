@@ -45,6 +45,9 @@ public class Animal implements Serializable {
         this.type = type;
         this.appearance = appearance;
         this.personality = personality;
+        this.birthYear = birthYear;
+        this.shelteredDate = shelteredDate;
+        this.shelter = shelter;
     }
 
     public Long getId() {
