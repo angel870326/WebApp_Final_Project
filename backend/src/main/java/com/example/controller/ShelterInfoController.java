@@ -67,31 +67,18 @@ public class ShelterInfoController {
             shelterAnimal.add(Map.of(
                     "id", animalId,
                     "name", animal.getName(),
-                    "shelter", animal.getShelter().getName(),
+                    "sex", animal.getSex(),
                     "type", animal.getType(),
                     "birth_year", animal.getBirthYear(),
+                    "sheltered_date", animal.getShelteredDate(),
+                    "shelter", animal.getShelter().getName(),
+                    "area", animal.getShelter().getArea(),
                     "numMember", currentAdopterNum));
 
         }
-
-        // const animals = [
-        // { id: 1, name: 'name1', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 2, name: 'name2', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 3, name: 'name3', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 4, name: 'name4', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 5, name: 'name5', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 6, name: 'name6', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 7, name: 'name7', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 8, name: 'name8', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // ];
+        // const animals = [{ id: 1, name: 'name1', type: '狗', sex: '公', birth_year:
+        // '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06
+        // 00:00:00.000000', numMember: '1' },];
 
         return shelterAnimal;
 

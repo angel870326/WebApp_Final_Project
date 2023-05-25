@@ -35,6 +35,9 @@ frontend
 │   ├── account.jsx
 │   ├── account
 │   │   └── edit.jsx
+│   ├── auth
+│   │   └── register.jsx
+│   │   └── login.jsx
 │   ├── faq.jsx
 │   ├── _app.jsx
 │   ├── _document.jsx
@@ -48,6 +51,14 @@ frontend
 │   │   └── DrawerLinks.jsx
 │   ├── Footer.jsx
 │   ├── Button.jsx
+│   ├── HomePage
+│   │   ├── HomeSectionLayout.jsx
+│   │   ├── ImageContent.jsx
+│   │   ├── AboutUs.jsx
+│   │   ├── CustomCountUp.jsx
+│   │   ├── HomeAnimal.jsx
+│   │   ├── HomeAdopter.jsx
+│   │   └── HomeShelter.jsx
 │   ├── AnimalListPage
 │   │   ├── AnimalListPage.jsx
 │   │   ├── SearchCond.jsx
@@ -73,10 +84,16 @@ frontend
 │   ├── AdopterInfoPage
 │   │   ├── AdopterInfo.jsx
 │   │   └── AdopterAnimalInfo.jsx
-│   └── AccountPage
-│       ├── AccountInfo.jsx
-│       ├── AccountAnimalInfo.jsx
-│       └── AccountInfoEdit.jsx
+│   ├── AccountPage
+│   │   ├── AccountInfo.jsx
+│   │   ├── AccountAnimalInfo.jsx
+│   │   └── AccountInfoEdit.jsx
+│   ├── AuthPage
+│   │   ├── RegisterForm.jsx
+│   │   └── LoginForm.jsx
+│   └── FaqPage
+│       ├── FaqPage.jsx
+│       └── Data.jsx
 ├── styles
 │   └── jss
 │       ├── components
@@ -86,14 +103,21 @@ frontend
 │       │   │   ├── drawerLinksStyle.js
 │       │   │   ├── headerLinksStyle.js
 │       │   │   └── headerStyle.js
+│       │   ├── HomePage
+│       │   │   ├── homeStyle.js
+│       │   │   ├── aboutUsStyle.js
+│       │   │   └── imageContentStyle.js
 │       │   ├── AdopterListPage
 │       │   │   └── adopterListStyle.js
-│       │   └── AccountPpage
-│       │       └── accountInfoStyle.js
+│       │   ├── AccountPage
+│       │   │   └── accountInfoStyle.js
+│       │   └── FaqPpage
+│       │       └── faqStyle.js
 │       └── animal-cloud-adoption.js
 └── public
-    └── animals
-       └── ....jpg
+    ├── animals
+    │   └── ....jpg
+    └── bg.jpg
 
 
 backend

@@ -12,7 +12,12 @@ export default function SheAniList() {
     const router = useRouter();
     const { s_id } = router.query;
     const [isLoading, setLoading] = useState(true);
+    // 後端利用 s_id 得到相對應的 animals [{id, name, type, sex, birth_year, area(可以不用), shelter, sheltered_date, numMember},]
     const [animals, setAnimals] = useState([]);
+    // // NEW animals array
+    // const animals = [{ id: 1, name: 'name1', type: '狗', sex: '公', birth_year: '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06 00:00:00.000000', numMember: '1' },];
+    // // OLD animals array
+    // const animals = [{id, name, shelter, type, birth_year, numMember},]
 
     useEffect(() => {
         if (s_id) {
@@ -27,7 +32,6 @@ export default function SheAniList() {
             fetchData();
         }
     }, [s_id]);
-    // const animals = [{ id: 1, name: 'name1', shelter: 'my shelter', type: 'my type', birth_year: 'my birth_year', numMember: 'my numMember' },];
 
     if (isLoading) {
         return;
@@ -40,4 +44,5 @@ export default function SheAniList() {
             </div>
         );
     }
+    
 }

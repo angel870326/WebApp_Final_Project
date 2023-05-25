@@ -7,15 +7,14 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 // mui conponents
 import { Button } from '@mui/material';
 
 // below function: {SelectBar, SortButton} --> SearchCond
 
 // 選單欄
-function SelectBar() {
-  const [area, setArea] = useState('');
+function SelectBar(props) {
+  const { area, setArea } = props;
   return(
     <div>
       
@@ -36,7 +35,6 @@ function SelectBar() {
           <MenuItem value={"南部"}>南部</MenuItem>
           <MenuItem value={"東部"}>東部</MenuItem>
         </Select>
-        <FormHelperText>helper text</FormHelperText>
       </FormControl>
 
     </div>
@@ -44,21 +42,38 @@ function SelectBar() {
 }
 
 // 排序按鈕
-function SortButton(){
-  const [color1, setColor1] = useState('primary');
-  const handleClick1 = () => {
-    setColor1(prevColor => prevColor === 'primary' ? 'secondary' : 'primary');
+function SortButton(props){
+  const {sortBy, setSortBy } = props;
+  const handleSort = (option) => {
+    if(sortBy === option){
+      setSortBy('');
+    }else{
+      setSortBy(option);
+    }
   };
 
   return(
     <p>排序方式：
-      <Button variant="outlined" onClick={handleClick1} color={color1} sx={{m: 0.5}}>當前收容動物數量</Button>
+      <Button
+        variant="outlined"
+        onClick={() => handleSort('numAnimal')}
+        color={sortBy === 'numAnimal' ? 'secondary' : 'primary'}
+        sx={{m: 0.5}}
+      >當前收容動物數量</Button>
     </p>
   );
 }
 
 // main
-function SearchCond() {
+function SearchCond({ onSearch }) {
+  const [area, setArea] = useState('');
+  const [sortBy, setSortBy] = useState('');
+
+  // 按下搜尋後，丟給爸爸 AnimalListPage 處理
+  const handleSearch = () => {
+    onSearch({ area, sortBy });
+  };
+
   return (
     <ThemeProvider theme={brownTheme}>
       
@@ -66,15 +81,21 @@ function SearchCond() {
       <div style={divLine}/>
           
       <div style={{textAlign: 'center'}}>
-        <SelectBar />
+        <SelectBar
+          area={area}
+          setArea={setArea}
+        />
       </div>
 
       <div style={{textAlign: "right", marginRight: '50px'}}>
-        <SortButton />
+        <SortButton
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
       </div>
 
       <div style={{textAlign: "center"}}>
-          <Button variant="contained" size="large">搜尋</Button>
+          <Button variant="contained" size="large" onClick={handleSearch}>搜尋</Button>
       </div>
 
     </ThemeProvider>

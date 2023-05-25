@@ -51,7 +51,7 @@ const theme = createTheme({
 
 const dashboardRoutes = [];
 
-export default function Layout({ children }) {
+export default function Layout({ imageBackground, children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -70,6 +70,7 @@ export default function Layout({ children }) {
             //   color: "white"
             // }}
           />
+          {imageBackground}
           <Container maxWidth="lg">
             {children}
           </Container>

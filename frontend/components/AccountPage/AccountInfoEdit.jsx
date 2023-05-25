@@ -81,9 +81,9 @@ const handleSubmit = async (event) => {
   });
 
   if (response.ok) {
-    alert("Update Success!");
+    alert("更新成功");
   } else {
-    alert("Update Failed!");
+    alert("系統錯誤");
   }
   window.location.href = "/account";
   
