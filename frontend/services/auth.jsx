@@ -14,11 +14,11 @@ const setUser = user =>
 
 // 處理登入，這邊使用 Hard Code 的方式驗證，此方式極度不安全，只是為了示範登入流程才用此方式，正式環境上會打 API 去跟後端確認資料是否正確，並等回傳結果後才會進行下一步
 export const handleLogin = ({ username, password }) => {
-  if (username === `ithelp` && password === `123456`) {
+  if (username === `test` && password === `123456`) {
+    // 存在前端的資訊，可以視情況新增
     return setUser({
-      username: `reynold`,
-      name: `Reynold`,
-      email: `reynold@example.org`,
+      id: 1,
+      username: `test`,
     })
   }
 
