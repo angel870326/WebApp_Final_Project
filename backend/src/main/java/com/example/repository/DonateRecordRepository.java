@@ -15,6 +15,12 @@ public interface DonateRecordRepository extends JpaRepository<DonateRecord, Long
 
         Optional<DonateRecord> findById(Long id);
 
+        // IndexController
+
+        // 累積總認養金額
+        @Query(nativeQuery = true, value = "SELECT SUM(dp.amount) FROM donate_record dr JOIN donate_plan dp ON dr.donate_plan_id = dp.id WHERE dr.status='認養中' or dr.status='認養結束'")
+        Integer sumAmountOfDonateRecords();
+
         // ShelterInfoController & AnimalListController
 
         // 當前總認養人數量 byAnimalId
@@ -69,24 +75,5 @@ public interface DonateRecordRepository extends JpaRepository<DonateRecord, Long
         @Query(nativeQuery = true, value = "SELECT id, status, apply_date, donation_start_date, donation_end_date, member_id, animal_id, donate_plan_id FROM donate_record as t1 WHERE animal_id = ?1 and member_id = ?2 and status != '審核失敗' ORDER BY apply_date DESC LIMIT 1;")
         DonateRecord findNewestDonateRecordByAnimalIdAndMemberId(@Param("animalId") Long animalId,
                         @Param("memberId") Long memberId);
-
-        // @Query(nativeQuery = true, value = "SELECT COUNT(id) FROM donate_record")
-        // Long countDonateRecord();
-
-        // // 當前總認養動物數量
-        // @Query(nativeQuery = true, value = "SELECT COUNT(DISTINCT animal_id) FROM
-        // donate_record WHERE status='認養中'")
-        // Integer sumCurrentAnimalNumOfDonateRecords();
-
-        // // 累積總認養動物數量
-        // @Query(nativeQuery = true, value = "SELECT COUNT(DISTINCT animal_id) FROM
-        // donate_record WHERE status='認養中'")
-        // Integer sumAnimalNumOfDonateRecords();
-
-        // // 累積總認養金額
-        // @Query(nativeQuery = true, value = "SELECT SUM(dp.amount) FROM
-        // donate_recorddr JOIN donate_plan dp ON dr.donate_plan_id = dp.id WHERE
-        // dr.status='認養中' or dr.status='認養結束'")
-        // Integer sumAmountOfDonateRecords();
 
 }
