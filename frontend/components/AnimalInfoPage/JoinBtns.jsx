@@ -3,7 +3,7 @@ import { brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
 import { Typography, Link, Button } from '@mui/material';
 
-export default function JoinBtns({ firstAdoptionStatus, firstAdoptionAnimalId }) {
+export default function JoinBtns({ firstAdoptionStatus, animalId }) {
   return (
     <div>
       {firstAdoptionStatus !== "審核中" && (
@@ -11,7 +11,7 @@ export default function JoinBtns({ firstAdoptionStatus, firstAdoptionAnimalId })
           {/* 加入認養計畫按鈕 */}
           {firstAdoptionStatus === "認養中" ? (
             <ThemeProvider theme={brownTheme}>
-              <Link href={`/animals/extendAdopt?a_id=${firstAdoptionAnimalId}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/animals/extendAdopt?a_id=${animalId}`} style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                   延長認養計畫
                 </Button>
@@ -19,7 +19,7 @@ export default function JoinBtns({ firstAdoptionStatus, firstAdoptionAnimalId })
             </ThemeProvider>
           ) : (
             <ThemeProvider theme={brownTheme}>
-              <Link href={`/animals/joinAdopt?a_id=${firstAdoptionAnimalId}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/animals/joinAdopt?a_id=${animalId}`} style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                   加入認養計畫
                 </Button>

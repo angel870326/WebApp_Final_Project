@@ -32,7 +32,6 @@ export default function AccountAnimalInfo(props) {
       } catch (error) { }
       try {
         // use memberId = 1 just for testing
-
         const response = await fetch('/api/getAccountAnimal/1');
         const jsonData = await response.json();
         setAnimalData(jsonData);
@@ -82,10 +81,10 @@ export default function AccountAnimalInfo(props) {
           gap={10}
         >
           {animalData.map((item) => (
-            <ImageListItem key={item.img}>
+            <ImageListItem key={item.animalId}>
               <img
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format`}
+                srcSet={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
               />
@@ -102,7 +101,7 @@ export default function AccountAnimalInfo(props) {
                   }
                 }}
               />
-              <a href={item.link} target="_blank">
+              <a href={`/animals/animalsInfo?a_id=${item.animalId}`} target="_blank">
                 <Button variant="outlined" sx={{ ...moreBtn, marginBottom: '10px' }}>查看更多</Button>
               </a>
             </ImageListItem>

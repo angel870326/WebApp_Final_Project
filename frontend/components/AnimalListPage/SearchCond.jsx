@@ -48,9 +48,9 @@ function SelectBar(props){
             <em>None</em>
           </MenuItem>
           <MenuItem value={"0-1"}>0-1 歲</MenuItem>
-          <MenuItem value={"1-3"}>1-3 歲</MenuItem>
-          <MenuItem value={"3-6"}>3-6 歲</MenuItem>
-          <MenuItem value={"6+"}>6 歲以上</MenuItem>
+          <MenuItem value={"2-3"}>2-3 歲</MenuItem>
+          <MenuItem value={"4-5"}>4-5 歲</MenuItem>
+          <MenuItem value={"5+"}>5 歲或以上</MenuItem>
         </Select>
       </FormControl>
 

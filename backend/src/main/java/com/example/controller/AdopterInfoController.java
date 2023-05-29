@@ -75,19 +75,11 @@ public class AdopterInfoController {
                         Animal animal = animalRepository.findByAnimalId(animalId);
                         String animalName = animal.getName();
                         adopterAnimal.add(Map.of(
-                                        "img", "/animals/" + animalId + ".jpg",
                                         "title", animalName,
-                                        "link", "/animals/animalsInfo"));
+                                        "animalId", animalId));
                 }
 
-                // const animalData = [
-                // { img: '/animals/1.jpg', title: 'name1', link: '/animals/animalsInfo',
-                // },
-                // { img: '/animals/2.jpg', title: 'name2', link: '/animals/animalsInfo',
-                // },
-                // { img: '/animals/1.jpg', title: 'name3', link: '/animals/animalsInfo',
-                // },
-                // ];
+                // const animalData = [{title: 'name1', state: state_date, animalId: 1},];
 
                 return adopterAnimal;
 

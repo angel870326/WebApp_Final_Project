@@ -47,10 +47,10 @@ export default function SearchRes({ searchCriteria }) {
       if (searchCriteria.age) {
         const now = new Date();
         const currentYear = now.getFullYear();
-        const animalAge = currentYear - parseInt(animal.birth_year);
+        const animalAge = currentYear - animal.birth_year;
 
-        if (searchCriteria.age === '6+') {
-          if (animalAge < 6) {
+        if (searchCriteria.age === '5+') {
+          if (animalAge < 5) {
             return false;
           }
         } else {
@@ -58,7 +58,7 @@ export default function SearchRes({ searchCriteria }) {
           if (minAge && animalAge < parseInt(minAge)) {
             return false;
           }
-          if (maxAge && animalAge >= parseInt(maxAge)) {
+          if (maxAge && animalAge > parseInt(maxAge)) {
             return false;
           }
         }

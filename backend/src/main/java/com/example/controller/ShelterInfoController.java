@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 public class ShelterInfoController {
@@ -64,13 +66,18 @@ public class ShelterInfoController {
                     .ofNullable(donateRecordRepository.sumCurrentAdopterNumOfDonateRecordsByAnimalId(animalId))
                     .orElse(0);
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime shelteredDate = animal.getShelteredDate();
+            String formattedShelteredDate = shelteredDate.format(formatter);
+
             shelterAnimal.add(Map.of(
                     "id", animalId,
                     "name", animal.getName(),
                     "sex", animal.getSex(),
                     "type", animal.getType(),
                     "birth_year", animal.getBirthYear(),
-                    "sheltered_date", animal.getShelteredDate(),
+                    "sheltered_date", shelteredDate,
+                    "formatted_sheltered_date", formattedShelteredDate,
                     "shelter", animal.getShelter().getName(),
                     "area", animal.getShelter().getArea(),
                     "numMember", currentAdopterNum));

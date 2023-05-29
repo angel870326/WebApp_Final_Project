@@ -95,12 +95,16 @@ public class AccountInfoController {
 
                 List<Map<String, Object>> accountAnimal = new ArrayList<Map<String, Object>>();
 
-                List<DonateRecord> donateRecords = Optional
-                                .ofNullable(donateRecordRepository.findDonateRecordsByMemberId(memberId))
-                                .orElse(new ArrayList<DonateRecord>());
+                // if adopted animal not exist, return empty list (accountAnimal)
+                List<Long> adoptingAnimalIds = Optional
+                                .ofNullable(donateRecordRepository.adoptingAnimalIdsByMemberId(memberId))
+                                .orElse(new ArrayList<Long>());
+                for (Long adoptingAnimalId : adoptingAnimalIds) {
 
-                // if donateRecords not exist, return empty list (accountAnimal)
-                for (DonateRecord donateRecord : donateRecords) {
+                        DonateRecord donateRecord = Optional
+                                        .ofNullable(donateRecordRepository.findNewestDonateRecordByAnimalIdAndMemberId(
+                                                        adoptingAnimalId, memberId))
+                                        .orElse(new DonateRecord());
 
                         String state = donateRecord.getStatus();
                         if (state.equals("認養中")) {
@@ -113,44 +117,17 @@ public class AccountInfoController {
                         }
 
                         Animal animal = donateRecord.getAnimal();
-                        String title = animal.getName();
-                        String img = "/animals/" + animal.getId() + ".jpg";
-                        String link = "/animals/animalsInfo";
+                        Long animalId = animal.getId();
+                        String aniamalName = animal.getName();
 
                         accountAnimal.add(Map.of(
                                         "state", state,
-                                        "title", title,
-                                        "img", img,
-                                        "link", link));
+                                        "title", aniamalName,
+                                        "animalId", animalId));
 
                 }
 
-                // const animalData = [
-                // {
-                // img: '/animals/1.jpg',
-                // title: 'name1',
-                // state: state_date,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/2.jpg',
-                // title: 'name2',
-                // state: state_pending,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/2.jpg',
-                // title: 'name3',
-                // state: state_end,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/1.jpg',
-                // title: 'name4',
-                // state: state_end,
-                // link: '/animals/animalsInfo',
-                // },
-                // ];
+                // const animalData = [{title: 'name1', state: state_date, animalId: 1,];
 
                 return accountAnimal;
 

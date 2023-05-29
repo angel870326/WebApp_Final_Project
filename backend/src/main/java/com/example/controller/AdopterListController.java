@@ -78,18 +78,8 @@ public class AdopterListController {
 
                 }
 
-                // const rowImgData = [
-                // {img: '1',title: 'name1',},
-                // {img: '1',title: 'name2',},
-                // {img: '1',title: 'name3',},
-                // ];
-                // const rows = [
-                // { id: 1, adopter: 'name A', currNum: 1, accumNum: 11, amount: 1000, animal:
-                // rowImgData },
-                // { id: 2, adopter: 'name B', currNum: 2, accumNum: 12, amount: 2000, animal:
-                // rowImgData },
-                // { id: 3, adopter: 'name C', currNum: 3, accumNum: 13, amount: 3000, animal:
-                // rowImgData },
+                // const rowImgData = [{img: '1',title: 'name1',},];
+                // const rows = [{ id: 1, adopter: 'name A', currNum: 1, accumNum: 11, amount: 1000, animal: rowImgData },];
 
                 return adopterList;
 

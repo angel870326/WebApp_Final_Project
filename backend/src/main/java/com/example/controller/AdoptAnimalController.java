@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 public class AdoptAnimalController {
@@ -83,6 +85,7 @@ public class AdoptAnimalController {
 
                 Animal animal = animalRepository.findByAnimalId(animalId);
                 Member member = memberRepository.findByMemberId(memberId);
+                DonateRecord newestDonateRecord = donateRecordRepository.findNewestDonateRecordByAnimalIdAndMemberId(animalId, memberId);
                 List<DonatePlan> donatePlans = donatePlanRepository.findAll();
 
                 Map<String, Object> animalData = new HashMap<String, Object>();
@@ -93,13 +96,16 @@ public class AdoptAnimalController {
                 // if animal/member not exist, return empty map in extendingDonatePlan
                 // (animalData, userData, options)
                 if (animal != null && member != null) {
+
                         userData = Map.of(
                                         "id", member.getId(),
                                         "email", member.getEmail(),
                                         "anonymous", member.getAnonymous());
+
                         animalData = Map.of(
                                         "id", animal.getId(),
                                         "name", animal.getName());
+
                         for (DonatePlan donatePlan : donatePlans) {
                                 options.add(Map.of(
                                                 "id", donatePlan.getId(),
@@ -107,9 +113,22 @@ public class AdoptAnimalController {
                                                 "price", donatePlan.getAmount(),
                                                 "duration", donatePlan.getDuration()));
                         }
+
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        LocalDateTime oldEndDate = newestDonateRecord.getDonationEndDate();
+                        String formattedOldEndDate = "";
+                        LocalDateTime newStartDate = newestDonateRecord.getDonationEndDate();
+                        String formattedNewStartDate = "";
+                        try {
+                                formattedOldEndDate = oldEndDate.format(formatter);
+                                newStartDate = oldEndDate.plusDays(1);
+                                formattedNewStartDate = newStartDate.format(formatter);
+                        } catch (NullPointerException e) {
+                        }
                         record = Map.of(
-                                        "oldEndDate", "2023/5/10",
-                                        "newStartDate", "2023/5/11");
+                                        "oldEndDate", formattedOldEndDate,
+                                        "newStartDate", formattedNewStartDate);
+
                 }
                 extendingDonatePlan = Map.of(
                                 "animal", animalData,

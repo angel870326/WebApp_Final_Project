@@ -68,15 +68,15 @@ public class AnimalInfoController {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime startDate = donateRecord.getDonationStartDate();
-            String formattedstartDate = "";
+            String formattedStartDate = "";
             try {
-                formattedstartDate = startDate.format(formatter);
+                formattedStartDate = startDate.format(formatter);
             } catch (NullPointerException e) {
             }
             LocalDateTime endDate = donateRecord.getDonationEndDate();
-            String formattedendDate = "";
+            String formattedEndDate = "";
             try {
-                formattedendDate = endDate.format(formatter);
+                formattedEndDate = endDate.format(formatter);
             } catch (NullPointerException e) {
             }
 
@@ -85,27 +85,15 @@ public class AnimalInfoController {
             animalDonateRecord.add(Map.of(
                     "id", donateRecord.getId(),
                     "status", donateRecord.getStatus(),
-                    "startDate", formattedstartDate,
-                    "endDate", formattedendDate,
+                    "startDate", formattedStartDate,
+                    "endDate", formattedEndDate,
                     "plan", donatePlan.getName(),
                     "amount", donatePlan.getAmount()));
 
         }
 
-        // const adoptionRecords = [
-        // { id: 1, plan: "方案一", startDate: '2023/5/1', endDate:"2023/6/1",
-        // status:"認養中", amount: 100 },
-        // { id: 2, plan: "方案二", startDate: '2022/5/1', endDate:"2022/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 3, plan: "方案三", startDate: '2021/5/1', endDate:"2021/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 4, plan: "方案四", startDate: '2020/5/1', endDate:"2020/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 5, plan: "方案四", startDate: '2019/5/1', endDate:"2019/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 6, plan: "方案四", startDate: '2018/5/1', endDate:"2018/6/1",
-        // status:"認養結束", amount: 100 },
-        // ];
+        // const adoptionRecords = [{ id: 1, plan: "方案一", startDate: '2023/5/1',
+        // endDate:"2023/6/1", status:"認養中", amount: 100 },];
 
         return animalDonateRecord;
 
@@ -134,14 +122,7 @@ public class AnimalInfoController {
 
         }
 
-        // const adopters = [
-        // { id: 1, name: "AA" },
-        // { id: 2, name: "BB" },
-        // { id: 3, name: "CC" },
-        // { id: 4, name: "DD" },
-        // { id: 5, name: "EE" },
-        // { id: 6, name: "FF" },
-        // ];
+        // const adopters = [{ id: 1, name: "AA" },];
 
         return animalAdopter;
 

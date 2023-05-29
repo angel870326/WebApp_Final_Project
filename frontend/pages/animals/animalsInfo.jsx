@@ -55,11 +55,9 @@ export default function AnimalsInfoPage() {
 
   // 取得最新一筆 adoptionRecords 的 status
   const [firstAdoptionStatus, setFirstAdoptionStatus] = useState(null);
-  const [firstAdoptionAnimalId, setFirstAdoptionAnimalId] = useState(null);
   useEffect(() => {
     if (adoptionRecords.length > 0) {
       setFirstAdoptionStatus(adoptionRecords[0].status);
-      setFirstAdoptionAnimalId(adoptionRecords[0].id);
     }
   }, [adoptionRecords]);
 
@@ -77,7 +75,7 @@ export default function AnimalsInfoPage() {
             {/* 其他認養人列表區塊 */}
             <OtherAdopters adopters={adopters} adoptionRecords={adoptionRecords} />
             {/* 了解認養流程連結 & 加入按鈕 */}
-            <JoinBtns firstAdoptionStatus={firstAdoptionStatus} firstAdoptionAnimalId={firstAdoptionAnimalId} />
+            <JoinBtns firstAdoptionStatus={firstAdoptionStatus} animalId={a_id} />
           </Box>
         </ThemeProvider>
       </Layout>

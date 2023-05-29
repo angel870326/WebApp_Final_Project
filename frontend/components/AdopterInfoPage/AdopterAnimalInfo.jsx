@@ -60,17 +60,17 @@ export default function AdopterAnimalInfo() {
           gap={10}
         >
           {animalData.map((item) => (
-            <ImageListItem key={item.img}>
+            <ImageListItem key={item.animalId}>
               <img
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format`}
+                srcSet={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
               />
               <ImageListItemBar
                 title={item.title}
                 subtitle={
-                  <a href={item.link} target="_blank">
+                  <a href={`/animals/animalsInfo?a_id=${item.animalId}`} target="_blank">
                     <Button variant="outlined" sx={{ ...moreBtn, marginTop: '10px' }}>查看更多</Button>
                   </a>
                 }

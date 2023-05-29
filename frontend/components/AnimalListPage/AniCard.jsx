@@ -63,10 +63,9 @@ export default function AniCard({ animals }) {
                       {animal.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      <b>品種：</b>{animal.type} ｜ <b>性別：</b>{animal.sex}<br />
-                      <b>出生年：</b>{animal.birth_year} 年，今年 {new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
+                      <b>品種：</b>{animal.type} ｜ <b>性別：</b>{animal.sex} ｜ <b>年齡：</b>{new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
                       <b>收容處：</b>{animal.shelter}<br />
-                      <b>收容時間：</b>{animal.sheltered_date.split(' ')[0]}<br />
+                      <b>收容時間：</b>{animal.formatted_sheltered_date}<br />
                       <b>認養人數：</b>{animal.numMember}
                     </Typography>
                   </CardContent>
@@ -81,7 +80,7 @@ export default function AniCard({ animals }) {
             </div>
           ))
         ) : (
-          <p>No animals available QQ</p>
+          <p>沒有符合搜尋條件之動物</p>
         )}
 
         {/* 頁數 */}
