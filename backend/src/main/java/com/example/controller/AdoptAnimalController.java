@@ -2,14 +2,15 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.component.*;
 import com.example.form.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -84,7 +85,8 @@ public class AdoptAnimalController {
 
                 Animal animal = animalRepository.findByAnimalId(animalId);
                 Member member = memberRepository.findByMemberId(memberId);
-                DonateRecord newestDonateRecord = donateRecordRepository.findNewestDonateRecordByAnimalIdAndMemberId(animalId, memberId);
+                DonateRecord newestDonateRecord = donateRecordRepository
+                                .findNewestDonateRecordByAnimalIdAndMemberId(animalId, memberId);
                 List<DonatePlan> donatePlans = donatePlanRepository.findAll();
 
                 Map<String, Object> animalData = new HashMap<String, Object>();
@@ -162,13 +164,35 @@ public class AdoptAnimalController {
                                         donatePlan);
                         donateRecordRepository.save(donateRecord);
 
-                        // 寄信功能
+                        // 寄信
+                        String memberMail = "yinhuang119@gmail.com";
+                        // String memberMail = member.getEmail();
+                        String memberName = member.getNickName();
+                        String animalName = animal.getName();
+                        Integer donatePlanAmount = donatePlan.getAmount();
+                        SendMail.sendMail(memberMail, memberName, animalName, donatePlanName, donatePlanAmount);
 
                         return ResponseEntity.ok().build();
 
                 } else {
                         return ResponseEntity.notFound().build();
                 }
+
+        }
+
+        @GetMapping("/test")
+        public Map<String, Object> test() {
+
+                String memberMail = "yinhuang119@gmail.com";
+                String memberName = "Eva";
+                String animalName = "樂樂";
+                String donatePlanName = "90 天方案";
+                Integer donatePlanAmount = 100;
+
+                SendMail.sendMail(memberMail, memberName, animalName, donatePlanName, donatePlanAmount);
+
+                Map<String, Object> test = new HashMap<String, Object>();
+                return test;
 
         }
 
