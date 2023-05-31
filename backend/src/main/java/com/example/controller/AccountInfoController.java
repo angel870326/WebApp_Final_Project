@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.component.*;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +30,11 @@ public class AccountInfoController {
 
                 Map<String, Object> accountInfo = new HashMap<String, Object>();
 
-                Member member = memberRepository.findByMemberId(memberId);
-
                 // if member not exist, return empty map (adopterInfo)
-                if (member != null) {
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
+
+                        Member member = memberOp.get();
 
                         String anonymous = "否";
                         if (member.getAnonymous() == true) {
@@ -63,18 +65,16 @@ public class AccountInfoController {
 
                 Map<String, Object> accountAdoptInfo = new HashMap<String, Object>();
 
-                Member member = memberRepository.findByMemberId(memberId);
-
                 // if member not exist, return empty map (adopterInfo)
-                if (member != null) {
-                        // 會員累積認養動物數量
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
+
                         Integer number = Optional
                                         .ofNullable(donateRecordRepository
-                                                        .sumAnimalNumOfDonateRecordsByMemberId(memberId))
+                                                        .countAdoptedAnimalNumByMemberId(memberId))
                                         .orElse(0);
-                        // 會員累積認養金額
                         Integer amount = Optional
-                                        .ofNullable(donateRecordRepository.sumAmountOfDonateRecordsByMemberId(memberId))
+                                        .ofNullable(donateRecordRepository.sumAdoptedAmountByMemberId(memberId))
                                         .orElse(0);
 
                         accountAdoptInfo = Map.of(
@@ -95,12 +95,18 @@ public class AccountInfoController {
 
                 List<Map<String, Object>> accountAnimal = new ArrayList<Map<String, Object>>();
 
-                List<DonateRecord> donateRecords = Optional
-                                .ofNullable(donateRecordRepository.findDonateRecordsByMemberId(memberId))
-                                .orElse(new ArrayList<DonateRecord>());
+                // if adopted animal not exist, return empty list (accountAnimal)
+                List<Long> adoptingAnimalIds = Optional
+                                .ofNullable(donateRecordRepository.findAdoptedAnimalIdsByMemberId(memberId))
+                                .orElse(new ArrayList<Long>());
+                for (Long adoptingAnimalId : adoptingAnimalIds) {
 
-                // if donateRecords not exist, return empty list (accountAnimal)
-                for (DonateRecord donateRecord : donateRecords) {
+                        DonateRecord donateRecord = Optional
+                                        .ofNullable(donateRecordRepository.findNewestDonateRecordByAnimalIdAndMemberId(
+                                                        adoptingAnimalId, memberId))
+                                        .orElse(new DonateRecord());
+
+                        UpdateDonateRecordStatus.updateStatus(donateRecord);
 
                         String state = donateRecord.getStatus();
                         if (state.equals("認養中")) {
@@ -113,44 +119,15 @@ public class AccountInfoController {
                         }
 
                         Animal animal = donateRecord.getAnimal();
-                        String title = animal.getName();
-                        String img = "/animals/" + animal.getId() + ".jpg";
-                        String link = "/animals/animalsInfo";
 
                         accountAnimal.add(Map.of(
                                         "state", state,
-                                        "title", title,
-                                        "img", img,
-                                        "link", link));
+                                        "title", animal.getName(),
+                                        "animalId", animal.getId()));
 
                 }
 
-                // const animalData = [
-                // {
-                // img: '/animals/1.jpg',
-                // title: 'name1',
-                // state: state_date,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/2.jpg',
-                // title: 'name2',
-                // state: state_pending,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/2.jpg',
-                // title: 'name3',
-                // state: state_end,
-                // link: '/animals/animalsInfo',
-                // },
-                // {
-                // img: '/animals/1.jpg',
-                // title: 'name4',
-                // state: state_end,
-                // link: '/animals/animalsInfo',
-                // },
-                // ];
+                // const animalData = [{title: 'name1', state: state_date, animalId: 1,];
 
                 return accountAnimal;
 

@@ -9,7 +9,9 @@ import { Card, CardMedia, CardContent, Typography, Button, CardActions } from '@
 import Link from 'next/link';
 
 //每 5 個換一頁
-const ShelterList = ({ shelters }) => {
+export default function SheCard(props) {
+  const { shelters } = props;
+
   const pageSize = 5; // 每頁顯示的卡片數量
   const [currentPage, setCurrentPage] = useState(0); // 當前頁碼
 
@@ -53,7 +55,6 @@ const ShelterList = ({ shelters }) => {
             }
           }}>
             <CardContent style={{ display: 'flex', alignItems: 'center', }} sx={{mx: '1%'}}>
-
               <Typography variant="h5" component="div" color={primaryColor} style={{ width: '40%' }}>
                 {shelter.name}
               </Typography>
@@ -93,6 +94,5 @@ const ShelterList = ({ shelters }) => {
       </ThemeProvider>
     </div>
   );
-};
 
-export default ShelterList;
+}

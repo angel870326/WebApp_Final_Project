@@ -1,10 +1,10 @@
 package com.example.model;
 
-import java.io.Serializable;
 import jakarta.persistence.*;
+import java.io.Serializable;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 public class Animal implements Serializable {

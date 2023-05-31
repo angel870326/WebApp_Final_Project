@@ -15,10 +15,10 @@ const shelters = [
     
 ];
 
-function SearchRes({ searchCriteria }) {
-    
-    // OLD shelter array: {id, name, address, numAnimal}
-    /*
+export default function SearchRes({ searchCriteria }) {
+
+    // Call API
+    const [isLoading, setLoading] = useState(true);
     const [shelters, setShelters] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -26,42 +26,46 @@ function SearchRes({ searchCriteria }) {
                 const response = await fetch('/api/getShelterList');
                 const jsonData = await response.json();
                 setShelters(jsonData);
-            } catch (error) {
-                console.log(error);
-            }
+            } catch (error) { }
+            setLoading(false);
         }
         fetchData();
     }, []);
-    */
+    // NEW shelter array
+    // const shelters = [{ id: 1, name: '臺北市動物之家', area: '北部', address: '我是一個地址，我是長字串，我要堅強', numAnimal: '5' },];
+    // OLD shelter array
+    // const shelters = [{ id: 1, name: 'name1', address: 'myAddress', numAnimal: 'my numAnimal' },];
 
-    // NEW shelter array 也可以放這裡
+    if (isLoading) {
+        return;
+    } else {
 
-    // area filters
-    const filteredShelters = shelters.filter(shelter => {
-        if (searchCriteria.area && shelter.area !== searchCriteria.area) {
-            return false;
-        }
-        return true;
-    });
+        // area filters
+        const filteredShelters = shelters.filter(shelter => {
+            if (searchCriteria.area && shelter.area !== searchCriteria.area) {
+                return false;
+            }
+            return true;
+        });
 
-    // numAnimal sort
-    const sortedShelters = filteredShelters.sort((a, b) => {
-        if (searchCriteria.sortBy === 'numAnimal') {
-            const numAnimalA = parseInt(a.numAnimal);
-            const numAnimalB = parseInt(b.numAnimal);
-            return numAnimalB - numAnimalA;
-        }
-        return 0;
-    });
+        // numAnimal sort
+        const sortedShelters = filteredShelters.sort((a, b) => {
+            if (searchCriteria.sortBy === 'numAnimal') {
+                const numAnimalA = parseInt(a.numAnimal);
+                const numAnimalB = parseInt(b.numAnimal);
+                return numAnimalB - numAnimalA;
+            }
+            return 0;
+        });
 
+        return (
+            <div>
+                <h2 style={title}>搜尋結果</h2>
+                <div style={divLine} />
+                <SheCard shelters={sortedShelters} />
+            </div>
+        );
 
-    return (
-        <div>
-            <h2 style={title}>搜尋結果</h2>
-            <div style={divLine} />
-            <SheCard shelters={sortedShelters} />
-        </div>
-    );
+    }
 
 }
-export default SearchRes;

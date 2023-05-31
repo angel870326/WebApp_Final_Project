@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 public class AnimalListController {
@@ -25,52 +27,37 @@ public class AnimalListController {
 
         List<Map<String, Object>> animalList = new ArrayList<Map<String, Object>>();
 
+        // if animal not exist, return empty list (animalList)
         List<Animal> animals = Optional
                 .ofNullable(animalRepository.findAll()).orElse(new ArrayList<Animal>());
-
-        // if animal not exist, return empty list (animalList)
         for (Animal animal : animals) {
 
             Long animalId = animal.getId();
-            String name = animal.getName();
-            String type = animal.getType();
-            Integer birthYear = animal.getBirthYear();
-
             Integer currentAdopterNum = Optional
-                    .ofNullable(donateRecordRepository.sumCurrentAdopterNumOfDonateRecordsByAnimalId(animalId))
+                    .ofNullable(donateRecordRepository.countCurrentAdopterNumByAnimalId(animalId))
                     .orElse(0);
 
-            Shelter shelter = animal.getShelter();
-            String shelterName = shelter.getName();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime shelteredDate = animal.getShelteredDate();
+            String formattedShelteredDate = shelteredDate.format(formatter);
 
             animalList.add(Map.of(
                     "id", animalId,
-                    "name", name,
-                    "type", type,
-                    "birth_year", birthYear,
-                    "numMember", currentAdopterNum,
-                    "shelter", shelterName));
+                    "name", animal.getName(),
+                    "sex", animal.getSex(),
+                    "type", animal.getType(),
+                    "birth_year", animal.getBirthYear(),
+                    "sheltered_date", shelteredDate,
+                    "formatted_sheltered_date", formattedShelteredDate,
+                    "shelter", animal.getShelter().getName(),
+                    "area", animal.getShelter().getArea(),
+                    "numMember", currentAdopterNum));
 
         }
 
-        // const animals = [
-        // { id: 1, name: 'name1', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 2, name: 'name2', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 3, name: 'name3', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 4, name: 'name4', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 5, name: 'name5', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 6, name: 'name6', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 7, name: 'name7', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 8, name: 'name8', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // ];
+        // const animals = [{ id: 1, name: 'name1', type: '狗', sex: '公', birth_year:
+        // '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06
+        // 00:00:00.000000', numMember: '1' },];
 
         return animalList;
 
