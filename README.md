@@ -90,7 +90,11 @@ frontend
 │   │   └── AccountInfoEdit.jsx
 │   ├── AuthPage
 │   │   ├── RegisterForm.jsx
-│   │   └── LoginForm.jsx
+│   │   ├── LoginForm.jsx
+│   │   └── LoginRequest.jsx
+│   ├── PlanPage
+│   │   ├── JoinPlan.jsx
+│   │   └── ExtendPlan.jsx
 │   └── FaqPage
 │       ├── FaqPage.jsx
 │       └── Data.jsx
@@ -114,6 +118,8 @@ frontend
 │       │   └── FaqPpage
 │       │       └── faqStyle.js
 │       └── animal-cloud-adoption.js
+├── services
+│   └── auth.jsx
 └── public
     ├── animals
     │   └── ....jpg

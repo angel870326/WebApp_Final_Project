@@ -1,9 +1,8 @@
-import Layout from '@/components/Layout'
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Link, Grid, Typography, Container, List, ListItem, ListItemText, ListItemSecondaryAction, FormControl, InputLabel, MenuItem, Select, Collapse } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { title, plan, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
-import EditIcon from '@mui/icons-material/Edit';
+import Layout from '@/components/Layout'
+import JoinPlan from "@/components/PlanPage/JoinPlan";
+import LoginRequest from "@/components/AuthPage/LoginRequest";
+import { isLoggedIn } from "@/services/auth";
 import { useRouter } from 'next/router';
 
 // 送出表單
@@ -46,6 +45,7 @@ const handleSubmit = async () => {
 };
 
 export default function JoinAdopt() {
+  const [isClient, setIsClient] = useState(false);
 
   // 選擇方案
   const [selectedOption, setSelectedOption] = useState(null);
@@ -71,6 +71,8 @@ export default function JoinAdopt() {
   const [animal, setAnimal] = useState({});
 
   useEffect(() => {
+    setIsClient(true);
+
     if (a_id) {
       async function fetchData() {
         try {
@@ -94,111 +96,19 @@ export default function JoinAdopt() {
     return;
   } else {
     return (
-      <Layout>
-        <ThemeProvider theme={brownTheme}>
-          <div style={plan}>
-            <Container component="main" maxWidth="xs">
-              <Box
-                sx={{
-                  marginTop: 8,
-                  alignItems: 'center',
-                  marginBottom: 8
-                }}
-              >
-                <h2 style={title}>
-                  加入{animal.name}的認養計畫！
-                </h2>
-                <Box
-                  component="form"
-                  onSubmit={handleSubmit}
-                  noValidate sx={{ mt: 1 }}
-                >
-                  <List container spacing={2}>
-                    <ListItem>
-                      <ListItemText primary="帳號：" />
-                      <ListItemSecondaryAction>
-                        {user.id}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText primary="認養動物收容編號：" />
-                      <ListItemSecondaryAction>
-                        {animal.id}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText primary="捐款方式：" />
-                      <ListItemSecondaryAction>
-                        <div>
-                          {user.anonymous ? (
-                            <>匿名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize: 14 }} /></Link></>
-                          ) : (
-                            <>具名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize: 14 }} /></Link></>
-                          )}
-                        </div>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText primary="認養方案：" />
-                      <ListItemSecondaryAction>
-                        <FormControl sx={{ minWidth: 100 }}>
-                          <InputLabel id="option-label">方案</InputLabel>
-                          <Select
-                            labelId="option-label"
-                            id="option"
-                            name="option"
-                            value={selectedOptionLabel}
-                            label="Option"
-                            onChange={handleChange}
-                            required
-                          >
-                            {options.map((option) => (
-                              <MenuItem key={option.id} value={option}>
-                                {option.label}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <Collapse in={checked}>
-                      <ListItem sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Typography sx={{ m: 1, border: '1px solid gray', padding: '1rem', display: selectedOption ? 'block' : 'none' }} borderRadius="10px">
-                          認養金額: ${selectedOption ? selectedOption.price : 'none'}
-                          <br />
-                          認養時長: {selectedOption ? selectedOption.duration : 'none'} 天
-                        </Typography>
-                      </ListItem>
-                    </Collapse>
-                  </List>
-                  <input name='animalId' type='hidden' value={a_id}></input>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 2, mb: 2 }}
-                  >
-                    加入認養計畫
-                  </Button>
-                  <Grid container justifyContent="center" sx={{ mt: 1 }}>
-                    <Grid item sx={{ textAlign: 'center' }}>
-                      點擊「加入認養計畫」後，<br />
-                      我們會將匯款資訊寄送至您的信箱，<br />
-                      請於 3 天內完成匯款。<br />
-                      等待審查完畢後，即可成功認養{animal.name}！<br />
-                    </Grid>
-                    <Grid item sx={{ textAlign: 'center', mt: 1 }}>
-                      <Link href="/faq">
-                        進一步了解認養流程
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Box>
-            </Container>
-          </div>
-        </ThemeProvider>
-      </Layout>
+       <div>
+          <Layout>
+            {isClient && (
+              <>
+                {isLoggedIn() ? (
+                  <JoinPlan />
+                ) : (
+                  <LoginRequest/>
+                )}
+              </>
+            )}
+          </Layout>
+        </div>
     );
   }
 
