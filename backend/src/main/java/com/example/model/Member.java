@@ -1,7 +1,7 @@
 package com.example.model;
 
-import java.io.Serializable;
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class Member implements Serializable {
 	@Column(nullable = false)
 	private Boolean anonymous;
 	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<DonateRecord> donateRecord;
+	private List<DonateRecord> donateRecord;
 
 	public Member() {
 		super();

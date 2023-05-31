@@ -8,7 +8,7 @@ import SearchRes from './SearchRes'
 //mui components
 import { Button } from '@mui/material';
 
-function Home() {
+export default function Home() {
   const [searchCriteria, setSearchCriteria] = useState({ types: '', age: '', sex: '', area: '', sortBy: ''});
 
   const handleSearch = (newSearchCriteria) => {
@@ -35,5 +35,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home

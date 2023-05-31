@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 public class ShelterInfoController {
@@ -29,16 +31,20 @@ public class ShelterInfoController {
 
         Map<String, Object> shelterInfo = new HashMap<String, Object>();
 
-        Shelter shelter = shelterRepository.findByShelterId(shelterId);
+        Optional<Shelter> shelterOp = shelterRepository.findById(shelterId);
 
         // if shelter not exist, return empty map (shelterInfo)
-        if (shelter != null) {
+        if (shelterOp.isPresent()) {
+
+            Shelter shelter = shelterOp.get();
+
             shelterInfo = Map.of(
                     "id", shelter.getId(),
                     "name", shelter.getName(),
                     "address", shelter.getAddress(),
                     "contact_phone", shelter.getContactPhone(),
                     "contact_email", shelter.getContactEmail());
+
         }
 
         // const shelter = { id: 1, name: 'name1', address: 'myAddress', contact_phone:
@@ -53,45 +59,36 @@ public class ShelterInfoController {
 
         List<Map<String, Object>> shelterAnimal = new ArrayList<Map<String, Object>>();
 
-        List<Animal> animals = Optional
-                .ofNullable(animalRepository.findByShelterId(shelterId)).orElse(new ArrayList<Animal>());
-
         // if member/animalIds not exist, return empty list (adopterAnimal)
+        List<Animal> animals = Optional
+                .ofNullable(animalRepository.findAnimalsByShelterId(shelterId)).orElse(new ArrayList<Animal>());
         for (Animal animal : animals) {
 
             Long animalId = animal.getId();
             Integer currentAdopterNum = Optional
-                    .ofNullable(donateRecordRepository.sumCurrentAdopterNumOfDonateRecordsByAnimalId(animalId))
+                    .ofNullable(donateRecordRepository.countCurrentAdopterNumByAnimalId(animalId))
                     .orElse(0);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime shelteredDate = animal.getShelteredDate();
+            String formattedShelteredDate = shelteredDate.format(formatter);
 
             shelterAnimal.add(Map.of(
                     "id", animalId,
                     "name", animal.getName(),
-                    "shelter", animal.getShelter().getName(),
+                    "sex", animal.getSex(),
                     "type", animal.getType(),
                     "birth_year", animal.getBirthYear(),
+                    "sheltered_date", shelteredDate,
+                    "formatted_sheltered_date", formattedShelteredDate,
+                    "shelter", animal.getShelter().getName(),
+                    "area", animal.getShelter().getArea(),
                     "numMember", currentAdopterNum));
 
         }
-
-        // const animals = [
-        // { id: 1, name: 'name1', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 2, name: 'name2', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 3, name: 'name3', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 4, name: 'name4', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 5, name: 'name5', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 6, name: 'name6', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 7, name: 'name7', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // { id: 8, name: 'name8', shelter: 'my shelter', type: 'my type', birth_year:
-        // 'my birth_year', numMember: 'my numMember' },
-        // ];
+        // const animals = [{ id: 1, name: 'name1', type: '狗', sex: '公', birth_year:
+        // '2020', area: '北部', shelter: '臺北市動物之家', sheltered_date: '2020-04-06
+        // 00:00:00.000000', numMember: '1' },];
 
         return shelterAnimal;
 

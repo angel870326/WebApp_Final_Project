@@ -25,36 +25,27 @@ public class ShelterListController {
 
         List<Map<String, Object>> shelterList = new ArrayList<Map<String, Object>>();
 
+        // if shelter not exist, return empty list (shelterList)
         List<Shelter> shelters = Optional
                 .ofNullable(shelterRepository.findAll()).orElse(new ArrayList<Shelter>());
-
-        // if shelter not exist, return empty list (shelterList)
         for (Shelter shelter : shelters) {
 
             Long shelterId = shelter.getId();
-            String name = shelter.getName();
-            String address = shelter.getAddress();
-
             Integer animalNum = Optional
-                    .ofNullable(animalRepository.sumAnimalNumByShelterId(shelterId))
+                    .ofNullable(animalRepository.countAnimalNumByShelterId(shelterId))
                     .orElse(0);
 
             shelterList.add(Map.of(
                     "id", shelterId,
-                    "name", name,
-                    "address", address,
+                    "name", shelter.getName(),
+                    "area", shelter.getArea(),
+                    "address", shelter.getAddress(),
                     "numAnimal", animalNum));
 
         }
 
-        // const shelters = [
-        // { id: 1, name: 'name1', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // { id: 2, name: 'name2', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // { id: 3, name: 'name3', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // { id: 4, name: 'name4', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // { id: 5, name: 'name5', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // { id: 6, name: 'name6', address: 'myAddress', numAnimal: 'my numAnimal' },
-        // ];
+        // const shelters = [{ id: 1, name: '臺北市動物之家', area: '北部', address:
+        // '我是一個地址，我是長字串，我要堅強', numAnimal: '5' },];
 
         return shelterList;
 

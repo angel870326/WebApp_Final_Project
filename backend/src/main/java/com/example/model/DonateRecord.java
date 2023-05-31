@@ -1,7 +1,7 @@
 package com.example.model;
 
-import java.io.Serializable;
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 import java.time.LocalDateTime;
 

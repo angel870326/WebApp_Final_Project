@@ -24,7 +24,6 @@ public class AccountInfoUpdateController {
                         @RequestBody UpdateMemberInfoForm request) {
 
                 Optional<Member> memberOp = memberRepository.findById(memberId);
-
                 if (memberOp.isPresent()) {
 
                         Member member = memberOp.get();

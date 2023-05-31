@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.component.*;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,12 @@ public class AnimalInfoController {
 
         Map<String, Object> animalInfo = new HashMap<String, Object>();
 
-        Animal animal = animalRepository.findByAnimalId(animalId);
-
         // if animal not exist, return empty map (animalInfo)
-        if (animal != null) {
+        Optional<Animal> animalOp = animalRepository.findById(animalId);
+        if (animalOp.isPresent()) {
+
+            Animal animal = animalOp.get();
+
             animalInfo = Map.of(
                     "id", animal.getId(),
                     "name", animal.getName(),
@@ -44,6 +47,7 @@ public class AnimalInfoController {
                     "personality", animal.getPersonality(),
                     "appearance", animal.getAppearance(),
                     "shelter_id", animal.getShelter().getId());
+
         }
 
         // const animal = { id: 22, name: '小黑', sex: "母", type: "巴哥犬", brithYear: 2020,
@@ -59,24 +63,25 @@ public class AnimalInfoController {
 
         List<Map<String, Object>> animalDonateRecord = new ArrayList<Map<String, Object>>();
 
+        // if donateRecords not exist, return empty list (animalDonateRecord)
         List<DonateRecord> donateRecords = Optional
                 .ofNullable(donateRecordRepository.findDonateRecordsByMemberIdAndAnimalId(animalId, memberId))
                 .orElse(new ArrayList<DonateRecord>());
-
-        // if donateRecords not exist, return empty list (animalDonateRecord)
         for (DonateRecord donateRecord : donateRecords) {
+
+            UpdateDonateRecordStatus.updateStatus(donateRecord);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime startDate = donateRecord.getDonationStartDate();
-            String formattedstartDate = "";
+            String formattedStartDate = "";
             try {
-                formattedstartDate = startDate.format(formatter);
+                formattedStartDate = startDate.format(formatter);
             } catch (NullPointerException e) {
             }
             LocalDateTime endDate = donateRecord.getDonationEndDate();
-            String formattedendDate = "";
+            String formattedEndDate = "";
             try {
-                formattedendDate = endDate.format(formatter);
+                formattedEndDate = endDate.format(formatter);
             } catch (NullPointerException e) {
             }
 
@@ -85,27 +90,15 @@ public class AnimalInfoController {
             animalDonateRecord.add(Map.of(
                     "id", donateRecord.getId(),
                     "status", donateRecord.getStatus(),
-                    "startDate", formattedstartDate,
-                    "endDate", formattedendDate,
+                    "startDate", formattedStartDate,
+                    "endDate", formattedEndDate,
                     "plan", donatePlan.getName(),
                     "amount", donatePlan.getAmount()));
 
         }
 
-        // const adoptionRecords = [
-        // { id: 1, plan: "方案一", startDate: '2023/5/1', endDate:"2023/6/1",
-        // status:"認養中", amount: 100 },
-        // { id: 2, plan: "方案二", startDate: '2022/5/1', endDate:"2022/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 3, plan: "方案三", startDate: '2021/5/1', endDate:"2021/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 4, plan: "方案四", startDate: '2020/5/1', endDate:"2020/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 5, plan: "方案四", startDate: '2019/5/1', endDate:"2019/6/1",
-        // status:"認養結束", amount: 100 },
-        // { id: 6, plan: "方案四", startDate: '2018/5/1', endDate:"2018/6/1",
-        // status:"認養結束", amount: 100 },
-        // ];
+        // const adoptionRecords = [{ id: 1, plan: "方案一", startDate: '2023/5/1',
+        // endDate:"2023/6/1", status:"認養中", amount: 100 },];
 
         return animalDonateRecord;
 
@@ -116,15 +109,15 @@ public class AnimalInfoController {
 
         List<Map<String, Object>> animalAdopter = new ArrayList<Map<String, Object>>();
 
+        // if donateRecords not exist, return empty list (animalAdopter)
         List<Long> currentAdoptingMemberIds = Optional
-                .ofNullable(donateRecordRepository.findCurrentAdoptingMemberIdsWithoutThisMemberIdByAnimalId(animalId,
+                .ofNullable(donateRecordRepository.findCurrentAdopterIdsByAnimalId(animalId,
                         memberId))
                 .orElse(new ArrayList<Long>());
-
-        // if donateRecords not exist, return empty list (animalAdopter)
         for (Long currentAdoptingMemberId : currentAdoptingMemberIds) {
 
-            Member member = memberRepository.findByMemberId(currentAdoptingMemberId);
+            Optional<Member> memberOp = memberRepository.findById(currentAdoptingMemberId);
+            Member member = memberOp.get();
 
             if (member.getAnonymous() == false) {
                 animalAdopter.add(Map.of(
@@ -134,14 +127,7 @@ public class AnimalInfoController {
 
         }
 
-        // const adopters = [
-        // { id: 1, name: "AA" },
-        // { id: 2, name: "BB" },
-        // { id: 3, name: "CC" },
-        // { id: 4, name: "DD" },
-        // { id: 5, name: "EE" },
-        // { id: 6, name: "FF" },
-        // ];
+        // const adopters = [{ id: 1, name: "AA" },];
 
         return animalAdopter;
 

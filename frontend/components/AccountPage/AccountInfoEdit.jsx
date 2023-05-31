@@ -39,17 +39,23 @@ const InfoFormControl = styled(FormControl)({
   },
 });
 
-async function handleSubmit(event) {
+const handleSubmit = async (event) => {
 
   event.preventDefault();
 
+  // Form data
   const formData = new FormData(event.target);
   const jsonData = {};
   for (let [key, value] of formData.entries()) {
     jsonData[key] = value;
   }
+  if (jsonData.anonymous === '否') {
+    jsonData.anonymous = false;
+  } else {
+    jsonData.anonymous = true;
+  }
 
-  // 檢查輸入資料是否合規則
+  // Data validation
   var validEmailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (jsonData.name.length > 30) {
     alert("暱稱請勿超過30字");
@@ -63,13 +69,8 @@ async function handleSubmit(event) {
     alert("手機號碼格式錯誤");
     return;
   }
-  if (jsonData.anonymous === '否') {
-    jsonData.anonymous = false;
-  } else {
-    jsonData.anonymous = true;
-  }
 
-  // call api
+  // Call API
   // use memberId = 1 just for testing
   const response = await fetch("/api/updateAccountInfo/1", {
     method: "POST",
@@ -79,36 +80,36 @@ async function handleSubmit(event) {
     body: JSON.stringify(jsonData),
   });
 
-  // console.log('status code: ', response.status);
   if (response.ok) {
-    alert("Update Success!");
+    alert("更新成功");
   } else {
-    alert("Update Failed!");
+    alert("系統錯誤");
   }
   window.location.href = "/account";
-
+  
   return;
 
-}
+};
 
 export default function AdopterInfo(props) {
 
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () =>
+    setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
+  // Call API
+  const [isLoading, setLoading] = useState(true);
   const anonymous_choice = [{ value: 0, label: '否', }, { value: 1, label: '是', },];
   const [user_name, setUserName] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [anonymous, setAnonymous] = useState("");
-  const [isLoading, setLoading] = useState(true); // Add a loading state
-
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
         // use memberId = 1 just for testing
         const response = await fetch('/api/getAccountInfo/1');
@@ -118,11 +119,9 @@ export default function AdopterInfo(props) {
         setEmail(jsonData.email);
         setPhone(jsonData.phone);
         setAnonymous(jsonData.anonymous);
-        setLoading(false); // Set loading state to false after data is fetched
-      } catch (error) {
-        console.log(error);
-      }
-    }
+      } catch (error) { }
+      setLoading(false);
+    };
     fetchData();
   }, []);
   // const user_name = 'user_name';
@@ -131,115 +130,117 @@ export default function AdopterInfo(props) {
   // const phone = '09xxxxxxxx';
   // const anonymous = '0';
 
-  if (isLoading) { return (<div></div>) }
-  // Render a loading indicator while data is being fetched
-
-  return (
-    <div style={content}>
-      <h2 style={title}>編輯個人資料</h2>
-      <div style={divLine} />
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2} sx={{ padding: '10px 30px 30px 30px' }} justifyContent="center" alignItems="center">
-          <Grid item xs={6}>
-            <Typography>帳號</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoTextField
-              disabled
-              id="user_name"
-              name="user_name"
-              label="固定"
-              defaultValue={user_name}
-              sx={{ width: fieldWidth }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>暱稱</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoTextField
-              required
-              id="name"
-              name="name"
-              label="必填"
-              defaultValue={name}
-              sx={{ width: fieldWidth }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>E-mail</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoTextField
-              required
-              id="email"
-              name="email"
-              label="必填"
-              defaultValue={email}
-              sx={{ width: fieldWidth }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>手機</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoTextField
-              required
-              id="phone"
-              name="phone"
-              label="必填"
-              defaultValue={phone}
-              sx={{ width: fieldWidth }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>新密碼</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoFormControl sx={{ width: fieldWidth }} variant="outlined">
-              <InputLabel htmlFor="password">選填</InputLabel>
-              <OutlinedInput
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="選填"
+  if (isLoading) {
+    return;
+  } else {
+    return (
+      <div style={content}>
+        <h2 style={title}>編輯個人資料</h2>
+        <div style={divLine} />
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2} sx={{ padding: '10px 30px 30px 30px' }} justifyContent="center" alignItems="center">
+            <Grid item xs={6}>
+              <Typography>帳號</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoTextField
+                disabled
+                id="user_name"
+                name="user_name"
+                label="固定"
+                defaultValue={user_name}
+                sx={{ width: fieldWidth }}
               />
-            </InfoFormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography>暱稱</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoTextField
+                required
+                id="name"
+                name="name"
+                label="必填"
+                defaultValue={name}
+                sx={{ width: fieldWidth }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography>E-mail</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoTextField
+                required
+                id="email"
+                name="email"
+                label="必填"
+                defaultValue={email}
+                sx={{ width: fieldWidth }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography>手機</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoTextField
+                required
+                id="phone"
+                name="phone"
+                label="必填"
+                defaultValue={phone}
+                sx={{ width: fieldWidth }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography>新密碼</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoFormControl sx={{ width: fieldWidth }} variant="outlined">
+                <InputLabel htmlFor="password">選填</InputLabel>
+                <OutlinedInput
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="選填"
+                />
+              </InfoFormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography>捐款時是否匿名</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <InfoTextField
+                id="anonymous"
+                name="anonymous"
+                select
+                label="必填"
+                defaultValue={anonymous}
+                sx={{ width: fieldWidth }}
+              >
+                {anonymous_choice.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </InfoTextField>
+            </Grid>
+            <Button type="submit" variant="outlined" sx={{ ...editBtn, marginTop: '40px' }}>儲存</Button>
           </Grid>
-          <Grid item xs={6}>
-            <Typography>捐款時是否匿名</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <InfoTextField
-              id="anonymous"
-              name="anonymous"
-              select
-              label="必填"
-              defaultValue={anonymous}
-              sx={{ width: fieldWidth }}
-            >
-              {anonymous_choice.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </InfoTextField>
-          </Grid>
-          <Button type="submit" variant="outlined" sx={{ ...editBtn, marginTop: '40px' }}>儲存</Button>
-        </Grid>
-      </form>
-    </div>
-  )
+        </form>
+      </div>
+    );
+  }
+
 }
