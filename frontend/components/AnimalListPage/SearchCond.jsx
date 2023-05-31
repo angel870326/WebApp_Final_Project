@@ -4,11 +4,15 @@ import { title, divLine, brownTheme } from "@/styles/jss/animal-cloud-adoption.j
 import { ThemeProvider } from '@mui/material/styles';
 // mui conponents
 import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 // select bar
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+
 
 // below function: {SelectBar, SortButton} --> SearchCond
 
@@ -105,22 +109,30 @@ function SortButton(props){
   };
 
   return(
-    <p>排序方式：
-      <Button
-        variant="outlined"
-        onClick={() => handleSort('sheltered_date')} 
-        color={sortBy === 'sheltered_date' ? 'secondary' : 'primary'}
-        sx={{ m: 0.5 }}
-      >收容時間</Button>
+    <div>
+      <FormControl><p>排序方式：</p></FormControl>
+      <FormControl>
+        <Button
+          disableElevation
+          onClick={() => handleSort('sheltered_date')} 
+          variant={sortBy === 'sheltered_date' ? 'contained' : 'outlined'}
+          color={sortBy === 'sheltered_date' ? 'secondary' : 'primary'}
+          sx={{ m: 0.5 }}
+        >收容時間</Button>
+        <FormHelperText>最新 → 最舊</FormHelperText>
+      </FormControl>
 
-      <Button
-        variant="outlined"
-        onClick={() => handleSort('numMember')}
-        color={sortBy === 'numMember' ? 'secondary' : 'primary'}
-        sx={{ m: 0.5 }}
-      >認養人數</Button>
-
-    </p>
+      <FormControl>
+        <Button
+          disableElevation
+          onClick={() => handleSort('numMember')}
+          color={sortBy === 'numMember' ? 'secondary' : 'primary'}
+          variant={sortBy === 'numMember' ? 'contained' : 'outlined'}
+          sx={{ m: 0.5 }}
+        >認養人數</Button>
+        <FormHelperText>最少 → 最多</FormHelperText>
+      </FormControl>
+    </div>
   );
 }
 
@@ -136,6 +148,15 @@ function SearchCond({ onSearch }) {
   const handleSearch = () => {
     onSearch({ types, age, sex, area, sortBy });
   };
+
+  // reset 按鈕
+  const handleReset = () => {
+    setTypes("");
+    setAge("");
+    setSex("");
+    setArea("");
+    setSortBy("");
+  }
 
   return (
     <ThemeProvider theme={brownTheme}>
@@ -165,8 +186,11 @@ function SearchCond({ onSearch }) {
       </div>
 
       {/* search button*/}
-      <div style={{ textAlign: "center" }}>
+      <div style={{ position: 'relative', textAlign: 'center' }}>
         <Button variant="contained" size="large" onClick={handleSearch}>搜尋</Button>
+        <IconButton color="primary" style={{ position: 'absolute', marginLeft: "10px"}}>
+          <RestartAltIcon onClick={handleReset} />
+        </IconButton>
       </div>
 
     </ThemeProvider>

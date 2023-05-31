@@ -66,7 +66,7 @@ export default function AniCard({ animals }) {
                       <b>品種：</b>{animal.type} ｜ <b>性別：</b>{animal.sex} ｜ <b>年齡：</b>{new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
                       <b>收容處：</b>{animal.shelter}<br />
                       <b>收容時間：</b>{animal.formatted_sheltered_date}<br />
-                      <b>認養人數：</b>{animal.numMember}
+                      <b>認養人數：</b>{animal.numMember} 人
                     </Typography>
                   </CardContent>
                   <CardActions style={{ justifyContent: 'center', marginBottom: 10 }}>

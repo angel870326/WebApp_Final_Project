@@ -7,8 +7,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 // mui conponents
 import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 // below function: {SelectBar, SortButton} --> SearchCond
 
@@ -53,14 +56,19 @@ function SortButton(props){
   };
 
   return(
-    <p>排序方式：
-      <Button
-        variant="outlined"
-        onClick={() => handleSort('numAnimal')}
-        color={sortBy === 'numAnimal' ? 'secondary' : 'primary'}
-        sx={{m: 0.5}}
-      >當前收容動物數量</Button>
-    </p>
+    <div>
+      <FormControl><p>排序方式：</p></FormControl>
+      <FormControl>
+        <Button
+          disableElevation
+          onClick={() => handleSort('numAnimal')}
+          variant={sortBy === 'numAnimal' ? 'contained' : 'outlined'}
+          color={sortBy === 'numAnimal' ? 'secondary' : 'primary'}
+          sx={{m: 0.5}}
+        >當前收容動物數量</Button>
+        <FormHelperText>最多 → 最少</FormHelperText>
+      </FormControl>
+    </div>
   );
 }
 
@@ -73,6 +81,12 @@ function SearchCond({ onSearch }) {
   const handleSearch = () => {
     onSearch({ area, sortBy });
   };
+
+  // reset 按鈕
+  const handleReset = () => {
+    setArea("");
+    setSortBy("");
+  }
 
   return (
     <ThemeProvider theme={brownTheme}>
@@ -94,8 +108,11 @@ function SearchCond({ onSearch }) {
         />
       </div>
 
-      <div style={{textAlign: "center"}}>
-          <Button variant="contained" size="large" onClick={handleSearch}>搜尋</Button>
+      <div style={{ position: 'relative', textAlign: 'center' }}>
+        <Button variant="contained" size="large" onClick={handleSearch}>搜尋</Button>
+        <IconButton color="primary" style={{ position: 'absolute', marginLeft: "10px"}}>
+          <RestartAltIcon onClick={handleReset} />
+        </IconButton>
       </div>
 
     </ThemeProvider>
