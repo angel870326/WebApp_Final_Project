@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Layout from '@/components/Layout'
-import React, { useState, useEffect } from 'react';
 import ExtendPlan from "@/components/PlanPage/ExtendPlan"
 import { isLoggedIn } from "@/services/auth";
 import LoginRequest from "@/components/AuthPage/LoginRequest";
