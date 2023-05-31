@@ -68,7 +68,7 @@ const AnimalList = ({ animals }) => {
                       <b>出生年：</b>{animal.birth_year} 年，今年 {new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
                       <b>收容處：</b>{animal.shelter}<br />
                       <b>收容時間：</b>{animal.sheltered_date.split(' ')[0]}<br />
-                      <b>認養人數：</b>{animal.numMember}
+                      <b>認養人數：</b>{animal.numMember} 人
                     </Typography>
                   </CardContent>
                                         
