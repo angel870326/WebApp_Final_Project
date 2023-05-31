@@ -25,15 +25,14 @@ public class ShelterListController {
 
         List<Map<String, Object>> shelterList = new ArrayList<Map<String, Object>>();
 
+        // if shelter not exist, return empty list (shelterList)
         List<Shelter> shelters = Optional
                 .ofNullable(shelterRepository.findAll()).orElse(new ArrayList<Shelter>());
-
-        // if shelter not exist, return empty list (shelterList)
         for (Shelter shelter : shelters) {
 
             Long shelterId = shelter.getId();
             Integer animalNum = Optional
-                    .ofNullable(animalRepository.sumAnimalNumByShelterId(shelterId))
+                    .ofNullable(animalRepository.countAnimalNumByShelterId(shelterId))
                     .orElse(0);
 
             shelterList.add(Map.of(

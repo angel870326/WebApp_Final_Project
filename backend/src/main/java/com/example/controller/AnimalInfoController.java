@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.component.*;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,12 @@ public class AnimalInfoController {
 
         Map<String, Object> animalInfo = new HashMap<String, Object>();
 
-        Animal animal = animalRepository.findByAnimalId(animalId);
-
         // if animal not exist, return empty map (animalInfo)
-        if (animal != null) {
+        Optional<Animal> animalOp = animalRepository.findById(animalId);
+        if (animalOp.isPresent()) {
+
+            Animal animal = animalOp.get();
+
             animalInfo = Map.of(
                     "id", animal.getId(),
                     "name", animal.getName(),
@@ -44,6 +47,7 @@ public class AnimalInfoController {
                     "personality", animal.getPersonality(),
                     "appearance", animal.getAppearance(),
                     "shelter_id", animal.getShelter().getId());
+
         }
 
         // const animal = { id: 22, name: '小黑', sex: "母", type: "巴哥犬", brithYear: 2020,
@@ -59,12 +63,13 @@ public class AnimalInfoController {
 
         List<Map<String, Object>> animalDonateRecord = new ArrayList<Map<String, Object>>();
 
+        // if donateRecords not exist, return empty list (animalDonateRecord)
         List<DonateRecord> donateRecords = Optional
                 .ofNullable(donateRecordRepository.findDonateRecordsByMemberIdAndAnimalId(animalId, memberId))
                 .orElse(new ArrayList<DonateRecord>());
-
-        // if donateRecords not exist, return empty list (animalDonateRecord)
         for (DonateRecord donateRecord : donateRecords) {
+
+            UpdateDonateRecordStatus.updateStatus(donateRecord);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime startDate = donateRecord.getDonationStartDate();
@@ -104,15 +109,15 @@ public class AnimalInfoController {
 
         List<Map<String, Object>> animalAdopter = new ArrayList<Map<String, Object>>();
 
+        // if donateRecords not exist, return empty list (animalAdopter)
         List<Long> currentAdoptingMemberIds = Optional
-                .ofNullable(donateRecordRepository.findCurrentAdoptingMemberIdsWithoutThisMemberIdByAnimalId(animalId,
+                .ofNullable(donateRecordRepository.findCurrentAdopterIdsByAnimalId(animalId,
                         memberId))
                 .orElse(new ArrayList<Long>());
-
-        // if donateRecords not exist, return empty list (animalAdopter)
         for (Long currentAdoptingMemberId : currentAdoptingMemberIds) {
 
-            Member member = memberRepository.findByMemberId(currentAdoptingMemberId);
+            Optional<Member> memberOp = memberRepository.findById(currentAdoptingMemberId);
+            Member member = memberOp.get();
 
             if (member.getAnonymous() == false) {
                 animalAdopter.add(Map.of(

@@ -29,24 +29,22 @@ public class AdopterInfoController {
 
                 Map<String, Object> adopterInfo = new HashMap<String, Object>();
 
-                Member member = memberRepository.findByMemberId(memberId);
-
                 // if member not exist, return empty map (adopterInfo)
-                if (member != null) {
-                        // 會員暱稱
-                        String nickName = member.getNickName();
-                        // 會員累積認養動物數量
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
+
+                        Member member = memberOp.get();
+
                         Integer number = Optional
                                         .ofNullable(donateRecordRepository
-                                                        .sumAnimalNumOfDonateRecordsByMemberId(memberId))
+                                                        .countAdoptedAnimalNumByMemberId(memberId))
                                         .orElse(0);
-                        // 會員累積認養金額
                         Integer amount = Optional
-                                        .ofNullable(donateRecordRepository.sumAmountOfDonateRecordsByMemberId(memberId))
+                                        .ofNullable(donateRecordRepository.sumAdoptedAmountByMemberId(memberId))
                                         .orElse(0);
 
                         adopterInfo = Map.of(
-                                        "name", nickName,
+                                        "name", member.getNickName(),
                                         "number", number,
                                         "amount", amount);
 
@@ -65,18 +63,19 @@ public class AdopterInfoController {
 
                 List<Map<String, Object>> adopterAnimal = new ArrayList<Map<String, Object>>();
 
-                // 會員當前認養動物
+                // if animalIds not exist, return empty list (adopterAnimal)
                 List<Long> animalIds = Optional
-                                .ofNullable(donateRecordRepository.currentAdoptingAnimalIdsByMemberId(memberId))
+                                .ofNullable(donateRecordRepository.findCurrentAdoptedAnimalIdsByMemberId(memberId))
                                 .orElse(new ArrayList<Long>());
-
-                // if member/animalIds not exist, return empty list (adopterAnimal)
                 for (Long animalId : animalIds) {
-                        Animal animal = animalRepository.findByAnimalId(animalId);
-                        String animalName = animal.getName();
+
+                        Optional<Animal> animalOp = animalRepository.findById(animalId);
+                        Animal animal = animalOp.get();
+
                         adopterAnimal.add(Map.of(
-                                        "title", animalName,
+                                        "title", animal.getName(),
                                         "animalId", animalId));
+
                 }
 
                 // const animalData = [{title: 'name1', state: state_date, animalId: 1},];

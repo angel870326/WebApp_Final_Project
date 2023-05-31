@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -37,18 +38,20 @@ public class AdoptAnimalController {
                         @PathVariable Long memberId) {
 
                 Map<String, Object> joiningDonatePlan = new HashMap<String, Object>();
-
-                Animal animal = animalRepository.findByAnimalId(animalId);
-                Member member = memberRepository.findByMemberId(memberId);
-                List<DonatePlan> donatePlans = donatePlanRepository.findAll();
-
                 Map<String, Object> animalData = new HashMap<String, Object>();
                 Map<String, Object> userData = new HashMap<String, Object>();
                 List<Map<String, Object>> options = new ArrayList<Map<String, Object>>();
 
                 // if animal/member not exist, return empty map in extendingDonatePlan
                 // (animalData, userData, options)
-                if (animal != null && member != null) {
+                Optional<Animal> animalOp = animalRepository.findById(animalId);
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                List<DonatePlan> donatePlans = donatePlanRepository.findAll();
+                if (animalOp.isPresent() && memberOp.isPresent()) {
+
+                        Animal animal = animalOp.get();
+                        Member member = memberOp.get();
+
                         userData = Map.of(
                                         "id", member.getId(),
                                         "email", member.getEmail(),
@@ -56,6 +59,7 @@ public class AdoptAnimalController {
                         animalData = Map.of(
                                         "id", animal.getId(),
                                         "name", animal.getName());
+
                         for (DonatePlan donatePlan : donatePlans) {
                                 options.add(Map.of(
                                                 "id", donatePlan.getId(),
@@ -63,7 +67,9 @@ public class AdoptAnimalController {
                                                 "price", donatePlan.getAmount(),
                                                 "duration", donatePlan.getDuration()));
                         }
+
                 }
+
                 joiningDonatePlan = Map.of(
                                 "animal", animalData,
                                 "user", userData,
@@ -82,13 +88,6 @@ public class AdoptAnimalController {
                         @PathVariable Long memberId) {
 
                 Map<String, Object> extendingDonatePlan = new HashMap<String, Object>();
-
-                Animal animal = animalRepository.findByAnimalId(animalId);
-                Member member = memberRepository.findByMemberId(memberId);
-                DonateRecord newestDonateRecord = donateRecordRepository
-                                .findNewestDonateRecordByAnimalIdAndMemberId(animalId, memberId);
-                List<DonatePlan> donatePlans = donatePlanRepository.findAll();
-
                 Map<String, Object> animalData = new HashMap<String, Object>();
                 Map<String, Object> userData = new HashMap<String, Object>();
                 List<Map<String, Object>> options = new ArrayList<Map<String, Object>>();
@@ -96,13 +95,20 @@ public class AdoptAnimalController {
 
                 // if animal/member not exist, return empty map in extendingDonatePlan
                 // (animalData, userData, options)
-                if (animal != null && member != null) {
+                Optional<Animal> animalOp = animalRepository.findById(animalId);
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                List<DonatePlan> donatePlans = donatePlanRepository.findAll();
+                DonateRecord newestDonateRecord = donateRecordRepository
+                                .findNewestDonateRecordByAnimalIdAndMemberId(animalId, memberId);
+                if (animalOp.isPresent() && memberOp.isPresent()) {
+
+                        Animal animal = animalOp.get();
+                        Member member = memberOp.get();
 
                         userData = Map.of(
                                         "id", member.getId(),
                                         "email", member.getEmail(),
                                         "anonymous", member.getAnonymous());
-
                         animalData = Map.of(
                                         "id", animal.getId(),
                                         "name", animal.getName());
@@ -131,6 +137,7 @@ public class AdoptAnimalController {
                                         "newStartDate", formattedNewStartDate);
 
                 }
+
                 extendingDonatePlan = Map.of(
                                 "animal", animalData,
                                 "user", userData,
@@ -153,11 +160,14 @@ public class AdoptAnimalController {
                 String donatePlanName = request.getOption();
                 Long animalId = request.getAnimalId();
 
-                Animal animal = animalRepository.findByAnimalId(animalId);
-                Member member = memberRepository.findByMemberId(memberId);
-                DonatePlan donatePlan = donatePlanRepository.findByDonatePlanName(donatePlanName);
+                Optional<Animal> animalOp = animalRepository.findById(animalId);
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                Optional<DonatePlan> donatePlanOp = donatePlanRepository.findDonatePlanByName(donatePlanName);
+                if (animalOp.isPresent() && memberOp.isPresent() && donatePlanOp.isPresent()) {
 
-                if (animal != null && member != null && donatePlan != null) {
+                        Animal animal = animalOp.get();
+                        Member member = memberOp.get();
+                        DonatePlan donatePlan = donatePlanOp.get();
 
                         DonateRecord donateRecord = new DonateRecord("審核中", LocalDateTime.now(), null, null, member,
                                         animal,
@@ -165,8 +175,7 @@ public class AdoptAnimalController {
                         donateRecordRepository.save(donateRecord);
 
                         // 寄信
-                        String memberMail = "yinhuang119@gmail.com";
-                        // String memberMail = member.getEmail();
+                        String memberMail = member.getEmail();
                         String memberName = member.getNickName();
                         String animalName = animal.getName();
                         Integer donatePlanAmount = donatePlan.getAmount();
@@ -177,22 +186,6 @@ public class AdoptAnimalController {
                 } else {
                         return ResponseEntity.notFound().build();
                 }
-
-        }
-
-        @GetMapping("/test")
-        public Map<String, Object> test() {
-
-                String memberMail = "yinhuang119@gmail.com";
-                String memberName = "Eva";
-                String animalName = "樂樂";
-                String donatePlanName = "90 天方案";
-                Integer donatePlanAmount = 100;
-
-                SendMail.sendMail(memberMail, memberName, animalName, donatePlanName, donatePlanAmount);
-
-                Map<String, Object> test = new HashMap<String, Object>();
-                return test;
 
         }
 

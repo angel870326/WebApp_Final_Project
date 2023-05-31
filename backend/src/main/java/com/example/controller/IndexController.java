@@ -31,7 +31,7 @@ public class IndexController {
         Map<String, Object> indexInfo = new HashMap<String, Object>();
 
         Integer animalNum = Optional
-                .ofNullable(animalRepository.sumCurrentAmountOfDonateRecords())
+                .ofNullable(animalRepository.countAnimalNum())
                 .orElse(0);
         Integer amount = Optional
                 .ofNullable(donateRecordRepository.sumAmountOfDonateRecords())
@@ -72,7 +72,7 @@ public class IndexController {
 
         List<Map<String, Object>> indexAdopterInfo = new ArrayList<Map<String, Object>>();
 
-        List<Map<String, Object>> memberInfos = Optional.ofNullable(memberRepository.findTop3Members())
+        List<Map<String, Object>> memberInfos = Optional.ofNullable(memberRepository.findTop3MemberInfos())
                 .orElse(new ArrayList<Map<String, Object>>());
         for (Map<String, Object> memberInfo : memberInfos) {
             indexAdopterInfo.add(Map.of(
@@ -93,7 +93,7 @@ public class IndexController {
 
         List<Map<String, Object>> indexSelterInfo = new ArrayList<Map<String, Object>>();
 
-        List<Map<String, Object>> shelterInfos = Optional.ofNullable(shelterRepository.findTop3Shelters())
+        List<Map<String, Object>> shelterInfos = Optional.ofNullable(shelterRepository.findTop3ShelterInfos())
                 .orElse(new ArrayList<Map<String, Object>>());
         for (Map<String, Object> shelterInfo : shelterInfos) {
             indexSelterInfo.add(Map.of(

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.component.*;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +30,11 @@ public class AccountInfoController {
 
                 Map<String, Object> accountInfo = new HashMap<String, Object>();
 
-                Member member = memberRepository.findByMemberId(memberId);
-
                 // if member not exist, return empty map (adopterInfo)
-                if (member != null) {
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
+
+                        Member member = memberOp.get();
 
                         String anonymous = "否";
                         if (member.getAnonymous() == true) {
@@ -63,18 +65,16 @@ public class AccountInfoController {
 
                 Map<String, Object> accountAdoptInfo = new HashMap<String, Object>();
 
-                Member member = memberRepository.findByMemberId(memberId);
-
                 // if member not exist, return empty map (adopterInfo)
-                if (member != null) {
-                        // 會員累積認養動物數量
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
+
                         Integer number = Optional
                                         .ofNullable(donateRecordRepository
-                                                        .sumAnimalNumOfDonateRecordsByMemberId(memberId))
+                                                        .countAdoptedAnimalNumByMemberId(memberId))
                                         .orElse(0);
-                        // 會員累積認養金額
                         Integer amount = Optional
-                                        .ofNullable(donateRecordRepository.sumAmountOfDonateRecordsByMemberId(memberId))
+                                        .ofNullable(donateRecordRepository.sumAdoptedAmountByMemberId(memberId))
                                         .orElse(0);
 
                         accountAdoptInfo = Map.of(
@@ -97,7 +97,7 @@ public class AccountInfoController {
 
                 // if adopted animal not exist, return empty list (accountAnimal)
                 List<Long> adoptingAnimalIds = Optional
-                                .ofNullable(donateRecordRepository.adoptingAnimalIdsByMemberId(memberId))
+                                .ofNullable(donateRecordRepository.findAdoptedAnimalIdsByMemberId(memberId))
                                 .orElse(new ArrayList<Long>());
                 for (Long adoptingAnimalId : adoptingAnimalIds) {
 
@@ -105,6 +105,8 @@ public class AccountInfoController {
                                         .ofNullable(donateRecordRepository.findNewestDonateRecordByAnimalIdAndMemberId(
                                                         adoptingAnimalId, memberId))
                                         .orElse(new DonateRecord());
+
+                        UpdateDonateRecordStatus.updateStatus(donateRecord);
 
                         String state = donateRecord.getStatus();
                         if (state.equals("認養中")) {
@@ -117,13 +119,11 @@ public class AccountInfoController {
                         }
 
                         Animal animal = donateRecord.getAnimal();
-                        Long animalId = animal.getId();
-                        String aniamalName = animal.getName();
 
                         accountAnimal.add(Map.of(
                                         "state", state,
-                                        "title", aniamalName,
-                                        "animalId", animalId));
+                                        "title", animal.getName(),
+                                        "animalId", animal.getId()));
 
                 }
 

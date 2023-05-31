@@ -27,15 +27,14 @@ public class AnimalListController {
 
         List<Map<String, Object>> animalList = new ArrayList<Map<String, Object>>();
 
+        // if animal not exist, return empty list (animalList)
         List<Animal> animals = Optional
                 .ofNullable(animalRepository.findAll()).orElse(new ArrayList<Animal>());
-
-        // if animal not exist, return empty list (animalList)
         for (Animal animal : animals) {
 
             Long animalId = animal.getId();
             Integer currentAdopterNum = Optional
-                    .ofNullable(donateRecordRepository.sumCurrentAdopterNumOfDonateRecordsByAnimalId(animalId))
+                    .ofNullable(donateRecordRepository.countCurrentAdopterNumByAnimalId(animalId))
                     .orElse(0);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

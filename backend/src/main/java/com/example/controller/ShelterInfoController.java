@@ -31,16 +31,20 @@ public class ShelterInfoController {
 
         Map<String, Object> shelterInfo = new HashMap<String, Object>();
 
-        Shelter shelter = shelterRepository.findByShelterId(shelterId);
+        Optional<Shelter> shelterOp = shelterRepository.findById(shelterId);
 
         // if shelter not exist, return empty map (shelterInfo)
-        if (shelter != null) {
+        if (shelterOp.isPresent()) {
+
+            Shelter shelter = shelterOp.get();
+
             shelterInfo = Map.of(
                     "id", shelter.getId(),
                     "name", shelter.getName(),
                     "address", shelter.getAddress(),
                     "contact_phone", shelter.getContactPhone(),
                     "contact_email", shelter.getContactEmail());
+
         }
 
         // const shelter = { id: 1, name: 'name1', address: 'myAddress', contact_phone:
@@ -55,15 +59,14 @@ public class ShelterInfoController {
 
         List<Map<String, Object>> shelterAnimal = new ArrayList<Map<String, Object>>();
 
-        List<Animal> animals = Optional
-                .ofNullable(animalRepository.findByShelterId(shelterId)).orElse(new ArrayList<Animal>());
-
         // if member/animalIds not exist, return empty list (adopterAnimal)
+        List<Animal> animals = Optional
+                .ofNullable(animalRepository.findAnimalsByShelterId(shelterId)).orElse(new ArrayList<Animal>());
         for (Animal animal : animals) {
 
             Long animalId = animal.getId();
             Integer currentAdopterNum = Optional
-                    .ofNullable(donateRecordRepository.sumCurrentAdopterNumOfDonateRecordsByAnimalId(animalId))
+                    .ofNullable(donateRecordRepository.countCurrentAdopterNumByAnimalId(animalId))
                     .orElse(0);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
