@@ -71,7 +71,7 @@ export default function AniInfo({ animal, firstAdoptionStatus }) {
               firstAdoptionStatus === "認養中" ? (
                 <iframe
                   height="200"
-                  src="https://www.youtube.com/embed/ZwtPgDLexgE"
+                  src="https://www.youtube.com/embed/VQTmS5izrzI"
                   title="YouTube video player"
                   allowFullScreen
                   sx={{ textAlign: 'center' }}
