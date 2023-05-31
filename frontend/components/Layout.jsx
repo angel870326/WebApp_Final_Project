@@ -58,6 +58,7 @@ export default function Layout({ imageBackground, children }) {
       <div style={{ backgroundColor: bgColor }}>
         <Grid container style={{ minHeight: "100vh" }}>
           <Head>
+            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
             <title>Animal Cloud Adoption</title>
           </Head>
           <Header
