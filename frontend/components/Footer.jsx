@@ -13,7 +13,7 @@ import { footer,
 
 // Send email
 const sendEmail = () => {
-  const emailAddress = 'animal_cloud_adoption@gmail.com';
+  const emailAddress = 'animal.cloud.adoption@gmail.com';
   const mailtoLink = `mailto:${emailAddress}`;
 
   window.location.href = mailtoLink;
