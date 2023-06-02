@@ -115,7 +115,7 @@ export default function AdopterList() {
     }
     fetchData();
   }, []);
-  // const rows = [{ "amount": 300, "id": 1, "animal": [{ "img": "animals/1.jpg", "title": "樂樂" }], "accumNum": 2, "currNum": 1, "adopter": "AAA" },]
+  // const rows = [{ "amount": 300, "id": 1, "animal": [{ "animalId": 1, "title": "樂樂" }], "accumNum": 2, "currNum": 1, "adopter": "AAA" },]
 
   if (isLoading) {
     return;

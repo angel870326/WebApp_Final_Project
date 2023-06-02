@@ -65,7 +65,7 @@ export default function AniInfo({ animal, firstAdoptionStatus }) {
               <img
                 src={'/animals/' + animal.id + '.jpg'}
                 alt={animal.name}
-                style={{ height: 200 }}
+                style={{ height: 200, width: 300, objectFit: 'cover' }}
               />
             ) : (
               firstAdoptionStatus === "認養中" ? (

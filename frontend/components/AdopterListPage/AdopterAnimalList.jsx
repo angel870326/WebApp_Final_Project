@@ -9,10 +9,10 @@ export default function AnimalImageList(props) {
   return (
     <ImageList sx={{ width: '100%', overflow: 'hidden'}} cols={3} rowHeight={100} gap={1}>
       {imgData.map((item) => (
-        <ImageListItem key={item.img}>
+        <ImageListItem key={item.animalId}>
           <img
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format`}
+            srcSet={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt={item.title}
             loading="lazy"
           />

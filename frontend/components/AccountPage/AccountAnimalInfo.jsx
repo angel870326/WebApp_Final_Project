@@ -68,7 +68,7 @@ export default function AccountAnimalInfo(props) {
         <ImageList
           sx={{
             width: "100%",
-            height: 500,
+            height: 300,
             overflow: 'auto',
             padding: '10px 30px 30px 30px',
             '&::-webkit-scrollbar-track': {
@@ -87,6 +87,7 @@ export default function AccountAnimalInfo(props) {
                 srcSet={`/animals/${item.animalId}.jpg?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
+                style={{ height: 200, width: 300, objectFit: 'cover' }}
               />
               <ImageListItemBar
                 title={item.title}
