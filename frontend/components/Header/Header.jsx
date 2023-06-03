@@ -68,7 +68,7 @@ export default function Header(props) {
   // // };
   const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
   const brandComponent = (
-    <Link href="/" as="/">
+    <Link href="/" as="/" target="_blank">
       <Button sx={title}>{brand}</Button>
     </Link>
   );

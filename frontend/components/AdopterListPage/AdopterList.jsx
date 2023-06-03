@@ -80,9 +80,9 @@ export default function AdopterList() {
 
   const columns = [
     { field: 'adopter', headerName: '認養人', width: 120, sortable: false },
-    { field: 'currNum', headerName: <>當前認養<br />動物數量</>, width: 120 },
-    { field: 'accumNum', headerName: <>累積認養<br />動物數量</>, width: 120 },
     { field: 'amount', headerName: <>累積認養<br />金額</>, width: 120 },
+    { field: 'accumNum', headerName: <>累積認養<br />動物數量</>, width: 120 },
+    { field: 'currNum', headerName: <>當前認養<br />動物數量</>, width: 120 },
     {
       field: 'animal', headerName: '當前認養動物', width: 390, sortable: false,
       renderCell: (params) => (
@@ -102,7 +102,7 @@ export default function AdopterList() {
   ];
 
   // Call API
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   const [rows, setRows] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -111,42 +111,42 @@ export default function AdopterList() {
         const jsonData = await response.json();
         setRows(jsonData);
       } catch (error) { }
-      setLoading(false);
+      setLoaded(true);
     }
     fetchData();
   }, []);
-  // const rows = [{ "amount": 300, "id": 1, "animal": [{ "img": "animals/1.jpg", "title": "樂樂" }], "accumNum": 2, "currNum": 1, "adopter": "AAA" },]
+  // const rows = [{ "amount": 300, "id": 1, "animal": [{ "animalId": 1, "title": "樂樂" }], "accumNum": 2, "currNum": 1, "adopter": "AAA" },]
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <div style={{ height: 633, width: '100%' }}>
-        <ThemeProvider theme={theme}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            rowHeight={100}
-            disableColumnMenu
-            disableRowSelectionOnClick
-            initialState={{
-              pagination: { paginationModel: { pageSize: 5 } },
-            }}
-            pageSizeOptions={[5]}
-            components={{
-              pagination: CustomPagination,
-              Toolbar: GridToolbar,
-            }}
-            pagination
-            slots={{
-              pagination: CustomPagination,
-            }}
-            sx={gridStyle}
-          // getRowHeight={() => 'auto'}
-          />
-        </ThemeProvider>
-      </div>
-    );
-  }
+  return (
+    <>
+      {isLoaded && (
+        <div style={{ height: 633, width: '100%' }}>
+          <ThemeProvider theme={theme}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              rowHeight={100}
+              disableColumnMenu
+              disableRowSelectionOnClick
+              initialState={{
+                pagination: { paginationModel: { pageSize: 5 } },
+              }}
+              pageSizeOptions={[5]}
+              components={{
+                pagination: CustomPagination,
+                Toolbar: GridToolbar,
+              }}
+              pagination
+              slots={{
+                pagination: CustomPagination,
+              }}
+              sx={gridStyle}
+            // getRowHeight={() => 'auto'}
+            />
+          </ThemeProvider>
+        </div>
+      )}
+    </>
+  );
 
 }

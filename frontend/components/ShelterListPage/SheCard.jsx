@@ -9,8 +9,7 @@ import { Card, CardMedia, CardContent, Typography, Button, CardActions } from '@
 import Link from 'next/link';
 
 //每 5 個換一頁
-export default function SheCard(props) {
-  const { shelters } = props;
+export default function SheCard({ shelters }) {
 
   const pageSize = 5; // 每頁顯示的卡片數量
   const [currentPage, setCurrentPage] = useState(0); // 當前頁碼
@@ -62,7 +61,7 @@ export default function SheCard(props) {
                 地址：{shelter.address}<br />收容動物數量：{shelter.numAnimal} 隻 {getDogPawPrints(shelter.numAnimal)}
               </Typography>
               <CardActions style={{ marginLeft: 'auto' }}>
-              <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} target="_blank" style={{ textDecoration: 'none' }}>
                 <Button size="small" variant="contained">查看更多</Button>
               </Link>
               </CardActions>
@@ -78,16 +77,16 @@ export default function SheCard(props) {
       {visibleShelters.length > 0 && (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
           <Button disabled={currentPage === 0} onClick={handleClickPrev}>
-            Previous
+            上一頁
           </Button>
           <Typography variant="body1" style={{ margin: '10px 1rem' }}>
-            Page {currentPage + 1} of {Math.ceil(shelters.length / pageSize)}
+            頁數 {currentPage + 1} of {Math.ceil(shelters.length / pageSize)}
           </Typography>
           <Button
             disabled={currentPage === Math.ceil(shelters.length / pageSize) - 1}
             onClick={handleClickNext}
           >
-            Next
+            下一頁
           </Button>
         </div>
       )}

@@ -43,12 +43,12 @@ public class ShelterInfoController {
                     "name", shelter.getName(),
                     "address", shelter.getAddress(),
                     "contact_phone", shelter.getContactPhone(),
-                    "contact_email", shelter.getContactEmail());
+                    "website", shelter.getWebsite());
 
         }
 
         // const shelter = { id: 1, name: 'name1', address: 'myAddress', contact_phone:
-        // '0987654321', contact_email: 'mymail@gmail.com' }
+        // '0987654321', website: 'https://www.tcapo.gov.taipei/Content_List.aspx?n=8A474D4AA59E06B7' }
 
         return shelterInfo;
 

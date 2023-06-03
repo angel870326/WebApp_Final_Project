@@ -60,7 +60,7 @@ public class AdopterListController {
                                 Animal animal = animalOp.get();
 
                                 animalList.add(Map.of(
-                                                "img", "animals/" + animalId + ".jpg",
+                                                "animalId", animalId,
                                                 "title", animal.getName()));
 
                         }

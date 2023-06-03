@@ -1,13 +1,10 @@
 import Layout from '@/components/Layout'
-import AnimalListpage from '@/components/AnimalListPage/AnimalListPage'
+import AnimalListPage from '@/components/AnimalListPage/AnimalListPage'
 
-export default function AnimalsListPage() {
-
+export default function AnimalsPage() {
   return (
     <Layout>
-      <AnimalListpage />
+      <AnimalListPage />
     </Layout>
-
-
   )
 }

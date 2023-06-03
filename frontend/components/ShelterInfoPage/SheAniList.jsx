@@ -11,7 +11,7 @@ export default function SheAniList() {
     // Call API
     const router = useRouter();
     const { s_id } = router.query;
-    const [isLoading, setLoading] = useState(true);
+    const [isLoaded, setLoaded] = useState(false);
     // 後端利用 s_id 得到相對應的 animals [{id, name, type, sex, birth_year, area(可以不用), shelter, sheltered_date, numMember},]
     const [animals, setAnimals] = useState([]);
     // // NEW animals array
@@ -27,22 +27,22 @@ export default function SheAniList() {
                     const jsonData = await response.json();
                     setAnimals(jsonData);
                 } catch (error) { }
-                setLoading(false);
+                setLoaded(true);
             }
             fetchData();
         }
     }, [s_id]);
 
-    if (isLoading) {
-        return;
-    } else {
-        return (
-            <div>
-                <h2 style={title}>收容所內動物列表</h2>
-                <div style={divLine} />
-                <AniCard animals={animals} />
-            </div>
-        );
-    }
-    
+    return (
+        <>
+            {isLoaded && (
+                <div>
+                    <h2 style={title}>收容所內動物列表</h2>
+                    <div style={divLine} />
+                    <AniCard animals={animals} />
+                </div>
+            )}
+        </>
+    );
+
 }

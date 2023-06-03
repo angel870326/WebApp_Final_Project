@@ -1,167 +1,192 @@
-import React, { useState } from 'react';
-import { Box, Button, Link, Grid, Typography, Container, List, ListItem, ListItemText, ListItemSecondaryAction, FormControl, InputLabel, MenuItem, Select, Collapse} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Button, Link, Grid, Typography, Container, List, ListItem, ListItemText, ListItemSecondaryAction, FormControl, InputLabel, MenuItem, Select, Collapse } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { getUser } from "@/services/auth";
 import { title, plan, brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import EditIcon from '@mui/icons-material/Edit';
+import { useRouter } from 'next/router';
+import { getUser } from "@/services/auth";
 
-// GET 所有方案所有資訊 
-const options = [
-    { id: 1, label: '方案一', price: 100, duration: 1 },
-    { id: 2, label: '方案二', price: 270, duration: 3 },
-    { id: 3, label: '方案三', price: 550, duration: 6 },
-    { id: 4, label: '方案四', price: 1000, duration: 12 },
-  ];
-  
-  // GET 單一 User (所有)資訊
-  const user = { id: 33, email: 'b08705037@ntu.edu.tw', anonymous: true};
-  
-  // GET 單一 Animal (所有)資訊
-  const animal = { id: 22, name: '小黑'};
+// 送出表單
+const handleSubmit = async (event) => {
 
-export default function JoinPlan() {
-  // 選擇方案
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [checked, setChecked] = React.useState(false);
-  const handleChange = (event) => {
-      setSelectedOption(event.target.value);
-      if (!selectedOption){
-        setChecked((prev) => !prev);
-      }
-  };
-
-  const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const plan = selectedOption;
-    
-    if (!selectedOption) {
-    // 使用者沒有選擇方案，發出警告 Alert
-    alert('請選擇方案！');
-    } else {
-    // 寄發email
-    alert('匯款通知信件已寄出！\n請至您的 email 確認信件，\n並於時間內完成匯款。');
 
-    // 計算方案起訖日期
-    const today = new Date();
-    const currentDate = today.toLocaleDateString();
-    const futureDate = new Date(today.getFullYear(), today.getMonth() + plan.duration, today.getDate());
-    const endDate = futureDate.toLocaleDateString();
+    // Form data
+    const formData = new FormData(event.target);
+    const jsonData = {};
+    for (let [key, value] of formData.entries()) {
+        jsonData[key] = value;
+    }
 
-    // 回傳
-    console.log({
-        amount: plan.price,
-        donatePeriod: plan.duration,
-        startDate: currentDate,
-        endDate: endDate,
-        planId: plan.id,
-        accountId: user.id,
-        animalId: animal.id,
+    // Data Validation
+    if (jsonData.option === "") {
+        alert('請選擇方案！');
+        return;
+    }
+
+    // Call API
+    const response = await fetch(`/api/addDonation/${getUser()}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
     });
 
-    // 導向動物資訊頁面
-    window.location.href = '/animals/animalsInfo';
+    if (response.ok) {
+        alert('匯款通知信件已寄出！\n請至您的 email 確認信件，\n並於時間內完成匯款。');
+    } else {
+        alert("系統錯誤");
     }
-  };
 
+    window.location.href = `/animals/animalsInfo?a_id=${jsonData.animalId}`;
 
-  return (
-    <ThemeProvider theme={brownTheme}>
-        <div style={plan}>
-            <Container component="main" maxWidth="xs">
-                <Box
-                sx={{
-                    marginTop: 8,
-                    alignItems: 'center',
-                    marginBottom: 8
-                }}
-                >
-                <h2 style={title}>
-                    加入{animal.name}的認養計畫！
-                </h2>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <List container spacing={2}>
-                        <ListItem>
-                            <ListItemText primary="帳號："/>
-                            <ListItemSecondaryAction>
-                                {getUser().username}
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText primary="認養動物收容編號："/>
-                            <ListItemSecondaryAction>
-                                {animal.id}
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText primary="捐款方式："/>
-                            <ListItemSecondaryAction>
-                                <div>
-                                    {user.anonymous ? (
-                                    <>匿名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
-                                    ) : (
-                                    <>具名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize:14 }} /></Link></>
-                                    )}
-                                </div>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText primary="認養方案："/>
-                            <ListItemSecondaryAction>
-                            <FormControl sx={{minWidth: 100 }}>
-                                <InputLabel id="option-label">方案</InputLabel>
-                                <Select
-                                labelId="option-label"
-                                id="option"
-                                value={selectedOption}
-                                label="Option"
-                                onChange={handleChange}
-                                required
-                                >
-                                {options.map((option) => (
-                                    <MenuItem key={option.id} value={option}>
-                                    {option.label}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                            </FormControl>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <Collapse in={checked}>
-                            <ListItem sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Typography sx={{ m: 1, border: '1px solid gray', padding: '1rem', display: selectedOption ? 'block' : 'none' }} borderRadius="10px">
-                                認養金額: ${selectedOption ? selectedOption.price : 'none'}
-                                <br/>
-                                認養時長: {selectedOption ? selectedOption.duration : 'none'} 個月
-                            </Typography>
-                            </ListItem>
-                        </Collapse>
-                    </List>
-                    <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 2, mb: 2 }}
-                    >
-                    加入認養計畫
-                    </Button>
-                    <Grid container justifyContent="center" sx={{ mt: 1 }}>
-                        <Grid item sx={{ textAlign: 'center' }}>
-                            點擊「加入認養計畫」後，<br />
-                            我們會將匯款資訊寄送至您的信箱，<br />
-                            請於 3 天內完成匯款。<br />
-                            等待審查完畢後，即可成功認養{animal.name}！<br />
-                        </Grid>
-                        <Grid item sx={{ textAlign: 'center', mt: 1 }}>
-                        <Link href="/faq">
-                            進一步了解認養流程
-                        </Link>
-                        </Grid>
-                    </Grid>
-                </Box>
-                </Box>
-            </Container>
-        </div>
-    </ThemeProvider>
-  )
+    return;
+
+};
+
+export default function JoinPlan() {
+
+    // 選擇方案
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOptionLabel, setSelectedOptionLabel] = useState(null);
+    const [checked, setChecked] = useState(false);
+    const handleChange = (event) => {
+        setSelectedOption(event.target.value);
+        setSelectedOptionLabel(event.target.value.label);
+        if (!selectedOption) {
+            setChecked((prev) => !prev);
+        }
+    };
+
+    // Call API
+    const router = useRouter();
+    const { a_id } = router.query;
+    const [isLoaded, setLoaded] = useState(false);
+    // GET 所有方案所有資訊 
+    const [options, setOptions] = useState({});
+    // GET 單一 User (所有)資訊
+    const [user, setUser] = useState({});
+    // GET 單一 Animal (所有)資訊
+    const [animal, setAnimal] = useState({});
+
+    useEffect(() => {
+        if (a_id) {
+            async function fetchData() {
+                try {
+                    const response = await fetch(`/api/getJoiningDonatePlan/${a_id}/${getUser()}`);
+                    const jsonData = await response.json();
+                    setOptions(jsonData.options);
+                    setUser(jsonData.user);
+                    setAnimal(jsonData.animal);
+                } catch (error) { }
+                setLoaded(true);
+            }
+            fetchData();
+        }
+    }, [a_id]);
+    // const options = [{ id: 1, label: '方案一', price: 100, duration: 1 },];
+    // const user = { id: 33, email: 'b08705037@ntu.edu.tw', anonymous: true };
+    // const animal = { id: 22, name: '小黑' };
+
+    return (
+        <>
+            {isLoaded && (
+                <ThemeProvider theme={brownTheme}>
+                    <div style={plan}>
+                        <Container component="main" maxWidth="xs">
+                            <Box
+                                sx={{
+                                    marginTop: 8,
+                                    alignItems: 'center',
+                                    marginBottom: 8
+                                }}
+                            >
+                                <h2 style={title}>
+                                    加入{animal.name}的認養計畫！
+                                </h2>
+                                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                                    <List container spacing={2}>
+                                        <ListItem>
+                                            <ListItemText primary="帳號：" />
+                                            <ListItemSecondaryAction>
+                                                {user.name}
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText primary="捐款方式：" />
+                                            <ListItemSecondaryAction>
+                                                <div>
+                                                    {user.anonymous ? (
+                                                        <>匿名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize: 14 }} /></Link></>
+                                                    ) : (
+                                                        <>具名捐款 <Link href="/account/edit"><EditIcon sx={{ fontSize: 14 }} /></Link></>
+                                                    )}
+                                                </div>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText primary="認養方案：" />
+                                            <ListItemSecondaryAction>
+                                                <FormControl sx={{ minWidth: 100 }}>
+                                                    <InputLabel id="option-label">方案</InputLabel>
+                                                    <Select
+                                                        labelId="option-label"
+                                                        id="option"
+                                                        name="option"
+                                                        value={selectedOptionLabel}
+                                                        label="Option"
+                                                        onChange={handleChange}
+                                                        required
+                                                    >
+                                                        {options.map((option) => (
+                                                            <MenuItem key={option.id} value={option}>
+                                                                {option.label}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                        <Collapse in={checked}>
+                                            <ListItem sx={{ display: 'flex', justifyContent: 'center' }}>
+                                                <Typography sx={{ m: 1, border: '1px solid gray', padding: '1rem', display: selectedOption ? 'block' : 'none' }} borderRadius="10px">
+                                                    認養金額: ${selectedOption ? selectedOption.price : 'none'}
+                                                    <br />
+                                                    認養時長: {selectedOption ? selectedOption.duration : 'none'} 天
+                                                </Typography>
+                                            </ListItem>
+                                        </Collapse>
+                                    </List>
+                                    <input type="hidden" id="animalId" name="animalId" value={a_id} />
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 2, mb: 2 }}
+                                    >
+                                        加入認養計畫
+                                    </Button>
+                                    <Grid container justifyContent="center" sx={{ mt: 1 }}>
+                                        <Grid item sx={{ textAlign: 'center' }}>
+                                            點擊「加入認養計畫」後，<br />
+                                            我們會將匯款資訊寄送至您的信箱，<br />
+                                            請於 3 天內完成匯款。<br />
+                                            等待審查完畢後，即可成功認養{animal.name}！<br />
+                                        </Grid>
+                                        <Grid item sx={{ textAlign: 'center', mt: 1 }}>
+                                            <Link href="/faq">
+                                                進一步了解認養流程
+                                            </Link>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            </Box>
+                        </Container>
+                    </div>
+                </ThemeProvider>
+            )}
+        </>
+    );
+
 }

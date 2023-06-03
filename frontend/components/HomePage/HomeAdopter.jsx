@@ -12,7 +12,7 @@ import { brownColor } from "@/styles/jss/animal-cloud-adoption.js";
 export default function HomeAdopter() {
 
   // Call API
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   const [adopters, setAdopters] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +21,7 @@ export default function HomeAdopter() {
         const jsonData = await response.json();
         setAdopters(jsonData);
       } catch (error) { }
-      setLoading(false);
+      setLoaded(true);
     }
     fetchData();
   }, []);
@@ -31,39 +31,39 @@ export default function HomeAdopter() {
   //   { id: 3, name: "name3", animalNum: 10 },
   // ]
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <HomeSectionLayout sectionTitle={"認養人風雲榜"} moreLink={"/adopters"}>
-        {/* List */}
-        <Grid container alignItems="center" justifyContent="center" spacing={0}>
-          {adopters.map((item) => (
-            <Grid item key={item.id} xs={10} sm={6} md={4}>
-              <Card sx={sectionCard}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ width: 50, height: 50, bgcolor: brownColor }} aria-label="recipe">
-                      <PersonIcon fontSize='large' />
-                    </Avatar>
-                  }
-                  title={
-                    <Typography sx={cardTitle}>
-                      {item.name}
+  return (
+    <>
+      {isLoaded && (
+        <HomeSectionLayout sectionTitle={"認養人風雲榜"} moreLink={"/adopters"}>
+          {/* List */}
+          <Grid container alignItems="center" justifyContent="center" spacing={0}>
+            {adopters.map((item) => (
+              <Grid item key={item.id} xs={10} sm={6} md={4}>
+                <Card sx={sectionCard}>
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ width: 50, height: 50, bgcolor: brownColor }} aria-label="recipe">
+                        <PersonIcon fontSize='large' />
+                      </Avatar>
+                    }
+                    title={
+                      <Typography sx={cardTitle}>
+                        {item.name}
+                      </Typography>
+                    }
+                  />
+                  <CardContent>
+                    <Typography sx={cardContent}>
+                      當前認養動物數：{item.animalNum}
                     </Typography>
-                  }
-                />
-                <CardContent>
-                  <Typography sx={cardContent}>
-                    當前認養動物數：{item.animalNum}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </HomeSectionLayout>
-    );
-  }
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </HomeSectionLayout>
+      )}
+    </>
+  );
 
 }

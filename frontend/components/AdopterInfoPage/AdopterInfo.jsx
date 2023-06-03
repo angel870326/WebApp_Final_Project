@@ -15,7 +15,7 @@ export default function AdopterInfo() {
   // Call API
   const router = useRouter();
   const { m_id } = router.query;
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -29,7 +29,7 @@ export default function AdopterInfo() {
           setNumber(jsonData.number);
           setAmount(jsonData.amount);
         } catch (error) { }
-        setLoading(false);
+        setLoaded(true);
       }
       fetchData();
     }
@@ -38,35 +38,35 @@ export default function AdopterInfo() {
   // const number = 1;
   // const amount = 1000;
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <div style={content}>
-        <h2 style={title}>個人資料</h2>
-        <div style={divLine} />
-        <Grid container spacing={2} sx={{ padding: '10px 30px 30px 30px' }}>
-          <Grid item xs={8}>
-            <Typography>暱稱</Typography>
+  return (
+    <>
+      {isLoaded && (
+        <div style={content}>
+          <h2 style={title}>個人資料</h2>
+          <div style={divLine} />
+          <Grid container spacing={2} sx={{ padding: '10px 30px 30px 30px' }}>
+            <Grid item xs={8}>
+              <Typography>暱稱</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography>{name}</Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography>累積認養動物數</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography>{number}</Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography>累積認養金額</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography>{amount}</Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Typography>{name}</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography>累積認養動物數</Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>{number}</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography>累積認養金額</Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>{amount}</Typography>
-          </Grid>
-        </Grid>
-      </div>
-    );
-  }
+        </div>
+      )}
+    </>
+  );
 
 }

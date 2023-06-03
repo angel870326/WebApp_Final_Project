@@ -5,7 +5,7 @@ import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 import SheName from './SheName'
 import SheAniList from './SheAniList'
 
-function Home() {
+export default function ShelterInfoPage() {
   return (
     <div>
       <h1 style={title}> 收容所資訊 </h1>
@@ -18,5 +18,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home

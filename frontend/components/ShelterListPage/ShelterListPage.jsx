@@ -5,7 +5,7 @@ import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 import SearchCond from './SearchCond'
 import SearchRes from './SearchRes'
 
-export default function Home() {
+export default function ShelterListPage() {
   const [searchCriteria, setSearchCriteria] = useState({ area: '', sortBy: ''});
 
   const handleSearch = (newSearchCriteria) => {

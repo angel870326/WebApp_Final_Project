@@ -46,7 +46,8 @@ public class AnimalInfoController {
                     "brithYear", animal.getBirthYear(),
                     "personality", animal.getPersonality(),
                     "appearance", animal.getAppearance(),
-                    "shelter_id", animal.getShelter().getId());
+                    "shelter_id", animal.getShelter().getId(),
+                    "shelter_name", animal.getShelter().getName());
 
         }
 
