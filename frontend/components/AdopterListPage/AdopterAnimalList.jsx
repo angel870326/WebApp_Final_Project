@@ -3,11 +3,9 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 
-export default function AnimalImageList(props) {
-  const { imgData } = props;
-
+export default function AnimalImageList({ imgData }) {
   return (
-    <ImageList sx={{ width: '100%', overflow: 'hidden'}} cols={3} rowHeight={100} gap={1}>
+    <ImageList sx={{ width: '100%', overflow: 'hidden' }} cols={3} rowHeight={100} gap={1}>
       {imgData.map((item) => (
         <ImageListItem key={item.animalId}>
           <img
@@ -18,7 +16,7 @@ export default function AnimalImageList(props) {
           />
           <ImageListItemBar
             title={item.title}
-            sx={{height: '30px'}}
+            sx={{ height: '30px' }}
           />
         </ImageListItem>
       ))}

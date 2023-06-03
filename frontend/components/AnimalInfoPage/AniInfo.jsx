@@ -23,7 +23,7 @@ export default function AniInfo({ animal, firstAdoptionStatus }) {
               <List>
                 <ListItem>
                   <Typography variant="body1" component="p" sx={{ textAlign: 'center' }}>
-                    收容編號： {animal.id}
+                    編號： {animal.id}
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -38,7 +38,7 @@ export default function AniInfo({ animal, firstAdoptionStatus }) {
                 </ListItem>
                 <ListItem>
                   <Typography variant="body1" component="p" sx={{ textAlign: 'center' }}>
-                    出生年： {animal.brithYear}年
+                    出生年： {animal.brithYear} 年
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -53,7 +53,7 @@ export default function AniInfo({ animal, firstAdoptionStatus }) {
                 </ListItem>
                 <ListItem>
                   <Typography variant="body1" component="p" sx={{ textAlign: 'center' }}>
-                    收容處： {animal.shelter_id}
+                    收容所： {animal.shelter_name}
                   </Typography>
                 </ListItem>
               </List>

@@ -8,7 +8,7 @@ import SearchRes from './SearchRes'
 //mui components
 import { Button } from '@mui/material';
 
-export default function Home() {
+export default function AnimalListPage() {
   const [searchCriteria, setSearchCriteria] = useState({ types: '', age: '', sex: '', area: '', sortBy: ''});
 
   const handleSearch = (newSearchCriteria) => {

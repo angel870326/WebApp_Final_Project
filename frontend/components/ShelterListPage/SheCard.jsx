@@ -9,8 +9,7 @@ import { Card, CardMedia, CardContent, Typography, Button, CardActions } from '@
 import Link from 'next/link';
 
 //每 5 個換一頁
-export default function SheCard(props) {
-  const { shelters } = props;
+export default function SheCard({ shelters }) {
 
   const pageSize = 5; // 每頁顯示的卡片數量
   const [currentPage, setCurrentPage] = useState(0); // 當前頁碼
@@ -74,16 +73,16 @@ export default function SheCard(props) {
         {/* 頁數 */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
           <Button disabled={currentPage === 0} onClick={handleClickPrev}>
-            Previous
+            上一頁
           </Button>
           <Typography variant="body1" style={{ margin: '10px 1rem' }}>
-            Page {currentPage + 1} of {Math.ceil(shelters.length / pageSize)}
+            頁數 {currentPage + 1} of {Math.ceil(shelters.length / pageSize)}
           </Typography>
           <Button
             disabled={currentPage === Math.ceil(shelters.length / pageSize) - 1}
             onClick={handleClickNext}
           >
-            Next
+            下一頁
           </Button>
         </div>
 

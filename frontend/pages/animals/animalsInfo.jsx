@@ -1,6 +1,5 @@
 import Layout from '@/components/Layout'
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { brownTheme } from "@/styles/jss/animal-cloud-adoption.js";
 import { ThemeProvider } from '@mui/material/styles';
@@ -9,13 +8,14 @@ import AdoptRecord from '@/components/AnimalInfoPage/AdoptRecord';
 import OtherAdopters from '@/components/AnimalInfoPage/OtherAdopters';
 import JoinBtns from '@/components/AnimalInfoPage/JoinBtns';
 import { useRouter } from 'next/router';
+import { getUser, isLoggedIn } from "@/services/auth";
 
 export default function AnimalsInfoPage() {
 
   // Call API
   const router = useRouter();
   const { a_id } = router.query;
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   // GET 單一 Animal (所有)資訊
   const [animal, setAnimal] = useState({});
   // GET 此使用者和此動物的所有認養紀錄，由新到舊排序
@@ -27,24 +27,28 @@ export default function AnimalsInfoPage() {
   useEffect(() => {
     if (a_id) {
       async function fetchData() {
+
         try {
           const response = await fetch(`/api/getAnimalInfo/${a_id}`);
           const jsonData = await response.json();
           setAnimal(jsonData);
         } catch (error) { }
-        try {
-          // use memberId = 1 just for testing
-          const response = await fetch(`/api/getAnimalDonateRecord/${a_id}/1`);
-          const jsonData = await response.json();
-          setAdoptionRecords(jsonData);
-        } catch (error) { }
-        try {
-          // use memberId = 1 just for testing
-          const response = await fetch(`/api/getAnimalAdopter/${a_id}/1`);
-          const jsonData = await response.json();
-          setAdopters(jsonData);
-        } catch (error) { }
-        setLoading(false);
+
+        if (isLoggedIn) {
+          try {
+            const response = await fetch(`/api/getAnimalDonateRecord/${a_id}/${getUser()}`);
+            const jsonData = await response.json();
+            setAdoptionRecords(jsonData);
+          } catch (error) { }
+          try {
+            const response = await fetch(`/api/getAnimalAdopter/${a_id}/${getUser()}`);
+            const jsonData = await response.json();
+            setAdopters(jsonData);
+          } catch (error) { }
+        }
+
+        setLoaded(true);
+
       }
       fetchData();
     }
@@ -61,25 +65,25 @@ export default function AnimalsInfoPage() {
     }
   }, [adoptionRecords]);
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <Layout>
-        <ThemeProvider theme={brownTheme}>
-          <Box sx={{ textAlign: 'center' }}>
-            {/* 動物資訊區塊 */}
-            <AniInfo animal={animal} firstAdoptionStatus={firstAdoptionStatus} />
-            {/* 認養紀錄區塊 */}
-            <AdoptRecord adoptionRecords={adoptionRecords} />
-            {/* 其他認養人列表區塊 */}
-            <OtherAdopters adopters={adopters} adoptionRecords={adoptionRecords} />
-            {/* 了解認養流程連結 & 加入按鈕 */}
-            <JoinBtns firstAdoptionStatus={firstAdoptionStatus} animalId={a_id} />
-          </Box>
-        </ThemeProvider>
-      </Layout>
-    );
-  }
+  return (
+    <>
+      {isLoaded && (
+        <Layout>
+          <ThemeProvider theme={brownTheme}>
+            <Box sx={{ textAlign: 'center' }}>
+              {/* 動物資訊區塊 */}
+              <AniInfo animal={animal} firstAdoptionStatus={firstAdoptionStatus} />
+              {/* 認養紀錄區塊 */}
+              <AdoptRecord adoptionRecords={adoptionRecords} />
+              {/* 其他認養人列表區塊 */}
+              <OtherAdopters adopters={adopters} adoptionRecords={adoptionRecords} />
+              {/* 了解認養流程連結 & 加入按鈕 */}
+              <JoinBtns firstAdoptionStatus={firstAdoptionStatus} animalId={a_id} />
+            </Box>
+          </ThemeProvider>
+        </Layout>
+      )}
+    </>
+  );
 
 }

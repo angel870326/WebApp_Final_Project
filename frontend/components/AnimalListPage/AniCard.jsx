@@ -63,8 +63,8 @@ export default function AniCard({ animals }) {
                       {animal.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      <b>品種：</b>{animal.type} ｜ <b>性別：</b>{animal.sex} ｜ <b>年齡：</b>{new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
-                      <b>收容處：</b>{animal.shelter}<br />
+                      <b>品種：</b>{animal.type} ｜ <b>性別：</b>{animal.sex} ｜ <b>年紀：</b>{new Date().getFullYear() - parseInt(animal.birth_year)} 歲<br />
+                      <b>收容所：</b>{animal.shelter}<br />
                       <b>收容時間：</b>{animal.formatted_sheltered_date}<br />
                       <b>認養人數：</b>{animal.numMember}
                     </Typography>
@@ -88,16 +88,16 @@ export default function AniCard({ animals }) {
         {groups.length > 0 && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
             <Button disabled={currentPage === 0} onClick={handleClickPrev}>
-              Previous
+              上一頁
             </Button>
             <Typography variant="body1" style={{ margin: '10px 1rem' }}>
-              Page {currentPage + 1} of {Math.ceil(animals.length / pageSize)}
+              頁數 {currentPage + 1} of {Math.ceil(animals.length / pageSize)}
             </Typography>
             <Button
               disabled={currentPage === Math.ceil(animals.length / pageSize) - 1}
               onClick={handleClickNext}
             >
-              Next
+              下一頁
             </Button>
           </div>
         )}

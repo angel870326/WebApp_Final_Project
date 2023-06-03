@@ -35,18 +35,27 @@ public class AdopterInfoController {
 
                         Member member = memberOp.get();
 
-                        Integer number = Optional
-                                        .ofNullable(donateRecordRepository
-                                                        .countAdoptedAnimalNumByMemberId(memberId))
-                                        .orElse(0);
-                        Integer amount = Optional
-                                        .ofNullable(donateRecordRepository.sumAdoptedAmountByMemberId(memberId))
-                                        .orElse(0);
+                        if (member.getAnonymous() == false) {
 
-                        adopterInfo = Map.of(
-                                        "name", member.getNickName(),
-                                        "number", number,
-                                        "amount", amount);
+                                Integer number = Optional
+                                                .ofNullable(donateRecordRepository
+                                                                .countAdoptedAnimalNumByMemberId(memberId))
+                                                .orElse(0);
+                                Integer amount = Optional
+                                                .ofNullable(donateRecordRepository.sumAdoptedAmountByMemberId(memberId))
+                                                .orElse(0);
+
+                                adopterInfo = Map.of(
+                                                "name", member.getNickName(),
+                                                "number", number,
+                                                "amount", amount);
+
+                        } else {
+                                adopterInfo = Map.of(
+                                                "name", "",
+                                                "number", 0,
+                                                "amount", 0);
+                        }
 
                 }
 
@@ -63,19 +72,29 @@ public class AdopterInfoController {
 
                 List<Map<String, Object>> adopterAnimal = new ArrayList<Map<String, Object>>();
 
-                // if animalIds not exist, return empty list (adopterAnimal)
-                List<Long> animalIds = Optional
-                                .ofNullable(donateRecordRepository.findCurrentAdoptedAnimalIdsByMemberId(memberId))
-                                .orElse(new ArrayList<Long>());
-                for (Long animalId : animalIds) {
+                Optional<Member> memberOp = memberRepository.findById(memberId);
+                if (memberOp.isPresent()) {
 
-                        Optional<Animal> animalOp = animalRepository.findById(animalId);
-                        Animal animal = animalOp.get();
+                        Member member = memberOp.get();
+                        if (member.getAnonymous() == false) {
 
-                        adopterAnimal.add(Map.of(
-                                        "title", animal.getName(),
-                                        "animalId", animalId));
+                                // if animalIds not exist, return empty list (adopterAnimal)
+                                List<Long> animalIds = Optional
+                                                .ofNullable(donateRecordRepository
+                                                                .findCurrentAdoptedAnimalIdsByMemberId(memberId))
+                                                .orElse(new ArrayList<Long>());
+                                for (Long animalId : animalIds) {
 
+                                        Optional<Animal> animalOp = animalRepository.findById(animalId);
+                                        Animal animal = animalOp.get();
+
+                                        adopterAnimal.add(Map.of(
+                                                        "title", animal.getName(),
+                                                        "animalId", animalId));
+
+                                }
+
+                        }
                 }
 
                 // const animalData = [{title: 'name1', state: state_date, animalId: 1},];

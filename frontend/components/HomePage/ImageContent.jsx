@@ -13,7 +13,7 @@ export default function ImageContent() {
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
 
   // Call API
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   const [animalNum, setAnimalNum] = useState(0);
   const [amount, setAmount] = useState(0);
   useEffect(() => {
@@ -24,37 +24,37 @@ export default function ImageContent() {
         setAnimalNum(jsonData.animalNum);
         setAmount(jsonData.amount);
       } catch (error) { }
-      setLoading(false);
+      setLoaded(true);
     }
     fetchData();
   }, []);
   // const animalNum = 20
   // const amount = 1000
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <div>
-        <Typography sx={title}>動物雲認養</Typography>
-        <Grid container spacing={0} sx={counterContent}>
-          <Grid item xs={6} md={6} lg={12} sx={item}>
-            {/* <Box sx={counterBox}> */}
-            <Box style={{ ...counterBox, width: isLg ? '320px' : 'inherit', margin: isLg ? '10px 60px' : '10px 20px' }}>
-              <Typography sx={counterTitle}>累積收容動物</Typography>
-              <CustomCountUp end={animalNum} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
-            </Box>
+  return (
+    <>
+      {isLoaded && (
+        <div>
+          <Typography sx={title}>動物雲認養</Typography>
+          <Grid container spacing={0} sx={counterContent}>
+            <Grid item xs={6} md={6} lg={12} sx={item}>
+              {/* <Box sx={counterBox}> */}
+              <Box style={{ ...counterBox, width: isLg ? '320px' : 'inherit', margin: isLg ? '10px 60px' : '10px 20px' }}>
+                <Typography sx={counterTitle}>累積收容動物</Typography>
+                <CustomCountUp end={animalNum} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
+              </Box>
+            </Grid>
+            <Grid item xs={6} md={6} lg={12} sx={item}>
+              {/* <Box sx={counterBox}> */}
+              <Box style={{ ...counterBox, width: isLg ? '320px' : 'inherit', margin: isLg ? '10px 60px' : '10px 20px' }}>
+                <Typography sx={counterTitle}>累積認養金額</Typography>
+                <CustomCountUp end={amount} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={6} md={6} lg={12} sx={item}>
-            {/* <Box sx={counterBox}> */}
-            <Box style={{ ...counterBox, width: isLg ? '320px' : 'inherit', margin: isLg ? '10px 60px' : '10px 20px' }}>
-              <Typography sx={counterTitle}>累積認養金額</Typography>
-              <CustomCountUp end={amount} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
-            </Box>
-          </Grid>
-        </Grid>
-      </div>
-    );
-  }
+        </div>
+      )}
+    </>
+  );
 
 }

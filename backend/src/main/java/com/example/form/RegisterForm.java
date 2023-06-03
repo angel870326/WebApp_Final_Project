@@ -1,24 +1,34 @@
 package com.example.form;
 
-public class UpdateMemberInfoForm {
+public class RegisterForm {
 
+    private String account;
     private String name;
-    private String password;
     private String email;
     private String phone;
+    private String password;
     private Boolean anonymous;
 
-    public UpdateMemberInfoForm() {
+    public RegisterForm() {
         super();
     }
 
-    public UpdateMemberInfoForm(String name, String password, String email, String phone, Boolean anonymous) {
+    public RegisterForm(String account, String name, String email, String phone, String password, Boolean anonymous) {
         super();
+        this.account = account;
         this.name = name;
-        this.password = password;
         this.email = email;
         this.phone = phone;
+        this.password = password;
         this.anonymous = anonymous;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getName() {
@@ -27,14 +37,6 @@ public class UpdateMemberInfoForm {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -51,6 +53,14 @@ public class UpdateMemberInfoForm {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getAnonymous() {

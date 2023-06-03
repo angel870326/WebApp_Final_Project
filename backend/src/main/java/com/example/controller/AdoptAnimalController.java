@@ -54,6 +54,7 @@ public class AdoptAnimalController {
 
                         userData = Map.of(
                                         "id", member.getId(),
+                                        "name", member.getNickName(),
                                         "email", member.getEmail(),
                                         "anonymous", member.getAnonymous());
                         animalData = Map.of(
@@ -107,6 +108,7 @@ public class AdoptAnimalController {
 
                         userData = Map.of(
                                         "id", member.getId(),
+                                        "name", member.getNickName(),
                                         "email", member.getEmail(),
                                         "anonymous", member.getAnonymous());
                         animalData = Map.of(
@@ -172,6 +174,7 @@ public class AdoptAnimalController {
                         DonateRecord donateRecord = new DonateRecord("審核中", LocalDateTime.now(), null, null, member,
                                         animal,
                                         donatePlan);
+                        donateRecord.setId(Long.valueOf(donateRecordRepository.findAll().size() + 1));
                         donateRecordRepository.save(donateRecord);
 
                         // 寄信

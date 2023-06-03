@@ -1,38 +1,65 @@
-// 判斷是否藉由瀏覽器瀏覽
-export const isBrowser = () => typeof window !== "undefined"
+const setUser = (userId) => {
+  window.localStorage.setItem("gatsbyUser", userId);
+}
 
-// 從 LocalStorage 中取得使用者資訊，有的話就 Parse 這筆資訊。
-export const getUser = () =>
-  isBrowser() && window.localStorage.getItem("gatsbyUser")
-    ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-    : {}
+export const getUser = () => {
+  if (window.localStorage.getItem("gatsbyUser")) {
+    return window.localStorage.getItem("gatsbyUser");
+  }
+  else {
+    return 0;
+  }
+}
 
-// 用來登入成功後，設定資訊在 LocalStorage 中。
-const setUser = user =>
-  window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+export const handleLogin = async (formData) => {
 
-
-// 處理登入，這邊使用 Hard Code 的方式驗證，此方式極度不安全，只是為了示範登入流程才用此方式，正式環境上會打 API 去跟後端確認資料是否正確，並等回傳結果後才會進行下一步
-export const handleLogin = ({ username, password }) => {
-  if (username === `test` && password === `123456`) {
-    // 存在前端的資訊，可以視情況新增
-    return setUser({
-      id: 1,
-      username: `test`,
-    })
+  const jsonData = {};
+  for (let [key, value] of formData.entries()) {
+    jsonData[key] = value;
   }
 
-  return false
+  // Call API
+  const response = await fetch('/api/login', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(jsonData),
+  });
+
+  const responseBody = await response.json();
+  switch (responseBody.result) {
+    case "Wrong password":
+      setUser(responseBody.userId);
+      alert('帳號或密碼錯誤！');
+        break;
+    case "Wrong username":
+      setUser(responseBody.userId);
+      alert('帳號或密碼錯誤！');
+        break;
+    case "Success":
+      setUser(responseBody.userId);
+      alert("登入成功！");
+      window.location.href = '/';
+        break;
+    default:
+      setUser(0);
+      alert("系統錯誤");
+      break;
+  }
+
 }
 
-// 判斷使用者是否已經登入，如以登入就直接從 LocalStorage 中撈取使用者資料
-export const isLoggedIn = () => {
-  const user = getUser()
-
-  return !!user.username
-}
-
-// 登出，直接將使用者資料清空
 export const logout = () => {
-  setUser({})
+  setUser(0);
+  alert("登出成功！");
+  window.location.href = '/';
+}
+
+export const isLoggedIn = () => {
+  if (getUser() == 0) {
+    return false;
+  } else {
+    return true;
+  }
 }

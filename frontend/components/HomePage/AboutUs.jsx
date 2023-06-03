@@ -13,7 +13,7 @@ export default function AboutUs() {
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
 
   // Call API
-  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(false);
   const [animalNum, setAnimalNum] = useState(0);
   const [amount, setAmount] = useState(0);
   useEffect(() => {
@@ -24,38 +24,38 @@ export default function AboutUs() {
         setAnimalNum(jsonData.animalNum);
         setAmount(jsonData.amount);
       } catch (error) { }
-      setLoading(false);
+      setLoaded(true);
     }
     fetchData();
   }, []);
   // const animalNum = 20
   // const amount = 1000
 
-  if (isLoading) {
-    return;
-  } else {
-    return (
-      <HomeSectionLayout sectionTitle={"關於我們"} moreLink={"/animals"}>
-        {/* Counter */}
-        <Grid container spacing={0} sx={counterContent}>
-          <Grid item xs={6} md={6} lg={6} sx={item}>
-            <Typography sx={counterTitle}>累積收容動物</Typography>
-            <CustomCountUp end={animalNum} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
+  return (
+    <>
+      {isLoaded && (
+        <HomeSectionLayout sectionTitle={"關於我們"} moreLink={"/animals"}>
+          {/* Counter */}
+          <Grid container spacing={0} sx={counterContent}>
+            <Grid item xs={6} md={6} lg={6} sx={item}>
+              <Typography sx={counterTitle}>累積收容動物</Typography>
+              <CustomCountUp end={animalNum} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
+            </Grid>
+            <Grid item xs={6} md={6} lg={6} sx={item}>
+              <Typography sx={counterTitle}>累積認養金額</Typography>
+              <CustomCountUp end={amount} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
+            </Grid>
           </Grid>
-          <Grid item xs={6} md={6} lg={6} sx={item}>
-            <Typography sx={counterTitle}>累積認養金額</Typography>
-            <CustomCountUp end={amount} style={{ ...counter, fontSize: isXs ? '70px' : '100px' }} />
-          </Grid>
-        </Grid>
 
-        {/* Description */}
-        <Grid container sx={about}>
-          <Grid item>
-            <p>再加一些敘述</p>
+          {/* Description */}
+          <Grid container sx={about}>
+            <Grid item>
+              <p>再加一些敘述</p>
+            </Grid>
           </Grid>
-        </Grid>
-      </HomeSectionLayout>
-    );
-  }
+        </HomeSectionLayout>
+      )}
+    </>
+  );
 
 }

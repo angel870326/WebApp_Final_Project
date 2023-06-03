@@ -3,9 +3,7 @@ import Layout from '@/components/Layout'
 import { title, content } from "@/styles/jss/animal-cloud-adoption.js";
 import AdopterList from "@/components/AdopterListPage/AdopterList";
 
-
-export default function DisableSortingGrid() {
-
+export default function AdoptersPage() {
   return (
     <Layout>
       <h1 style={title}>認養人排行榜</h1>
@@ -13,8 +11,5 @@ export default function DisableSortingGrid() {
         <AdopterList />
       </div>
     </Layout>
-
-
   )
 }
-

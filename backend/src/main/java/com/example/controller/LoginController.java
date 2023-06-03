@@ -2,33 +2,57 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.form.*;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
-import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 
 @RestController
 public class LoginController {
-    
+
     @Autowired
     private MemberRepository memberRepository;
-    @Autowired
-    private AnimalRepository animalRepository;
-    @Autowired
-    private ShelterRepository shelterRepository;
-    @Autowired
-    private DonatePlanRepository donatePlanRepository;
-    @Autowired
-    private DonateRecordRepository donateRecordRepository;
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> addDonation(@RequestBody LoginForm request) {
+
+        Map<String, Object> responseBody = new HashMap<String, Object>();
+
+        String username = request.getUsername();
+        String password = request.getPassword();
+
+        Optional<Member> memberOp = memberRepository.findMemberByUserName(username);
+        if (memberOp.isPresent()) {
+
+            Member member = memberOp.get();
+
+            if (password.equals(member.getPassWord())) {
+                responseBody = Map.of(
+                        "result", "Success",
+                        "userId", member.getId());
+                return new ResponseEntity<Map<String, Object>>(responseBody, HttpStatus.OK);
+            } else {
+                responseBody = Map.of(
+                        "result", "Wrong password",
+                        "userId", Long.valueOf(0));
+                return new ResponseEntity<Map<String, Object>>(responseBody, HttpStatus.OK);
+            }
+
+        } else {
+            responseBody = Map.of(
+                    "result", "Wrong username",
+                    "userId", Long.valueOf(0));
+            return new ResponseEntity<Map<String, Object>>(responseBody, HttpStatus.OK);
+        }
+
+    }
 
 }

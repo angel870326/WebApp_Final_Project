@@ -5,6 +5,7 @@ import com.example.model.Member;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 import java.util.List;
@@ -14,6 +15,10 @@ import java.util.Map;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findById(Long id);
+
+    // LoginController
+    @Query(nativeQuery = true, value = "SELECT * FROM member WHERE user_name = ?")
+    Optional<Member> findMemberByUserName(@Param("userName") String userName);
 
     // IndexController
 

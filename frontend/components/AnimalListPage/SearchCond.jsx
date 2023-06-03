@@ -13,18 +13,17 @@ import FormControl from '@mui/material/FormControl';
 // below function: {SelectBar, SortButton} --> SearchCond
 
 // 選單欄
-function SelectBar(props){
-  const { types, setTypes, age, setAge, sex, setSex, area, setArea } = props;
-  
+function SelectBar({ types, setTypes, age, setAge, sex, setSex, area, setArea }) {
+
   return (
     <div>
 
       {/* types */}
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel>動物品種</InputLabel>
+        <InputLabel>品種</InputLabel>
         <Select
           value={types}
-          label="動物品種"
+          label="品種"
           onChange={(e) => setTypes(e.target.value)}
         >
           <MenuItem value="">
@@ -33,6 +32,22 @@ function SelectBar(props){
           <MenuItem value={"貓"}>貓</MenuItem>
           <MenuItem value={"狗"}>狗</MenuItem>
           <MenuItem value={"其他"}>其他</MenuItem>
+        </Select>
+      </FormControl>
+
+      {/* sex */}
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel>性別</InputLabel>
+        <Select
+          value={sex}
+          label="性別"
+          onChange={(e) => setSex(e.target.value)}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"公"}>公</MenuItem>
+          <MenuItem value={"母"}>母</MenuItem>
         </Select>
       </FormControl>
 
@@ -54,28 +69,12 @@ function SelectBar(props){
         </Select>
       </FormControl>
 
-      {/* sex */}
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel>性別</InputLabel>
-        <Select
-          value={sex}
-          label="性別"
-          onChange={(e) => setSex(e.target.value)}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"公"}>公</MenuItem>
-          <MenuItem value={"母"}>母</MenuItem>
-        </Select>
-      </FormControl>
-
       {/* area */}
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel>收容地點</InputLabel>
+        <InputLabel>收容所地區</InputLabel>
         <Select
           value={area}
-          label="收容地點"
+          label="收容所地區"
           onChange={(e) => setArea(e.target.value)}
         >
           <MenuItem value="">
@@ -93,22 +92,21 @@ function SelectBar(props){
 }
 
 // 排序按鈕
-function SortButton(props){
-  const {sortBy, setSortBy } = props;
+function SortButton({ sortBy, setSortBy }) {
 
   const handleSort = (option) => {
-    if(sortBy === option){
+    if (sortBy === option) {
       setSortBy('');
-    }else{
+    } else {
       setSortBy(option);
     }
   };
 
-  return(
+  return (
     <p>排序方式：
       <Button
         variant="outlined"
-        onClick={() => handleSort('sheltered_date')} 
+        onClick={() => handleSort('sheltered_date')}
         color={sortBy === 'sheltered_date' ? 'secondary' : 'primary'}
         sx={{ m: 0.5 }}
       >收容時間</Button>
@@ -125,7 +123,8 @@ function SortButton(props){
 }
 
 // main
-function SearchCond({ onSearch }) {
+export default function SearchCond({ onSearch }) {
+
   const [types, setTypes] = useState('');
   const [age, setAge] = useState('');
   const [sex, setSex] = useState('');
@@ -140,7 +139,7 @@ function SearchCond({ onSearch }) {
   return (
     <ThemeProvider theme={brownTheme}>
       <h2 style={title}>搜尋條件</h2>
-      <div style={divLine}/>
+      <div style={divLine} />
 
       {/* select bar */}
       <div style={{ textAlign: 'center' }}>
@@ -171,6 +170,5 @@ function SearchCond({ onSearch }) {
 
     </ThemeProvider>
   );
-}
 
-export default SearchCond;
+}
