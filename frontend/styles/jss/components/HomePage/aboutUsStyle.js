@@ -41,12 +41,25 @@ const counter = {
 
 const about = {
     ...defaultFont,
-    fontSize: '16px',
+    fontSize: '18px',
     fontWeight: '10px',
     width: '100%',
     padding: 0,
     marginTop: "0px",
     marginButtom: "0px",
+};
+
+const text = {
+    ...about,
+    lineHeight: '2',
+};
+
+const highlightText = {
+    ...about,
+    lineHeight: '2',
+    fontWeight: 'bold',
+    fontSize: '30px',
+    color: brownColor,
 };
 
 
@@ -56,5 +69,7 @@ export {
     counterTitle,
     counter,
     about,
+    text,
+    highlightText,
 }
 

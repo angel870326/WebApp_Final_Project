@@ -1,76 +1,59 @@
-import { container, primaryColor } from "/styles/jss/animal-cloud-adoption.js";
-
-// const block = {
-//   color: "inherit",
-//   padding: "0.9375rem",
-//   fontWeight: "500",
-//   fontSize: "12px",
-//   textTransform: "uppercase",
-//   borderRadius: "3px",
-//   textDecoration: "none",
-//   position: "relative",
-//   display: "block"
-// };
-// const left = {
-//   float: "left!important",
-//   display: "block"
-// };
-// const right = {
-//   padding: "15px 0",
-//   margin: "0",
-//   float: "right!important"
-// };
+import { brownColor, primaryColor } from "/styles/jss/animal-cloud-adoption.js";
 
 const footer = {
-  padding: "0.9375rem 0",
+  margin: 2,
+  padding: 0
+};
+
+const footerLine = {
+  padding: 0,
+  margin: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
   textAlign: "center",
   display: "flex",
   zIndex: "2",
   position: "relative"
-};
+}
 
-const footerContainer = {
-  ...container,
-};
-
-const a = {
+const copyRight = {
   color: primaryColor,
   textDecoration: "none",
   backgroundColor: "transparent"
 };
-const footerWhiteFont = {
-  "&,&:hover,&:focus": {
-    color: "#FFFFFF"
+
+const copyRightInvisable = {
+  color: "transparent",
+  textDecoration: "none",
+  backgroundColor: "transparent"
+};
+
+const footerBtn = {
+  padding: 0,
+  margin: "0px 10px",
+  fontSize: '16px',
+  color: primaryColor,
+  textDecoration: "none",
+  backgroundColor: "transparent",
+  "&:hover,&:focus": {
+    color: brownColor,
+    backgroundColor: "transparent",
   }
 };
-// const list = {
-//   marginBottom: "0",
-//   padding: "0",
-//   marginTop: "0"
-// };
-// const inlineBlock = {
-//   display: "inline-block",
-//   padding: "0px",
-//   width: "auto"
-// };
 
-// const icon = {
-//   width: "18px",
-//   height: "18px",
-//   position: "relative",
-//   top: "3px"
-// };
+const icon = {
+  width: 30,
+  height: 30,
+  position: "relative",
+  marginRight: 1,
+};
 
 
 export {
-  // block,
-  // left,
-  // right,
   footer,
-  footerContainer,
-  a,
-  footerWhiteFont,
-  // list,
-  // inlineBlock,
-  // icon
+  footerLine,
+  copyRight,
+  copyRightInvisable,
+  footerBtn,
+  icon,
 };
