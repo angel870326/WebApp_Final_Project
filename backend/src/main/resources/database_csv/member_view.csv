@@ -1,6 +1,6 @@
 "id","anonymous","email","nick_name","pass_word","phone","user_name"
 1,0,"eva19981109@gmail.com","Eva",123456,"0900000000","Eva"
-2,1,"amy0721@gmail.com","浪浪子","iamdog","0912345678","Amy"
+2,0,"amy0721@gmail.com","浪浪子","iamdog","0912345678","Amy"
 3,0,"john0915@gmail.com","John","qwerty123","0976543210","John0915"
 4,1,"lucy0422@gmail.com","小樂","heyapple","0932198765","Lucy"
 5,0,"peter1128@gmail.com","彼得兔","ilovecoding","0965432109","Peter1128"
@@ -29,4 +29,3 @@
 28,1,"vicky0919@gmail.com","Vicky","vickyy","0955998877","Vicky"
 29,0,"david0323@gmail.com","BigDavid","davedave","0922887766","David"
 30,1,"nancy0111@gmail.com","Nancy","koejlwn","0900445566","Nancy"
-31,0,"daniel0503@gmail.com","丹尼爾","i4got",987654321,"Daniel"

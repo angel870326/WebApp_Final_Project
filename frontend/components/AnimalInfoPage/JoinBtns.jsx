@@ -11,7 +11,7 @@ export default function JoinBtns({ firstAdoptionStatus, animalId }) {
           {/* 加入認養計畫按鈕 */}
           {firstAdoptionStatus === "認養中" ? (
             <ThemeProvider theme={brownTheme}>
-              <Link href={`/animals/extendAdopt?a_id=${animalId}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/animals/extendAdopt?a_id=${animalId}`} target="_blank" style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                   延長認養計畫
                 </Button>
@@ -19,7 +19,7 @@ export default function JoinBtns({ firstAdoptionStatus, animalId }) {
             </ThemeProvider>
           ) : (
             <ThemeProvider theme={brownTheme}>
-              <Link href={`/animals/joinAdopt?a_id=${animalId}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/animals/joinAdopt?a_id=${animalId}`} target="_blank" style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                   加入認養計畫
                 </Button>
@@ -28,7 +28,7 @@ export default function JoinBtns({ firstAdoptionStatus, animalId }) {
           )}
           <ThemeProvider theme={brownTheme}>
             <Typography variant="body2" component="p" sx={{ mt: 1.5 }}>
-              <Link href="/faq">了解認養流程</Link>
+              <Link href="/faq" target="_blank">了解認養流程</Link>
             </Typography>
           </ThemeProvider>
         </>

@@ -70,7 +70,7 @@ export default function AniCard({ animals }) {
                     </Typography>
                   </CardContent>
                   <CardActions style={{ justifyContent: 'center', marginBottom: 10 }}>
-                    <Link href={`/animals/animalsInfo?a_id=${animal.id}`} style={{ textDecoration: 'none' }}>
+                    <Link href={`/animals/animalsInfo?a_id=${animal.id}`} target="_blank" style={{ textDecoration: 'none' }}>
                       <Button size="small" variant="contained">查看更多</Button>
                     </Link>
                   </CardActions>

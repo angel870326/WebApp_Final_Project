@@ -21,7 +21,7 @@ public class Shelter implements Serializable {
     @Column(nullable = false, length = 10)
     private String contactPhone;
     @Column(nullable = false)
-    private String contactEmail;
+    private String website;
     @OneToMany(mappedBy = "shelter", cascade = CascadeType.ALL)
     private List<Animal> animals;
 
@@ -29,13 +29,13 @@ public class Shelter implements Serializable {
         super();
     }
 
-    public Shelter(String name, String address, String area, String contactPhone, String contactEmail) {
+    public Shelter(String name, String address, String area, String contactPhone, String website) {
         super();
         this.name = name;
         this.address = address;
         this.area = area;
         this.contactPhone = contactPhone;
-        this.contactEmail = contactEmail;
+        this.website = website;
     }
 
     public Long getId() {
@@ -78,12 +78,12 @@ public class Shelter implements Serializable {
         this.contactPhone = contactPhone;
     }
 
-    public String getContactEmail() {
-        return contactEmail;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
 }

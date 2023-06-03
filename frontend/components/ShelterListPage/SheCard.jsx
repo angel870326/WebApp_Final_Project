@@ -61,7 +61,7 @@ export default function SheCard({ shelters }) {
                 地址：{shelter.address}<br />收容動物數量：{shelter.numAnimal} 隻 {getDogPawPrints(shelter.numAnimal)}
               </Typography>
               <CardActions style={{ marginLeft: 'auto' }}>
-              <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} style={{ textDecoration: 'none' }}>
+              <Link href={`/shelters/sheltersInfo?s_id=${shelter.id}`} target="_blank" style={{ textDecoration: 'none' }}>
                 <Button size="small" variant="contained">查看更多</Button>
               </Link>
               </CardActions>
