@@ -1,4 +1,4 @@
-# WebApp Final Project - 動物雲
+# 111-2 WebApp Final Project - Animal Cloud Adoption (動物雲認養)
 
 ## File Structure
 
@@ -45,24 +45,20 @@ animal-cloud-adoption
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ DonateRecordRepository.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MemberRepository.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ShelterRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ WebApplication.java
- ┃ ┃ ┃ ┣ resources
+ ┃ ┃ ┃ ┗  resources
  ┃ ┃ ┃ ┃ ┣ database_csv
  ┃ ┃ ┃ ┃ ┃ ┣ animal_view.csv
  ┃ ┃ ┃ ┃ ┃ ┣ donate_plan_view.csv
  ┃ ┃ ┃ ┃ ┃ ┣ donate_record_view.csv
  ┃ ┃ ┃ ┃ ┃ ┣ member_view.csv
  ┃ ┃ ┃ ┃ ┃ ┗ shelter_view.csv
- ┃ ┃ ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┃ ┃ ┗ application.properties
- ┃ ┃ ┃ ┗ .DS_Store
  ┃ ┃ ┣ test
  ┃ ┃ ┃ ┗ java
  ┃ ┃ ┃ ┃ ┗ com
  ┃ ┃ ┃ ┃ ┃ ┗ example
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ WebApplicationTests.java
- ┃ ┃ ┗ .DS_Store
  ┃ ┣ target
  ┃ ┃ ┣ classes
  ┃ ┃ ┃ ┣ com
@@ -100,7 +96,6 @@ animal-cloud-adoption
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ DonateRecordRepository.class
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ MemberRepository.class
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ ShelterRepository.class
- ┃ ┃ ┃ ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┃ ┃ ┃ ┗ WebApplication.class
  ┃ ┃ ┃ ┣ database_csv
  ┃ ┃ ┃ ┃ ┣ animal_view.csv
@@ -123,11 +118,10 @@ animal-cloud-adoption
  ┃ ┃ ┃ ┃ ┃ ┗ default-testCompile
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ createdFiles.lst
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ inputFiles.lst
- ┃ ┃ ┣ test-classes
+ ┃ ┃ ┗ test-classes
  ┃ ┃ ┃ ┗ com
  ┃ ┃ ┃ ┃ ┗ example
  ┃ ┃ ┃ ┃ ┃ ┗ WebApplicationTests.class
- ┃ ┃ ┗ .DS_Store
  ┃ ┗ pom.xml
  ┣ frontend
  ┃ ┣ components
@@ -182,7 +176,6 @@ animal-cloud-adoption
  ┃ ┃ ┃ ┣ SearchRes.jsx
  ┃ ┃ ┃ ┣ SheCard.jsx
  ┃ ┃ ┃ ┗ ShelterListPage.jsx
- ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┣ Footer.jsx
  ┃ ┃ ┗ Layout.jsx
  ┃ ┣ pages
@@ -199,7 +192,6 @@ animal-cloud-adoption
  ┃ ┃ ┃ ┗ register.jsx
  ┃ ┃ ┣ shelters
  ┃ ┃ ┃ ┗ sheltersInfo.jsx
- ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┣ _app.jsx
  ┃ ┃ ┣ _document.jsx
  ┃ ┃ ┣ account.jsx
@@ -210,7 +202,6 @@ animal-cloud-adoption
  ┃ ┃ ┗ shelters.jsx
  ┃ ┣ public
  ┃ ┃ ┣ animals
- ┃ ┃ ┃ ┣ .DS_Store
  ┃ ┃ ┃ ┣ 1.jpg
  ┃ ┃ ┃ ┣ ...
  ┃ ┃ ┃ ┗  100.jpg
@@ -274,7 +265,6 @@ or
 yarn install
 ``` 
 
-
 #### Frontend Developing Server (in terminal)
 ```
 make
@@ -283,15 +273,6 @@ or
 ```
 yarn dev
 ```
-
-
-#### Colors in styles/jss/animal-cloud-adoption.js
-|Color|Img|Hex|RGB|Link|
-|---|---|---|---|---|
-|**primaryColor**|<img src="https://www.colorhexa.com/5e3f26.png" width="100" height="100"/>|#5e3f26|rgb(94,63,38)|https://www.colorhexa.com/5e3f26|
-|**bgColor**|<img src="https://www.colorhexa.com/e8e6e4.png" width="100" height="100"/>|#e8e6e4|rgb(232,230,228)|https://www.colorhexa.com/e8e6e4|
-|**brownColor**|<img src="https://www.colorhexa.com/a77356.png" width="100" height="100"/>|#a77356|rgb(167,115,86)|https://www.colorhexa.com/a77356|
-|**greyColor**|||||
 
 
 ### Backend
