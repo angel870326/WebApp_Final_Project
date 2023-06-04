@@ -1,4 +1,6 @@
-# 111-2 WebApp Final Project - Animal Cloud Adoption (動物雲認養)
+# WebApp Final Project - Animal Cloud Adoption (動物雲認養)
+
+![logo](https://github.com/angel870326/animal-cloud-adoption/blob/main/frontend/public/logo.png)
 
 ## File Structure
 
