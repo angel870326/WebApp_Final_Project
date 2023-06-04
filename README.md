@@ -242,6 +242,7 @@ animal-cloud-adoption
  ┃ ┣ .prettierrc.json
  ┃ ┣ jsconfig.json
  ┃ ┣ Makefile
+ ┃ ┣ README.md
  ┃ ┣ next.config.js
  ┃ ┣ package.json
  ┃ ┗ yarn.lock
