@@ -1,6 +1,10 @@
 # WebApp Final Project - Animal Cloud Adoption (動物雲認養)
 
-![logo](https://github.com/angel870326/animal-cloud-adoption/blob/main/frontend/public/logo.png)
+
+<div align="center">
+  <img src="https://github.com/angel870326/animal-cloud-adoption/blob/main/frontend/public/logo.png" alt="logo" width="400">
+</div>
+
 
 ## File Structure
 
