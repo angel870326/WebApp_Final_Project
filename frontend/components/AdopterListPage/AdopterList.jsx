@@ -94,7 +94,7 @@ export default function AdopterList() {
     {
       field: 'id', headerName: '', width: 100, sortable: false,
       renderCell: (params) => (
-        <a href={`/adopters/adoptersInfo?m_id=${params.value}`} target="_blank">
+        <a href={`/adopters/adoptersInfo?m_id=${params.value}`}>
           <Button variant="outlined" sx={moreBtn}>查看更多</Button>
         </a>
       ),

@@ -85,7 +85,7 @@ export default function AccountInfo() {
               <Typography>{anonymous}</Typography>
             </Grid>
             <Grid item>
-              <Link href="/account/edit" target="_blank">
+              <Link href="/account/edit">
                 <Button variant="outlined" sx={{ ...editBtn, marginTop: '40px' }}>編輯</Button>
               </Link>
             </Grid>

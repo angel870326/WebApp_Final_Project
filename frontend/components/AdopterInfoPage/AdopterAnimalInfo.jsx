@@ -70,7 +70,7 @@ export default function AdopterAnimalInfo() {
                 <ImageListItemBar
                   title={item.title}
                   subtitle={
-                    <a href={`/animals/animalsInfo?a_id=${item.animalId}`} target="_blank">
+                    <a href={`/animals/animalsInfo?a_id=${item.animalId}`}>
                       <Button variant="outlined" sx={{ ...moreBtn, marginTop: '10px' }}>查看更多</Button>
                     </a>
                   }

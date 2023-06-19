@@ -39,7 +39,6 @@ export default function OtherAdopters({ adopters, adoptionRecords }) {
                   {/* 顯示認養人的基本資訊 */}
                   <Link
                     href={`/adopters/adoptersInfo?m_id=${adopter.id}`}
-                    target="_blank"
                     color="inherit"
                     underline="none"
                   >
