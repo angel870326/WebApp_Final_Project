@@ -19,7 +19,7 @@ const text1_1 = (
 );
 const text1_2 = (
   <div>
-    <b style={smallBox}>e-mail: animal_cloud_adoption@gmail.com</b><br /><br />
+    <b style={smallBox}>E-mail: animal.cloud.adoption@gmail.com</b><br /><br />
     我們是 Animal Cloud Adoption 開發團隊，感謝您的愛戴與支持。<br />
     如果您有其他問題，請隨時聯繫我們的客服團隊，我們將很樂意為您提供幫助。
   </div>
