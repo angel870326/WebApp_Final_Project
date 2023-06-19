@@ -5,6 +5,13 @@
   <img src="https://github.com/angel870326/animal-cloud-adoption/blob/main/frontend/public/logo.png" alt="logo" width="400">
 </div>
 
+## Demo
+
+Full demo (6 min): https://youtu.be/IsLrsci1pwY<br/>
+How to adopt an animal (2 min): https://youtu.be/SyMP45iFCsI<br/>
+
+https://github.com/angel870326/animal-cloud-adoption/assets/44830635/58c8a3fa-f6d2-482a-a2a8-85e6c2308a9a
+
 
 ## File Structure
 
@@ -290,8 +297,8 @@ Install MySQL 8.0.33 (https://dev.mysql.com/downloads/installer/)
 2. Start MySQL server
 3. Create database and user
 4. Create table
-Refer to ```animal-cloud-adoption/backend/src/main/java/com/example/model``` for the name and data type of the columns in each table
-Import tuples from csv files in ```animal-cloud-adoption/backend/src/main/resources/database_csv```
+Refer to ```animal-cloud-adoption/backend/src/main/java/com/example/model``` for the name and data type of the columns in each table.<br/>
+Import tuples from csv files in ```animal-cloud-adoption/backend/src/main/resources/database_csv```.<br/>
 
 #### Account Setup (in new terminal)
 1. Open ```animal-cloud-adoption/backend/src/main/resources/application.properties```
