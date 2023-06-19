@@ -1,14 +1,15 @@
 # WebApp Final Project - Animal Cloud Adoption (動物雲認養)
 
-
 <div align="center">
   <img src="https://github.com/angel870326/animal-cloud-adoption/blob/main/frontend/public/logo.png" alt="logo" width="400">
 </div>
 
-## Demo
 
-Full demo (6 min): https://youtu.be/IsLrsci1pwY<br/>
-How to adopt an animal (2 min): https://youtu.be/SyMP45iFCsI<br/>
+## Demo
+|Demo Video|Duration|Link|
+|---|---|---|
+|Full Demo|5:43|https://youtu.be/IsLrsci1pwY|
+|How to Adopt an Animal?|1:57|https://youtu.be/SyMP45iFCsI|
 
 https://github.com/angel870326/animal-cloud-adoption/assets/44830635/58c8a3fa-f6d2-482a-a2a8-85e6c2308a9a
 
